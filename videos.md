@@ -8,6 +8,15 @@ https://www.youtube.com/watch?v=VPZiJGNX4_s
 * https://www.youtube.com/watch?v=WthG9S9wNhM
 * https://www.youtube.com/watch?v=FqEkcIbkOio
 
+## Cluster Analysis
+
+#### SPSS k-means Clustering
+* https://www.youtube.com/watch?v=K7DUbNfTj5Q
+
+#### SPSS Hierarchical Clustering
+* https://www.youtube.com/watch?v=dIJKBQbBCto
+
+<hr>
 ## Modeling Count Varables
 * https://www.youtube.com/watch?v=i05dKATW2nA
 
@@ -20,7 +29,7 @@ https://www.youtube.com/watch?v=VPZiJGNX4_s
 * https://www.youtube.com/watch?v=lUbtXI3XdPE
 
 
-
+<hr>
 ## Linear Regression Models
 https://www.youtube.com/watch?v=ejR8LnQziPY
 
@@ -30,8 +39,13 @@ https://www.youtube.com/watch?v=OYEII--K_k4
 #### Backward Elimination - Stepwise Regression with R
 https://www.youtube.com/watch?v=0aTtMJO-pE4
 
+<hr>
+## Principal Component Analysis
 
+#### KMO Measure and Bartlett Test for Sphericity
+https://www.youtube.com/watch?v=efA-syfE6_U
 
+<hr>
 ## Testing Model Assumptons
 
 #### Shapiro Wilk Test for Normality
