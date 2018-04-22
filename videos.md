@@ -4,7 +4,9 @@
 https://www.youtube.com/edit?o=U&video_id=VPZiJGNX4_s
 
 
-
+## Binary Logistic Regression
+https://www.youtube.com/edit?o=U&video_id=WthG9S9wNhM
+https://www.youtube.com/edit?o=U&video_id=FqEkcIbkOio
 
 ## Modeling Count Varables
 https://www.youtube.com/edit?o=U&video_id=i05dKATW2nA
@@ -16,3 +18,20 @@ https://www.youtube.com/edit?o=U&video_id=YIVmWBGG7Dg
 https://www.youtube.com/edit?o=U&video_id=wUwhncKr0c0
 
 https://www.youtube.com/watch?v=lUbtXI3XdPE
+
+
+
+## Linear Regression Models
+https://www.youtube.com/edit?o=U&video_id=ejR8LnQziPY
+
+#### Forward Selection - Stepwise Regression with R
+https://www.youtube.com/edit?o=U&video_id=OYEII--K_k4
+
+#### Backward Elimination - Stepwise Regression with R
+https://www.youtube.com/edit?o=U&video_id=0aTtMJO-pE4
+
+
+
+## Testing Model Assumptons
+####  Grubbs Test
+https://www.youtube.com/edit?o=U&video_id=rcYN89Trt4Y
