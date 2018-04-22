@@ -33,5 +33,12 @@ https://www.youtube.com/watch?v=0aTtMJO-pE4
 
 
 ## Testing Model Assumptons
+
+#### Shapiro Wilk Test for Normality
+* https://www.youtu.be/UJmd_Uzsltw
+
+#### Normal Probability (QQ) plots
+* https://www.youtu.be/Erze9pNIX8A
+* https://www.youtu.be/dK-JNR3g_LU
 ####  Grubbs Test
 https://www.youtube.com/watch?v=rcYN89Trt4Y
