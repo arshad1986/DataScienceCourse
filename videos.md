@@ -1,23 +1,23 @@
 ## Binary Classification
 
 #### Accuracy Prediction and Recall
-https://www.youtube.com/video_id=VPZiJGNX4_s
+https://www.youtube.com/watch?v=VPZiJGNX4_s
 
 
 ## Binary Logistic Regression
-https://www.youtube.com/video_id=WthG9S9wNhM
-https://www.youtube.com/video_id=FqEkcIbkOio
+* https://www.youtube.com/watch?v=WthG9S9wNhM
+* https://www.youtube.com/watch?v=FqEkcIbkOio
 
 ## Modeling Count Varables
-https://www.youtube.com/video_id=i05dKATW2nA
+* https://www.youtube.com/watch?v=i05dKATW2nA
 
 #### Poisson Randon Variables - R Programming
-https://www.youtube.com/video_id=YIVmWBGG7Dg
+* https://www.youtube.com/video_id=YIVmWBGG7Dg
 
 #### Poisson Random Variables
-https://www.youtube.com/video_id=wUwhncKr0c0
+* https://www.youtube.com/video_id=wUwhncKr0c0
 
-https://www.youtube.com/watch?v=lUbtXI3XdPE
+* https://www.youtube.com/watch?v=lUbtXI3XdPE
 
 
 
