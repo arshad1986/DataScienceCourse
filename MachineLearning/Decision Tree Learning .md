@@ -1,0 +1,7 @@
+Decision tree learning uses a predictive model with informational branches similar to a tree to gather assumptions about and make a judgment on an item’s value. The system is used for machine learning, statistics, and data mining. Decision trees are also known as regression or classification trees, depending upon the purpose for which they are used.
+
+The process of decision tree learning involves moving from branch to branch of information. Upon reaching each element, whether via computer or a person, it must be determined whether or not it applies to the target item. Once each branch has been explored, the answers can be used to determine value.
+
+In essence, decision tree learning is the process of answering questions. Each answer moves the process forward until there is enough information to make a decision. For example, a simple tree may start by asking which of two objects to buy. One question may ask whether the object is useful, while another could ask whether one item has a better price than the other. By asking all of these questions it is typically possible to determine which action is statistically more beneficial.
+
+Decision tree learning also explores sub categories. Answering one question may lead to another. This could result in some branches having many sub branches, while others are less elaborate because it is easy to answer the question. Pursuing the process in this fashion enables the user to develop a more detailed assessment of the item.

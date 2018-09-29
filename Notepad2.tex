@@ -1,0 +1,124 @@
+1.1 Basic Indexing
+
+"Look"  - finding useful info is a sign of intelligent behaviour.
+Web queries, made possible by "Basic text indexing".
+which of the following data structures might be suitable to store all possible words on the web?
+Ans: Heaps, Binary Trees and Hash Tables.
+
+Basic Text Queries : looking up a word takes O(log M) time. 
+Hash tables can do better.
+
+Assemble results.
+
+Still need to assemble results of a q term query.
+O(R,q) if r= # intermediate results in all.
+
+What is r is huge.
+
+
+1.2 Index Creation
+
+1.3 Complexity of Index Creation
+How fast is the procedure for index creation
+assum n documents, m words and w words per documents, on average
+Ans: O(nwlogm)
+
+1.4 Ranking
+
+1.5 Page Rank
+PageRank is a link analysis algorithm, named after Larry Page[1] and used by the Google Internet search engine, that assigns a numerical weighting to each element of a hyperlinked set of documents, such as the World Wide Web, with the purpose of "measuring" its relative importance within the set.
+
+1.5.1 PageRank and Memory
+
+Semantic Network
+Letter Word Associations ( first word that comes to mind when prompted with letter "A", i.e. Apple)
+Most of us poor at remembering facts - ie. year of historical event.
+Human memory and web-search are quite different
+
+1.5.2 Google and the Mind - Co-evolution
+Page rank is intuitive. The more we rely on it, the worse it gets, in terms of accuracy.
+Page Rank relies on Hyperlinks between pages. As this is happening less and less - the accuracy of PageRank gets worse and Worse.
+Book - The Shallows - Reliance on google has had negative effect on power of recall.
+
+1.6 Searching
+
+1.6.1. Enterprise Search
+
+challenging
+Unstructured Data
+
+Structured Data , as in Databases.
+SQL is not the answer. ManyLimitations.
+Entreprise Search is an active area of research.
+
+Grouping records obtained from searching structured data requires SQL programming and knowledge of the Schema.
+
+1.6.2 Searchin Structured Data
+
+1.7 Locality Sensitive Hashing
+
+1.7.1. Object Search
+Index an object (document) by features (words)
+Assumption is that a query is a bag of word (i.e. features)
+
+1.7.2 Locality Sensitive Hashing
+
+1.7.3 Example 1
+
+1.7.4 Example 2
+
+1.7.5 LSH Intuition
+
+1.7.6 High-dimensional Objects
+
+1.7.7 Associative Memories
+
+1.7.8 Recap and Review
+Structured Data is not a solved problem
+
+
+2.1 Introduction to Week 3 "Listening"
+Ambient Sea of Data.
+Companies discern habits and intents of computer users.
+
+2.2 Shannon Information
+Formal mathematical meaning of "Information".
+
+In the context of advertising and news , Information has role to play.
+Shannon (1948) defined as Information related to Surprise.
+For an event with probability p - the information of this event is -log(p,2).
+Improbable events have high information.
+
+2.3
+
+2.4 TF-IDF
+Keywords and Mutual Information
+Adsense - google's mechanism for placing ads.
+Rarer Words make better Keywords
+TF: Time Frequency
+IDF: Inverse Document
+Words having high TF-IDF are considered to be good keywords.
+
+2.5 
+
+2.7 Machine Learning Intro
+
+"Semantics"
+Machine Learning is all about learning from Past Data.
+Prediction using Conditional Probability
+
+2.9 Sentiment Analysis.
+Hundreds of millions of tweets every day can be analyszed.
+Ratio of positive to negative sentiments.
+popular in Big Data Analytics.
+
+Uses Bayesian machine learning.
+Manual label comments as positive or negative, as part of "Training Phase"
+Use Naive bayes
+
+Apriori Probabilities for both positive and negative - compute likelihoods.
+
+Smoothing in the Naive Bayes Classifier - replace zero with a very low number (i.e 1/10000).
+Prevent a logical fallacy from occuring.
+
+Compute Likelihood Ratios.

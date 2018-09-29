@@ -1,0 +1,15 @@
+Market Risk
+========================
+The risk that the value of a portfolio will decrease due to the change in value of the
+market risk factors:
+
+1. Equity Risk
+
+2. Interest Rate Risk
+
+3. Currency Risk
+
+4. Commodity Risk
+
+Typically measured using Value at Risk or (less frequently) Expected Shortfall
+(Also combined with sensitivity analysis (PV01, CR01))

@@ -1,0 +1,212 @@
+	Assumption of Normality
+	
+	Limitations of Tests 
+\item	There are some important limitations to the usefulness of these tests. 
+\item	If you reject H0 you can conclude that the population is not normally distributed, but if you don't reject H0 then you only conclude that you failed to show the population 
+\item	is not normally distributed. 
+\item	In other words, you can prove the population is not normally distributed but you can't prove it is normally distributed. 
+\item	Rejecting H0 means that the population is not normally distributed, but it doesn't tell you whether it is because it is a fat-tailed distribution, a thin-tailed distribution, a skewed distribution, or something else.
+\item	The tests are influenced by power. 
+\item	If you have a small sample the test may not have enough power to detect non-normality in the population.
+	
+\item	The quantile-quantile (Q-Q) plot is an excellent way to see whether the data deviate from normal.
+\item	The process used for creating a QQ plot involves determining what proportion of the 'observed' scores fall below any one score, 
+\item	then the “z- score” that would fit that proportion if the data were normally distributed is calculated,
+\item	finally that “z- score” that would cut off that proportion (the 'expected normal value') is translated back into the original metric to see what raw score that would be. 
+\item	A scatter plot is then created that shows the relationship between the actual 'observed' values and what those values would be 'expected' to be if the data were normally distributed. 
+\item	If the data is normally distributed then the circles on the resulting plot (each circle representing a score) will form a straight line. 
+\item	A trend line can be added to the plot to assist in determining whether or not this relationship is linear.
+	
+
+%================================================================================%
+
+Hierarchical Cluster Procedures
+Agglomerative Methods
+Divisive Methods
+Euclidean Distance
+Manhattan Distance
+Mahalanobis Distance
+Detecting Outliers
+Similarity Measures
+Ward's Methods
+Dendrogram
+
+%================================================================================%
+Centroid Method
+Cluster seeding
+Sequential Threshold Method
+Standardizing the Data
+Assumptions in Cluster Analysis
+Deriving Clusters and Assessing Overall Fit
+Clustering Algorithms
+
+%================================================================================%
+
+Interpretability Criterion
+Factor Loadings
+Rotations
+Varimax
+Communalities
+
+%=========================================================================%
+
+
+% http://www.spss.ch/upload/1122644952_The%20SPSS%20TwoStep%20Cluster%20Component.pdf
+
+\subsection{Introduction}
+
+The SPSS Two Step Clustering Component is a scalable cluster analysis algorithm designed
+to handle very large datasets. Capable of handling both continuous and categorical variables
+or attributes, it requires only one data pass in the procedure. In the first step of the
+procedure, you pre-cluster the records into many small sub-clusters. Then, cluster the
+sub-clusters from the pre-cluster step into the desired number of clusters. If the desired
+number of clusters is unknown, the SPSS Two Step Cluster Component will find the proper
+number of clusters automatically.
+
+
+\subsection{History of clustering methods}
+Traditional clustering methods fall into two broad categories: relocation and hierarchical.
+Relocation clustering methods — such as k-means and EM (expectation-maximization) —
+move records iteratively from one cluster to another, starting from an initial partition.
+
+You need to specify the number of clusters in advance, and it does not change during the iteration. Hierarchical clustering methods proceed by stages producing a sequence of
+partitions in which each one nests into the next partition in the sequence. Hierarchical clustering can be either agglomerative or divisive. Agglomerative clustering starts with
+singleton clusters (clusters that contain only one record) and proceeds by successively merging the two “closest” clusters at each stage. 
+
+In contrast, divisive clustering starts with one single cluster that contains all records and proceeds by successively separating the
+cluster into smaller ones. Unlike relocation methods, you don’t need initial values for hierarchical clustering.
+
+All the aforementioned cluster methods (except the EM method) need a distance measure. Different distance measures may lead to different cluster results. Some distance
+measures accept only continuous variables like Euclidean distance, and some only categorical
+variables, such as the simple matching dissimilarity measure used in the k-modes
+method by Huang (1998).
+
+Traditional clustering methods are effective and accurate on small datasets, but usually don’t scale up to the very large datasets. These traditional methods will cluster large
+datasets effectively if these datasets are first reduced into smaller datasets. This is the basic concept of two-stage clustering methods like BIRCH (Zhang et al. 1996). 
+
+In the first stage, you apply a quick sequential cluster method to the large dataset to compress the
+dense regions and form sub-clusters. In the second stage, apply a cluster method on the sub-clusters to find the desired number of clusters. The records in one sub-cluster should
+end up in one of the final clusters so the pre-cluster step will not affect the accuracy of the final clustering. 
+
+In general, inaccuracy from the pre-cluster step decreases as the number of sub-clusters from the pre-cluster step increases. However, too many sub-clusters
+will slow down the second stage clustering. Choose the number of sub-clusters carefully so that the number is large enough to produce accurate results and small enough to not inhibit performance in the later clustering procedure.
+
+None of the cluster methods directly address the issue of determining the number of
+clusters because the means of determining the number of clusters is difficult and it is
+considered a separate issue. You might apply various strategies to determine the number
+of clusters. You want to cluster the data into a series of numbers of clusters (such as two
+clusters, three clusters, etc.) and calculate certain criterion statistics for each of them.
+The one with the best statistic is the “winner.” 
+
+Fraley and Raftery (1998) proposed using the \textit{\textbf{Bayesian information criterion}} (BIC) as the criterion statistic for the EM clustering
+method. 
+Banfield and Raftery (1993) suggested using the approximate weight of evidence (AWE) as the criterion statistic for their model-based hierarchical 
+clustering.
+
+\subsection{Number of clusters}
+You can specify the number of clusters, or you can let the algorithm select the optimal number based on either the 
+\textbf{\textit{Schwarz Bayesian criterion}} (BIC) or the \textbf{\textit{Akaike information criterion}} (AIC).
+Clustering Criterion. BIC and AIC are offered with the default being BIC.
+
+% http://www.uea.ac.uk/~e130/2b7ycluster.htm
+% http://txcdk.unt.edu/iralab/k-means-cluster-analysis
+% www.people.vcu.edu/~randrews/mgmt643/cluster_analysis.doc
+% https://txcdk.unt.edu/iralab/sites/default/files/K-Means_Handout.pdf
+% http://www.mvsolution.com/wp-content/uploads/SPSS-Tutorial-Cluster-Analysis.pdf
+% http://www.statisticalinnovations.com/products/twostep.pdf
+% http://publib.boulder.ibm.com/infocenter/spssstat/v20r0m0/index.jsp?topic=%2Fcom.ibm.spss.statistics.help%2Fidh_twostep_main.htm
+% http://estadistica.cl/public_disk/Programas/Estadistica/spss13/Algorithms/twostep_cluster.pdf
+%-------------------------------------------------------------------------------------------------------------------%
+
+
+\subsection{Within cluster percentage chart} Within-cluster percentage charts show how each categorical variable is divided within each cluster. 
+In the output, there is one chart per categorical variable.
+\subsection{Cluster pie chart} The cluster pie chart shows the relative size of each cluster in the cluster solution.
+\subsection{Variable Importance Plot} When you select the “By cluster” choice, the variable importance plots show how important the different variables are to the clusters. For categorical variables, chi-square is calculated and for continuous variables t statistics are calculated. 
+The ``By variable” choice tracks all of the variables’ importance across all clusters.
+
+% https://txcdk.unt.edu/iralab/sites/default/files/Two-step_Handout.pdf
+
+Five clusters were chosen because of the low BIC value (4602.287) and high ratio of distance of measures value (1.881).
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+% MANOVA (4 Marks)
+`	% Tukey LSD test
+	% Difference between two Regions
+% PCA (5 Marks)
+	% KMO Measure of Sampling Adequacy (1 Mark)
+	% Bartlett Test (1 Mark) ?
+	% Scree Plot (1 Mark)
+	% Eigen Value Threshold (1 Mark)
+           % Varimax Rotation
+           % Interpretation 
+% Logistic (4 Marks) 
+	% 
+           % Logit ( 1 Mark)
+% Linear Models (7 Marks)
+	% Forward Selection
+	% Backward Elimination
+	% Linear Equation (1 Marks)
+	% Multicollineaity (2 Marks)
+% Discriminant Analysis (3 Marks)
+% K means Cluster Analysis (4 Marks)
+	% Predicted Membership for case no 26
+	% 
+% Hierarchical Cluster Analysis (4 Marks) 
+	%
+	%
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Multiple ANOVA (4 Marks)}
+% Skull Data - Three Abstracted Variables
+\begin{itemize}
+\item The categorical variable is \textbf{Region}
+\item The dependent variables are
+\begin{itemize}
+\item[1]
+\item[2]
+\item[3]
+\end{itemize}
+\end{itemize}
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Linear Models(5 Marks) }
+% Capital Punishment
+The Data Set is \textbf{\texttt{MLR1.sav}}.
+The Dependent Variable is \textbf{Response}
+The Independent Variables are
+\begin{itemize}
+\item[1]
+\item[2]
+\item[3]
+\end{itemize}
+Compute the R squared for the first model (one independent variable) and the second model (two indepedent variables).
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Logistic Models}
+The Data Set is \textbf{\texttt{LOG1.sav}}.
+\begin{itemize}
+\item[1]
+\item[2]
+\item[3]
+\end{itemize}
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Discriminant Analysis (3 Marks)}
+
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+
+
+
+
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------%
+% https://onlinecourses.science.psu.edu/stat505/node/78
+% http://rer.sagepub.com/content/45/4/543.full.pdf
+%http://www.uvm.edu/~dhowell/StatPages/More_Stuff/Missing_Data/Missing.html
+
+% http://www.uvm.edu/~dhowell/StatPages/More_Stuff/Missing_Data/Missing.html
+% http://www.stat.columbia.edu/~gelman/arm/missing.pdf

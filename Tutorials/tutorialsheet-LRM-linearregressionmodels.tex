@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Advanced Data Modelling}
+%\input{tcilatex}
+
+\begin{document}
+	\section*{Linear Regression Models: Tutorial Sheet}
+\begin{enumerate}
+
+\item Describe how to use to the Akaike Information Criterion for model selection.
+\item Compare and contrast three types of variable selection procedure.
+\item Explain what variable selection procedures are used for.
+	
+%============================%
+\item Model Selection Question
+
+
+Suppose we have 5 predictor variables: $x_1$, $x_2$,$x_3$, $x_4$ and $x_5$ to model a response variale $y$, and that we have the Akaike Information Criterion (AIC) for models based on each possible combination of predictor variables.
+Use \textbf{Forward Selection} and \textbf{Backward Selection} to choose the optimal set of predictor variables, based on the AIC measure.
+
+{
+	\large
+	\begin{center}
+		\begin{tabular}{||c|c||c|c||}
+			\hline
+			Variables & AIC & Variables & AIC \\ \hline \hline
+			$\emptyset$	&	200	&	x1, x2, x3	&	74	\\ \hline
+			\phantom{makemakespace}
+			&	\phantom{makespace}
+			&	x1, x2, x4	&	75	\\ \hline
+			x1	&	150	&	x1, x2, x5	&	79	\\ \hline
+			x2	&	145	&	x1, x3, x4	&	72	\\ \hline
+			x3	&	135	&	x1, x3, x5	&	85	\\ \hline
+			x4	&	136	&	x1, x4, x5	&	95	\\ \hline
+			x5	&	139	&	x2, x3, x4	&	83	\\ \hline
+			&		&	x2, x3, x5	&	82	\\ \hline
+			x1, x2	&	97	&	x2, x4, x5	&	78	\\ \hline
+			x1, x3	&	81	&	x3, x4, x5	&	85	\\ \hline
+			x1, x4	&	94	&	\phantom{makemakespace}
+			&	\phantom{makespace}
+			\\ \hline
+			x1, x5	&	88	&	x1, x2, x3, x4	&	93	\\ \hline
+			x2, x3	&	87	&	x1, x2, x3, x5	&	120	\\ \hline
+			x2, x4	&	108	&	x1, x2, x4, x5	&	104	\\ \hline
+			x2, x5	&	87	&	x1, x3, x4, x5	&	101	\\ \hline
+			x3, x4	&	105	&	x2, x3, x4, x5	&	89	\\ \hline
+			x3, x5	&	82	&		&		\\ \hline
+			x4, x5	&	86	&	x1, x2, x3, x4, x5	&	100	\\ \hline
+		\end{tabular} 
+	\end{center}
+}
+
+
+	
+	\item What is Multicollinearity? Describe the implications of Multicollinearity?
+	\item Contrast the uses of Training Data, Validation Data and Testing Data, when creating a predictive model.
+	\item What is meant by overfitting, in the context of predictive models?
+	\item Describe how you would use the Variance Inflation Factor to make an assessment about multicollinearity.
+	
+	\item Describe the process of model validation, with reference to training, validation and testing phases.
+	\item State two ways of methodically diagnosing the severity of multi-collinearity. How are these techniques related? How are they used to make decisions about the data?
+	\item State two ways in which a multiple regression technique could be affected by severe multicollinearity?
+	\item Explain what variable selection procedures are used for.
+	
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,443 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{amssymb}
+
+\begin{document}
+
+
+\begin{frame}[fragile]
+\begin{verbatim}
+1. Logistic Regression
+2. Stepwise Regression
+3. All Subsets (Leap)
+4. Principal Components Analysis (princomps)
+5. Poisson Regression - Crabs Example
+6. Ordered Logistic Regression - GOOD
+7. Multinomial Logistic Regression
+8. Robust Regression
+9. Interaction plots
+10. Analysis of variance (kris podgorski)
+\end{verbatim}
+\end{frame}
+\section*{1. GLMs - Logistic Regression - Variable Selection}
+
+
+% South African Heart Data 
+% ElemStatLearn package
+
+\begin{frame}[fragile]
+\begin{framed}
+\begin{verbatim}
+install.packages("ElemStatLearn")
+library(ElemStatLearn)
+data(SAheart)
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+%--------------------------------------------- %
+\begin{frame}[fragile]
+\frametitle{Binomial Logistic Regression}
+Let's have a look at the data set. 
+The outcome variable that we are going to analyse is the \texttt{chd} variable (i.e. coronary heart disease).
+\begin{framed}
+\begin{verbatim}
+tail(SAheart)
+summary(SAheart)
+table(SAheart$chd)
+\end{verbatim}
+\end{framed}
+\end{frame}
+%--------------------------------------------- %
+\begin{frame}[fragile]
+Let's fit a logistic Regression Model to the data. 
+To begin with, we will use only three predictor variables: \texttt{age}, \texttt{alcohol} and \texttt{obesity}.
+
+\begin{framed}
+\begin{verbatim}
+glm(chd ~ age + alcohol + obesity, 
+    data = SAheart, 
+    family = "binomial")
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+%--------------------------------------------- %
+\begin{frame}[fragile]
+
+\begin{framed}
+\begin{verbatim}
+model1 <- glm(chd ~ age + alcohol + obesity, 
+    data = SAheart, 
+    family = "binomial")
+predict(model1, type = "response")    
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+
+
+\section*{2. Logistic Regression - Variable Selection}
+%----------------------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+%------------------------------%
+\textbf{Variable Selection}
+\begin{itemize}
+\item Selecting a subset of predictor variables from a larger set (e.g., stepwise selection) is a controversial topic. 
+\item You can perform stepwise selection (forward, backward, both) using the stepAIC( ) function from the MASS package.
+\item stepAIC( ) performs stepwise model selection by exact AIC.
+\end{itemize}
+
+
+%------------------------------%
+\begin{verbatim}
+library(MASS)
+\end{verbatim}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+\item \texttt{stepAIC()} - Performs stepwise model selection by AIC.
+\end{itemize}
+
+\begin{itemize}
+\item forward selection
+\item backward elimination
+\item stepwise selection
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+%------------------------------%
+\begin{framed}
+\begin{verbatim}
+SAheart.glm <- glm(chd ~ ., family = binomial, data = SAheart)
+SAheart.step <- stepAIC(SAheart.glm, trace = FALSE)
+\end{verbatim}
+\end{framed}
+%------------------------------%
+Alternatively, you can perform all-subsets regression using the leaps( ) function from the leaps package. In the following code nbest indicates the number of subsets of each size to report. Here, the ten best models will be reported for each subset size (1 predictor, 2 predictors, etc.).
+\end{frame}
+\section*{3. All Subsets Regression}
+%----------------------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{verbatim}
+# All Subsets Regression
+library(leaps)
+attach(mydata)
+leaps<-regsubsets(y~x1+x2+x3+x4,data=mydata,nbest=10)
+# view results 
+summary(leaps)
+# plot a table of models showing variables in each model.
+# models are ordered by the selection statistic.
+plot(leaps,scale="r2")
+# plot statistic by subset size 
+library(car)
+subsets(leaps, statistic="rsq")
+\end{verbatim}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\section*{5. Poisson Regression - Crabs Example}
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+
+%\subsection*{The crabs data set}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+The crabs data set is derived from Agresti \textit{(2007, Table 3.2, pp.76-77)}. It gives 4 variables for each of 173 female horseshoe crabs.
+\begin{itemize}
+\item \textbf{Satellites}
+number of male partners in addition to the female's primary partner
+
+\item \textbf{Width}
+width of the female in centimeters
+
+\item \textbf{Dark}
+a binary factor indicating whether the female has dark coloring (yes or no)
+
+\item \textbf{GoodSpine}
+a binary factor indicating whether the female has good spine condition (yes or no)
+\end{itemize}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+\begin{framed}
+\begin{verbatim}
+require(glm2)
+data(crabs)
+head(crabs)
+summary(crabs[,1:4])
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+\begin{verbatim}
+> head(crabs)
+  Satellites Width Dark GoodSpine Rep1 Rep2
+1          8  28.3   no        no    2    2
+2          0  22.5  yes        no    4    5
+3          9  26.0   no       yes    5    6
+4          0  24.8  yes        no    6    6
+5          4  26.0  yes        no    6    8
+....
+> summary(crabs[,1:4])
+  Satellites         Width       Dark     GoodSpine
+ Min.   : 0.000   Min.   :21.0   no :107   no :121  
+ 1st Qu.: 0.000   1st Qu.:24.9   yes: 66   yes: 52  
+ Median : 2.000   Median :26.1                      
+ Mean   : 2.919   Mean   :26.3                      
+ 3rd Qu.: 5.000   3rd Qu.:27.7                      
+ Max.   :15.000   Max.   :33.5                
+
+\end{verbatim}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+Fit a Poisson regression model with the number of Satellites as the outcome and the width of the female as the covariate. What is the multiplicative change in the expected number of crabs for each additional centimeter of width?
+\begin{framed}
+\begin{verbatim}
+crabs.pois <- glm2(Satellites ~ Width, 
+   data=crabs, family="poisson")
+summary(crabs.pois)
+exp(0.164)
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+\begin{verbatim}
+> summary(crabs.pois)
+...... 
+......
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -3.30476    0.54224  -6.095  1.1e-09 ***
+Width        0.16405    0.01997   8.216  < 2e-16 ***
+---
+...... 
+......
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 632.79  on 172  degrees of freedom
+Residual deviance: 567.88  on 171  degrees of freedom
+AIC: 927.18
+
+Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Poisson Regression}
+\Large
+
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------%
+\section*{6. Ordered Logistic Regression}
+\begin{frame}[fragile]
+\frametitle{Ordered Logistic Regression}
+\Large
+
+Ordered logistic regression - polr
+
+\begin{itemize}
+\item The polr command from the MASS package can be used to estimate an ordered logistic regression model.
+
+\item The command name comes from proportional odds logistic regression, highlighting the proportional odds assumption in our model.
+
+\item polr uses the standard formula interface in R for specifying a regression model with outcome followed by predictors.
+
+\item We also specify \texttt{Hess=TRUE} to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
+\end{itemize}
+
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\frametitle{Ordered Logistic Regression}
+\Large
+\textbf{Syntax}
+\begin{verbatim}
+
+
+
+Model <- polr(ranking ~ variables, data = dat, Hess = TRUE)
+\end{verbatim}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\section*{7. Multinomial Logistic Regression}
+\begin{frame}[fragile]
+\frametitle{Multinomial Logistic Regression}
+\Large
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Multinomial Logistic Regression}
+\Large
+
+\begin{framed}
+\begin{verbatim}
+
+\end{verbatim}
+\end{framed}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+\frametitle{Multinomial Logistic Regression}
+\Large
+
+\begin{itemize}
+\item Use
+\item
+\item
+\end{itemize}
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+
+
+
+\begin{frame}[fragile]
+\frametitle{Multinomial Logistic Regression}
+\Large
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\section*{8. Robust Regression}
+\begin{frame}[fragile]
+\frametitle{Robust Regression}
+\Large
+
+Robust Fitting of Linear Models
+
+Description
+
+Fit a linear model by robust regression using an M estimator.
+\begin{framed}
+\begin{verbatim}
+
+summary(rlm(stack.loss ~ ., stackloss))
+rlm(stack.loss ~ ., stackloss, psi = psi.hampel, init = "lts")
+rlm(stack.loss ~ ., stackloss, psi = psi.bisquare)
+\end{verbatim}
+\end{framed}
+
+
+\end{frame}
+%----------------------------------------------------------------------------------------------%
+\section*{8. Robust Regression}
+\begin{frame}[fragile]
+\frametitle{Robust Regression}
+\Large
+
+\begin{itemize}
+\item \texttt{psi.huber(u, k = 1.345, deriv = 0)}
+\item \texttt{psi.hampel(u, a = 2, b = 4, c = 8, deriv = 0)}
+\item \texttt{psi.bisquare(u, c = 4.685, deriv = 0)}
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------------------------------------- %
+\begin{frame}
+\frametitle{K-means clustering}
+\Large
+
+\begin{itemize}
+\item K-means clustering is the most popular partitioning method. 
+\item It requires the analyst to specify the number of clusters to extract. 
+\item A plot of the within groups sum of squares by number of clusters extracted can help determine the appropriate number of clusters. 
+\item The analyst looks for a bend in the plot similar to a scree test in factor analysis.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------------------------------- %
+\begin{frame}[fragile]
+\begin{verbatim}
+# Determine number of clusters
+wss <- (nrow(mydata)-1)*sum(apply(mydata,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(mydata, 
+  	 centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",
+  ylab="Within groups sum of squares")
+\end{verbatim}
+
+
+\end{frame}
+
+%------------------------------------------------------------------------------------- %
+
+
+\begin{frame}[fragile]
+\begin{verbatim}  
+# K-Means Cluster Analysis
+fit <- kmeans(mydata, 5) # 5 cluster solution
+# get cluster means 
+aggregate(mydata,by=list(fit$cluster),FUN=mean)
+# append cluster assignment
+mydata <- data.frame(mydata, fit$cluster)
+\end{verbatim}
+\begin{itemize}
+\item A robust version of K-means based on mediods can be invoked by using \texttt{pam( )} instead of \texttt{kmeans( )}. 
+\item The function \texttt{pamk( )} in the \textbf{\textit{fpc}} package is a wrapper for pam that also prints the suggested number of clusters based on optimum average silhouette width.
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+\end{document}

@@ -1,0 +1,5 @@
+http://www.decisionanalyst.com/Downloads/MultivariateAnalysisTechniques.pdf
+
+Multidimensional Scaling (MDS)
+Correspondence Analysis
+Conjoint Analysis

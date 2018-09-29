@@ -1,0 +1,278 @@
+
+
+\section{Data Science with Scala}
+
+(TS03V1EN) Version 1: February 2016
+
+ 
+Scala is a modern multi-paradigm programming language designed to express common programming patterns in a concise, elegant, and type-safe way. Scala has been created by Martin Odersky and he released the first version in 2003. Scala smoothly integrates the features of object-oriented and functional languages. This tutorial explains the basics of Scala in a simple and reader-friendly way.
+ 
+%-----------------------------------------------------------------------%
+
+Apache Spark™ is a fast and general engine for large-scale data processing, with built-in modules for streaming, SQL, machine learning and graph processing. This course shows how to use Spark’s machine learning pipelines to fit models and search for optimal hyperparameters using a Spark cluster.
+ 
+
+
+\section{Basic Statistics and Data Types}
+ 
+
+Vectors and Labeled Points
+
+After completing this lesson, you should be able to:
+Understand local vectors and labeled points
+Create dense and sparse vectors
+Create labeled points
+Local and distributed matrices
+
+After completing this lesson, you should be able to:
+Understand local and distributed matrices
+Create dense and sparse matrices
+Create different types of distributed matrices
+Summary statistics, correlations, and random data
+
+After completing this lesson, you should be able to:
+Compute column summary statistics
+Compute pairwise correlations between series/columns
+Generate random data from different distributions
+Sampling
+
+After completing this lesson, you should be able to:
+Perform standard sampling on any RDD
+Split any RDD randomly into subsets
+Perform stratified sampling on RDDs of key-value pairs
+Hypothesis Testing
+
+After completing this lesson, you should be able to:
+Perform hypothesis testing for goodness of fit and independence
+Perform hypothesis testing for equality of probability distributions
+Perform kernel density estimation
+ 
+
+Videos
+
+Page Vectors and Labelled Points (7:06) Page Not completed; select to mark as complete
+Page Local and Distributed Matrices (8:48) Page Not completed; select to mark as complete
+Page Summary Statistics (5:30) Page Not completed; select to mark as complete
+Page Sampling (6:49) Page Not completed; select to mark as complete
+Page Hypothesis Testing (9:09) Page Not completed; select to mark as complete
+
+
+%================================================================================%
+\newpage
+\subsection{Part 2: Preparing Data}
+ 
+\subsection{Statistics, Random Data and Sampling on Dataframes}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Compute column summary statistics
+\item Compute pairwise statistics between series/columns
+\item Perform standard sampling on any DataFrame
+\item Split any DataFrame randomly into subsets
+\item Perform stratified sampling on DataFrames
+\item Generate Random Data from Uniform and Normal Distributions
+\end{itemize}
+
+\subsection{Handling Missing Data and Imputing Values}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Drop records according to different criteria
+\item Fill missing data according to different criteria
+\item Drop duplicate records
+\end{itemize}
+
+\subsection{Transformers and Estimators}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Understand, create, and use a Transformer
+\item Understand, create, and use an Estimator
+\item Set parameters of Transformers and Estimators
+\item Create a feature Vector with VectorAssembler
+\end{itemize}
+%------------------------------%
+\subsection{Data Normalization}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Normalize a dataset to have unit p-norm
+\item Normalize a dataset to have unit standard deviation and zero mean
+\item Normalize a dataset to have given minimum and maximum values
+\end{itemize}
+%------------------------------%
+\subsection{Identifying Outliers}
+
+After completing this lesson, you should be able to:
+Compute the inverse of covariance matrix given of a dataset
+Compute Mahalanobis Distance for all elements in a dataset
+Remove outliers from a dataset
+Instructions
+
+%================================================================================================================%
+
+Page Statistics, Random data and Sampling on Data Frames(12:16) Page Not completed; select to mark as complete
+Page Handling Missing Data and Imputing Values(11:07) Page Not completed; select to mark as complete
+Page Transformers and Estimators (8:39) Page Not completed; select to mark as complete
+Page Data Normalization (5:00) Page Not completed; select to mark as complete
+Page Identifying Outliers (7:32) Page Not completed; select to mark as complete
+
+3Show only topic 3
+Lesson 3
+
+Feature Engineering
+ 
+
+
+%---------------------------------------------------------------------------------%
+\subsection{Feature Vectors}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Understand how feature vectors fit into the APIs for Spark's MLlib and spark.ml libraries
+\item Assemble feature vectors
+\item Extract specific dimensions from feature vectors
+\end{itemize}
+%---------------------------------------------------------------------------------%
+\subsection{Categorical Features}
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item encode categorical features with Spark's StringIndexer
+\item encode categorical features with Spark's OneHotEncoder
+\item know when to use each of these
+\end{itemize}
+
+%---------------------------------------------------------------------------------%
+\subsection{Using Explode, User Defined Functions, and Pivot}
+
+After completing this lesson, you should be able to use these methods of DataFrames:
+explode()
+User Defined Functions
+pivot
+
+\subsection{Principal Component Analysis (PCA) in Feature Engineering}
+
+After completing this lesson, you should be able to:
+Understand what Principal Component Analysis (PCA) is
+Understand PCA’s role in feature engineering
+
+\subsection{RFormulas}
+
+After completing this lesson, you should be able to:
+Understand why RFormula exist
+Understand RFormula notation
+Understand the transformations RFormala produces on linear models
+Use RFormula on a real world example
+ 
+%===========================================================================================%
+
+Page Feature Vectors (3:28) Page Not completed; select to mark as complete
+Page Categorial Features (6:53) Page Not completed; select to mark as complete
+Page Using Explode, User Defined Functions, and Pivot (4:18) Page Not completed; select to mark as complete
+Page PCA for Feature Engineering (9:12) Page Not completed; select to mark as complete
+Page RFormula (4:28) Page Not completed; select to mark as complete
+
+%=============================================================================%
+\newapge
+\section{ Lesson 4: Fitting a Model }
+
+ 
+
+\subsection{ Decision Trees }
+
+After completing this lesson, you should be able to:
+Understand the Pipelines API for Decision Trees
+Describe Pipeline’s Input and Output columns
+Perform classification and regression with Decision Trees
+Understand and use Decision Trees’ parameters
+\subsection{ Random Forests }
+
+After completing this lesson, you should be able to:
+Understand the Pipelines API for Random Forests and Gradient-Boosted Trees
+Describe default’s Input and Output columns
+Perform classification and regression with RFs
+Understand and use RF’s parameters
+%--------------------------------------------------------------------------%
+\subsection{ Gradient-Boosting Trees }
+
+After completing this lesson, you should be able to:
+\begin{itemize}
+\item Understand how to fit together the functions available in Spark’s machine learning libraries to solve real problems
+\item Use a Spark cluster to fit models in a fraction of the time
+\item Perform classification and regression with Gradient-Boosted Trees
+\item Understand and use Gradient-Boosted Trees parameters
+\end{itemize}
+%---------------------------------------------------------------------------------%
+\subsection{ Linear Methods }
+
+After completing this lesson, you should be able to:
+Understand the Pipelines API for Logistic Regression and Linear Least Squares
+Perform classification with Logistic Regression
+Perform regression with Linear Least Squares
+Use regularization with Logistic Regression and Linear Least Squares
+
+%---------------------------------------------------------------------------------%
+\subsection{Evaluation}
+
+After completing this lesson, you should be able to:
+Evaluate binary classification algorithms using area under the ROC curve
+Evaluate multiclass classification algorithms using several metrics
+Evaluate regression algorithms using several metrics
+Evaluate logistic and linear regression algorithms using several metrics
+Evaluate logistic and linear regression algorithms using summaries
+ 
+
+Videos
+
+Page Decision Trees (8:45) Page Not completed; select to mark as complete
+Page Random Forests (7:15) Page Not completed; select to mark as complete
+Page Gradient Boosting Trees (7:10) Page Not completed; select to mark as complete
+Page Linear Methods (6:16) Page Not completed; select to mark as complete
+Page Evaluation (11:04) Page Not completed; select to mark as complete
+
+This topic5Show only topic 5
+Lesson 5
+
+Pipeline and Grid Search
+
+ 
+
+Predicting Grant Applications: Introduction
+
+After completing this lesson, you should be able to:
+Understand how to fit together the functions available in Spark’s machine learning libraries to solve real problems
+Use a Spark cluster to fit models in a fraction of the time
+Predicting Grant Applications: Creating Features
+
+After completing this lesson, you should be able to:
+Create features for your own datasets
+Learn about set relevant model parameters
+Predicting Grant Applications: Building a Pipeline
+
+After completing this lesson, you should be able to:
+Understand the role of pipelines in spark.ml
+Use a pipeline to fit a model and make predictions
+Evaluate the results
+Predicting Grant Applications: Cross Validation and Model Tuning
+
+After completing this lesson, you should be able to:
+Avoid overfitting by using cross validation when training a model
+Improve a model’s performance by using grid search to find better parameters
+Predicting Grant Applications: Wrapping Up
+
+After completing this lesson, you should be able to extract useful information from the results of the grid search, including:
+the average area under the ROC curve for each combination of parameters
+the parameters of the best model
+the feature importance of the best model
+Videos
+
+Page Introduction (4:27) Page Not completed; select to mark as complete
+Page Grants Creating Features (4:52) Page Not completed; select to mark as complete
+Page Grants Building a Pipeline (4:16) Page Not completed; select to mark as complete
+Page Grants Tuning the Model (3:47) Page Not completed; select to mark as complete
+Page Grants Wrapping Up (4:13) Page Not completed; select to mark as complete
+
+%=============================================================================%
+
+\end{document}

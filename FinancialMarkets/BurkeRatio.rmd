@@ -1,0 +1,17 @@
+BurkeRatio 
+====================================
+Burke ratio of the return distribution
+
+### Description
+To calculate Burke ratio we take the difference between the portfolio return and the risk free rate
+and we divide it by the square root of the sum of the square of the drawdowns. To calculate the
+modiﬁed Burke ratio we just multiply the Burke ratio by the square root of the number of datas.
+
+### Usage
+BurkeRatio(R, Rf = 0, modified = FALSE, ...)
+
+#### Arguments
+- R an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns
+- Rf the risk free rate
+- modified a boolean to decide which ratio to calculate between Burke ratio and modiﬁed Burke ratio.
+- ... any other passthrough parameters

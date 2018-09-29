@@ -1,0 +1,10 @@
+A fixed-income instrument is a contract between a borrower and an issuer to exchange cash flows in a 
+predetermined and periodic (fixed) time frame. 
+Cash flows at each period in time may be variable. 
+Traditional securities of fixed income include loans, notes, bills and bonds. 
+Non-traditional securities include interest rate derivatives, inflation derivatives, and credit derivatives.
+
+Modeling tools are often used for determining the price, yield, and cash flow for many types of 
+fixed-income securities, 
+including mortgage-backed securities, corporate bonds, treasury bonds, municipal bonds, 
+certificates of deposit, and treasury bills.

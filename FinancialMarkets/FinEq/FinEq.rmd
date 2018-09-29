@@ -1,0 +1,24 @@
+FinEq.jl
+============================================
+Financial Equations in Julia
+
+###Section 1. Deterministic Cash Flows
+
+*Easy enough to compute these. Serves as an exercise in programming with Julia
+
+1. EIR() Effective Interest Rate
+2. NPV() Net Present Value
+3. APR() Annual Percentage Rate
+
+### Section 2. Investment Appraisal Measures
+
+1. Sharpe Ratio *CAPM*
+2. Treynor Ratio *CAPM*
+3. Jensen Measure *CAPM*
+4. Sortino Index
+5. Sterling Ration and Calmar Ratio
+6. CDaR
+
+
+
+

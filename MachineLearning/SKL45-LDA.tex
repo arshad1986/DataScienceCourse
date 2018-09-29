@@ -1,0 +1,282 @@
+Using LDA for classification
+
+\begin{framed}
+Linear discriminant analysis (LDA) is a generalization of Fisher's linear discriminant, a method used in statistics, pattern recognition and machine learning to find a linear combination of features that characterizes or separates two or more classes of objects or events.
+\end{framed}
+
+Linear Discriminant Analysis (LDA) attempts to fit a linear combination of features to predict
+the outcome variable. LDA is often used as a preprocessing step. We'll walk through both
+methods in this recipe.
+\subsubsection*{Getting Ready}
+In this recipe, we will do the following:
+1. Grab stock data from Yahoo.
+2. Rearrange it in a shape we're comfortable with.
+3. Create an LDA object to fit and predict the class labels.
+4. Give an example of how to use LDA for dimensionality reduction.
+\subsection{Implementation}
+In this example, we will perform an analysis similar to Altman's Z-score. In this paper, Altman
+looked at a company's likelihood of defaulting within two years based on several financial
+metrics. The following is taken from the Wiki page of Altman's Z-score:
+\begin{itemize}
+T1 = Working Capital / Total Assets. Measures liquid assets in relation to the size
+of the company.
+T2 = Retained Earnings / Total Assets. Measures profitability that reflects the
+company's age and earning power.
+T3 = Earnings Before Interest and Taxes / Total Assets. Measures operating
+efficiency apart from tax and leveraging factors. It recognizes operating
+earnings as being important to long-term viability.
+T4 = Market Value of Equity / Book Value of Total Liabilities. Adds market dimension
+that can show up security price fluctuation as a possible red flag.
+T5 = Sales/ Total Assets. Standard measure for total asset turnover (varies greatly
+from industry to industry).
+\end{itemize}
+%===================================================%
+Classifying Data with scikit-learn
+148
+From Wikipedia:
+[1]: Altman, Edward I. (September 1968). ""Financial Ratios, Discriminant Analysis and the
+Prediction of Corporate Bankruptcy"". Journal of Finance: 189–209.
+%-------------------------------------------------- %
+In this analysis, we'll look at some financial data from Yahoo via pandas. We'll try to predict
+if a stock will be higher in exactly 6 months from today, based on the current attribute of the
+stock. It's obviously nowhere near as refined as Altman's Z-score. Let's use a basket of auto
+stocks:
+>>> tickers = ["F", "TM", "GM", "TSLA"]
+>>> from pandas.io import data as external_data
+>>> stock_panel = external_data.DataReader(tickers, "yahoo")
+\end{verbatim}
+\end{framed}
+This data structure is panel from pandas. It's similar to an OLAP cube or a 3D DataFrame.
+Let's take a look at the data to get some familiarity with closes since that's what we care
+about while comparing:
+>>> stock_df = stock_panel.Close.dropna()
+>>> stock_df.plot(figsize=(7, 5))
+The following is the output:
+%===================================================%
+%Chapter 4
+%149
+Ok, so now we need to compare each stock price with its price in 6 months. If it's higher,
+we'll code it with 1, and if not, we'll code that with 0.
+To do this, we'll just shift the dataframe back 180 days and compare:
+#this dataframe indicates if the stock was higher in 180 days
+\begin{framed}
+\begin{verbatim}
+>>> classes = (stock_df.shift(-180) > stock_df).astype(int)
+The next thing we need to do is flatten out the dataset:
+>>> X = stock_panel.to_frame()
+>>> classes = classes.unstack()
+>>> classes = classes.swaplevel(0, 1).sort_index()
+>>> classes = classes.to_frame()
+>>> classes.index.names = ['Date', 'minor']
+>>> data = X.join(classes).dropna()
+>>> data.rename(columns={0: 'is_higher'}, inplace=True)
+>>> data.head()
+\end{verbatim}
+\end{framed}
+The following is the output:
+Ok, so now we need to create matrices to SciPy. To do this, we'll use the patsy library. This is
+a great library that can be used to create a design matrix in a fashion similar to R:
+\begin{framed}
+\begin{verbatim}
+>>> import patsy
+>>> X = patsy.dmatrix("Open + High + Low + Close + Volume +
+is_higher - 1", data.reset_index(),
+return_type='dataframe')
+>>> X.head()
+\end{verbatim}
+\end{framed}
+%===================================================%
+%Classifying Data with scikit-learn
+%150
+The following is the output:
+patsy is a very strong package, for example, suppose we want to apply some of the
+preprocessing from Chapter 1, Premodel Workflow. In patsy, it's possible, like in R,
+to modify the formula in a way that corresponds to modifications in the design matrix.
+It won't be done here, but if we want to scale the value to mean 0 and standard
+deviation 1, the function will be "scale(open) + scale(high)".
+Awesome! So, now that we have our dataset, let's fit the LDA object:
+\begin{framed}
+	\begin{verbatim}
+>>> import pandas as pd
+>>> from sklearn.lda import LDA
+>>> lda = LDA()
+>>> lda.fit(X.ix[:, :-1], X.ix[:, -1]);
+\end{verbatim}
+\end{framed}
+We can see that it's not too bad when predicting against the dataset. Certainly, we will
+want to improve this with other parameters and test the model:
+\begin{framed}
+	\begin{verbatim}
+	>>> from sklearn.metrics import classification_report
+>>> print classification_report(X.ix[:, -1].values,
+lda.predict(X.ix[:, :-1]))
+precision recall f1-score support
+0.0 0.63 0.59 0.61 1895
+1.0 0.60 0.64 0.62 1833
+avg / total 0.61 0.61 0.61 3728
+\end{verbatim}
+\end{framed}
+These metrics describe how the model fits the data in various ways.
+The precision and recall parameters are fairly similar. In some ways, as shown in the
+following list, they can be thought of as conditional proportions:
+\begin{itemize}
+\item  For precision, given the model predicts a positive value, what proportion of this
+is correct?
+\item  For recall, given the state of one class is true, what proportion did we "select"? I say,
+select because recall is a common metric in search problems. For example, there can
+be a set of underlying web pages that, in fact, relate to a search term—the proportion
+that is returned.
+\end{itemize}
+
+%===================================================%
+%Chapter 4
+%151
+The f1-score parameter attempts to summarize the relationship between recall and
+precision.
+\subsection{Theory}
+% % How it works…
+\begin{itemize}
+\item LDA is actually fairly similar to clustering that we did previously. 
+\item We fit a basic model from the
+data. Then, once we have the model, we try to predict and compare the likelihoods of the data
+given in each class. We choose the option that's more likely.
+\item LDA is actually a simplification of QDA, which we'll talk about in the next chapter. Here, we
+assume that the covariance of each class is the same, but in QDA, the assumption is relaxed.
+Think about the connections between KNN and GMM and the relationship there and here.
+Working with QDA – a nonlinear LDA
+\item QDA is the generalization of a common technique such as quadratic regression. It is simply
+a generalization of the model to allow for more complex models to fit, though, like all things,
+when allowing complexity to creep in, we make our life more difficult.
+\end{itemize}
+\subsubsection*{Getting Ready}
+We will expand on the last recipe and look at Quadratic Discernment Analysis (QDA)
+via the QDA object.
+We said we made an assumption about the covariance of the model. Here, we will relax
+the assumption.
+How to do it…
+QDA is aptly a member of the qda module. Use the following commands to use QDA:
+>>> from sklearn.qda import QDA
+>>> qda = QDA()
+>>> qda.fit(X.ix[:, :-1], X.ix[:, -1])
+>>> predictions = qda.predict(X.ix[:, :-1])
+>>> predictions.sum()
+2812.0
+>>> from sklearn.metrics import classification_report
+>>> print classification_report(X.ix[:, -1].values, predictions)
+%===================================================%
+%Classifying Data with scikit-learn
+%152
+precision recall f1-score support
+0.0 0.75 0.36 0.49 1895
+1.0 0.57 0.88 0.69 1833
+avg / total 0.66 0.62 0.59 3728
+As you can see, it's about equal on the whole. If we look back at the LDA recipe, we can see
+large changes as opposed to the QDA object for class 0 and minor differences for class 1.
+
+\subsection{Theory}
+% % - How it works…
+
+Like we talked about in the last recipe, we essentially compare likelihoods here. So, how do
+we compare likelihoods? Let's just use the price at hand to attempt to classify \texttt{is\_higher}.
+We'll assume that the closing price is log-normally distributed. In order to compute the likelihood
+for each class, we need to create the subsets of closes as well as a training and test set for each
+class. As a sneak peak to the next chapter, we'll use the built-in cross validation methods:
+\begin{framed}
+\begin{verbatim}
+>>> from sklearn import cross_validation as cv
+>>> import scipy.stats as sp
+>>> for test, train in cv.ShuffleSplit(len(X.Close), n_iter=1):
+train_set = X.iloc[train]
+train_close = train_set.Close
+train_0 = train_close[~train_set.is_higher.astype(bool)]
+train_1 = train_close[train_set.is_higher.astype(bool)]
+test_set = X.iloc[test]
+test_close = test_set.Close.values
+ll_0 = sp.norm.pdf(test_close, train_0.mean())
+ll_1 = sp.norm.pdf(test_close, train_1.mean())
+\end{verbatim}
+\end{framed}
+Now that we have likelihoods for both classes, we can compare and assign classes:
+>>> (ll_0 > ll_1).mean()
+0.15588673621460505
+%===================================================%
+% % Chapter 4
+% % 153
+Using Stochastic Gradient Descent fof classification
+As was discussed in Chapter 2, Working with Linear Models, Stochastic Gradient Descent is a
+fundamental technique to fit a model for regression. There are natural connections between
+the two techniques, as the name so obviously implies.
+\subsubsection*{Getting Ready}
+In regression, we minimized a cost function that penalized for bad choices on a continuous
+scale, but for classification, we'll minimize a cost function that penalizes for two (or more) cases.
+How to do it…
+First, let's create some very basic data:
+>>> from sklearn import datasets
+>>> X, y = datasets.make_classification()
+Next, we'll create a SGDClassifier instance:
+>>> from sklearn import linear_model
+>>> sgd_clf = linear_model.SGDClassifier()
+As usual, we'll fit the model:
+>>> sgd_clf.fit(X, y)
+SGDClassifier(alpha=0.0001, class_weight=None, epsilon=0.1, eta0=0.0,
+fit_intercept=True, l1_ratio=0.15,
+learning_rate='optimal', loss='hinge', n_iter=5,
+n_jobs=1, penalty='l2', power_t=0.5, random_state=None,
+shu\item le=False, verbose=0, warm_start=False)
+We can set the class_weight parameter to account for the varying amounts of unbalance
+in a dataset.
+The Hinge loss function is defined as follows:
+%===================================================%
+Classifying Data with scikit-learn
+154
+Here, t is the true classification denoted as +1 for one case and -1 for the other. The vector of
+coe\item icients is denoted by y as fit from the model, and x is the value of interest. There is also
+an intercept for good measure. To put it another way:
+Classifying documents with Naïve Bayes
+Naïve Bayes is a really interesting model. It's somewhat similar to k-NN in the sense that it
+makes some assumptions that might oversimplify reality, but still perform well in many cases.
+\subsubsection*{Getting Ready}
+In this recipe, we'll use Naïve Bayes to do document classification with sklearn. An example
+I have personal experience of is using the words that make up an account descriptor in
+accounting, such as Accounts Payable, and determining if it belongs to Income Statement,
+Cash Flow Statement, or Balance Sheet.
+The basic idea is to use the word frequency from a labeled test corpus to learn the
+classifications of the documents. Then, we can turn this on a training set and attempt to
+predict the label.
+
+We'll use the newgroups dataset within sklearn to play with the Naïve Bayes model. It's a
+nontrivial amount of data, so we'll fetch it instead of loading it. We'll also limit the categories
+to rec.autos and rec.motorcycles:
+>>> from sklearn.datasets import fetch_20newsgroups
+>>> categories = ["rec.autos", "rec.motorcycles"]
+>>> newgroups = fetch_20newsgroups(categories=categories)
+#take a look
+>>> print "\n".join(newgroups.data[:1])
+From: gregl@zimmer.CSUFresno.EDU (Greg Lewis)
+Subject: Re: WARNING.....(please read)...
+Keywords: BRICK, TRUCK, DANGER
+Nntp-Posting-Host: zimmer.csufresno.edu
+Organization: CSU Fresno
+Lines: 33
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

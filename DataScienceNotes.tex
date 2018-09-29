@@ -1,0 +1,169 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Data Science - The ABCs of Data Science}
+\author{The Author}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{What is a Data Scientist?}
+
+A data scientist represents an evolution from the business or data analyst role. The formal training is similar, with a solid foundation typically in computer science and applications, modeling, statistics, analytics and math.
+
+In addition to having a solid foundation in statistics, mathematics, and computer science, data scientists must also have expertise in some particular industry or business domain, so they can properly identify the important problems to solve in a given area and the kinds of answers one should be looking for. Domain expertise is also needed to be able to draw the proper conclusions from their analysis, and to communicate their findings to business leaders in their own terms.
+
+
+%---------------------------%
+\section{Business intelligence (BI) }
+
+
+Business intelligence (BI) is a broad category of applications and technologies for gathering, storing, analyzing, and providing access to data to help enterprise users make better business decisions. BI applications include the activities of decision support systems, query and reporting, online analytical processing (OLAP), statistical analysis, forecasting, and data mining.
+
+
+Business intelligence applications can be:
+
+\begin{itemize}
+\item Mission-critical and integral to an enterprise's operations or occasional to meet a special requirement
+
+\item 
+Enterprise-wide or local to one division, department, or project
+
+\item
+Centrally initiated or driven by user demand
+\end{itemize}
+%----------------------------------------%
+
+
+This term was used as early as September, 1996, when a Gartner Group report said:
+
+
+By 2000, Information Democracy will emerge in forward-thinking enterprises, with Business Intelligence information and applications available broadly to employees, consultants, customers, suppliers, and the public. The key to thriving in a competitive marketplace is staying ahead of the competition. Making sound business decisions based on accurate and current information takes more than intuition. Data analysis, reporting, and query tools can help business users wade through a sea of data to synthesize valuable information from it - today these tools collectively fall into a category called \textbf{\textit{Business Intelligence}}.
+
+
+\section{Eclipse}
+In computer programming, Eclipse is a multi-language Integrated development environment (IDE) comprising a base workspace and an extensible plug-in system for customizing the environment. It is written mostly in Java. It can be used to develop applications in Java and, by means of various plug-ins, other programming languages including Ada, C, C++, COBOL, Fortran, Haskell, JavaScript, Perl, PHP, Python, R, Ruby (including Ruby on Rails framework), Scala, Clojure, Groovy, Scheme, and Erlang. It can also be used to develop packages for the software Mathematica. Development environments include the Eclipse Java development tools (JDT) for Java and Scala, Eclipse CDT for C/C++ and Eclipse PDT for PHP, among others.
+
+
+
+%---------------------------%
+\section{Decision tree learning}
+
+Decision tree learning uses a branching model to classify the data. The computer basically asks a series of questions about the data. If the answer to the first question is true, it asks question 2a. If the answer is false, it asks question 2b. When drawn out, this method forms a tree of branching paths.
+
+
+
+
+
+
+
+\subsection*{Classification and Regression Trees}
+
+Non Parametric Technique that produces either classification or regression trees, depending on whether or not the variable is categorical or numeric respectively.
+
+Trees are formed by a collection of rules based on certain variables in the modelling data set.
+
+Each branch of the tree ends in a terminal node, which is uniquely defined by a set of rules.
+
+
+%=============================================================================%
+
+\subsection*{Multivariate Adaptive Regression Splines}
+
+Non parametric tecnhqiue that builds flexible models by filtering piecewise linear regression.
+
+"knot" - where one regression gives way to another, and is the intersection of two splines.
+
+
+
+
+
+
+\section{On-Line Analytic Processing (OLAP)}
+
+
+The term On-Line Analytic Processing - OLAP (or Fast Analysis of Shared Multidimensional Information - FASMI) refers to technology that allows users of multidimensional databases to generate on-line descriptive or comparative summaries ("views") of data and other analytic queries. Note that despite its name, analyses referred to as OLAP do not need to be performed truly "on-line" (or in real-time); the term applies to analyses of multidimensional databases (that may, obviously, contain dynamically updated information) through efficient "multidimensional" queries that reference various types of data. 
+
+
+OLAP facilities can be integrated into corporate (enterprise-wide) database systems and they allow analysts and managers to monitor the performance of the business (e.g., such as various aspects of the manufacturing process or numbers and types of completed transactions at different locations) or the market. The final result of OLAP techniques can be very simple (e.g., frequency tables, descriptive statistics, simple cross-tabulations) or more complex (e.g., they may involve seasonal adjustments, removal of outliers, and other forms of cleaning the data). 
+
+
+Although Data Mining techniques can operate on any kind of unprocessed or even unstructured information, they can also be applied to the data views and summaries generated by OLAP to provide more in-depth and often more multidimensional knowledge. In this sense, Data Mining techniques could be considered to represent either a different analytic approach (serving different purposes than OLAP) or as an analytic extension of OLAP.
+
+
+
+
+
+
+%---------------------------%
+\section{Inductive Logic Programming (ILP)}
+
+Inductive Logic Programming (ILP) is a research area formed at the intersection of Machine Learning and Logic Programming. ILP systems develop predicate descriptions from examples and background knowledge. The examples, background knowledge and final descriptions are all described as logic programs. A unifying theory of Inductive Logic Programming is being built up around lattice-based concepts such as refinement, least general generalisation, inverse resolution and most specific corrections. In addition to a well established tradition of learning-in-the-limit results, some results within Valiant's PAC-learning framework have been demonstrated for ILP systems. U-learnabilty, a new model of learnability, has also been developed.
+
+
+Presently successful applications areas for ILP systems include the learning of structure-activity rules for drug design, finite-element mesh analysis design rules, primary-secondary prediction of protein structure and fault diagnosis rules for satellites.
+
+
+The theory of ILP is based on proof theory and model theory for the first order predicate calculus. Inductive hypothesis formation is characterised by techniques including inverse resolution , relative least general generalisations , inverse implication , and inverse entailment.
+
+
+The removal of redundancy, and use of search procedures also play an important role in the theory.
+
+
+Computational Learning Theory (COLT) is used to analyse learning results for ILP systems. An extension to Valiant's PAC learning framework, U-learnability, has been suggested.
+
+
+
+%---------------------------%
+\section{Naive Bayesian Classifier}
+
+The naive Bayesian classifier is an algorithm for supervised learning that stores a single probabilistic summary for each class and that assumes conditional independence of the attributes given the class. Despite these simplifying assumptions, in many domains naive Bayes gives results as good or better than much more sophisticated approaches to induction. 
+
+
+
+
+
+\end{document}
+
+ 
+

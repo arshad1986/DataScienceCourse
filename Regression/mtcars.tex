@@ -1,0 +1,218 @@
+https://rpubs.com/davoodastaraky/mtRegression
+
+Analysis of the MPG difference between automatic and manual transmissions
+Regression Analysis project by D. Astaraky, June 2015
+Executive summary
+Looking at the data set
+Exploratory data analyses
+Model fitting and hypothesis testing
+Two samples t-test
+Simple linear regression model
+Fitting multivariable linear regression model
+Regression diagnostics
+Executive summary
+This analysis is performed for the Motor Trend, a magazine about the automobile industry. By looking at a data set of a collection of cars, we are interested in exploring the relationship between a set of variables and miles per gallon (MPG) as outcome. We are particularly interested to explore:
+
+“Is an automatic or manual transmission better for MPG”
+
+“Quantify the MPG difference between automatic and manual transmissions”
+
+In order to answer these questions we performed exploratory data analyses, and used hypothesis testing and linear regression as methodologies to make inference. We established both simple and multivariate linear regression analysis. However the result of the multivariable regression model is more promising as it includes the potential effect of other variables on MPG.
+
+Using model selection strategy, we found out that among all variables weight and quarter mile time (acceleration) have significant impact in quantifying the difference of MPG between automatic and manual transmission cars.
+
+Looking at the data set
+For the purpose of this analysis we use mtcars dataset which is a dataset that was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models). Below is a brief description of the variables in the data set:
+
+[, 1]   mpg     Miles/(US) gallon
+[, 2]   cyl     Number of cylinders
+[, 3]   disp    Displacement (cu.in.)
+[, 4]   hp      Gross horsepower
+[, 5]   drat    Rear axle ratio
+[, 6]   wt      Weight (lb/1000)
+[, 7]   qsec    1/4 mile time
+[, 8]   vs      V/S
+[, 9]   am      Transmission (0 = automatic, 1 = manual)
+[,10]   gear    Number of forward gears
+[,11]   carb    Number of carburetors
+Also the first six records of the dataset are shown below:
+
+library(knitr)
+library(printr)
+kable(head(mtcars),align = 'c')
+mpg	cyl	disp	hp	drat	wt	qsec	vs	am	gear	carb	amfactor
+Mazda RX4	21.0	6	160	110	3.90	2.620	16.46	0	1	4	4	manual
+Mazda RX4 Wag	21.0	6	160	110	3.90	2.875	17.02	0	1	4	4	manual
+Datsun 710	22.8	4	108	93	3.85	2.320	18.61	1	1	4	1	manual
+Hornet 4 Drive	21.4	6	258	110	3.08	3.215	19.44	1	0	3	1	automatic
+Hornet Sportabout	18.7	8	360	175	3.15	3.440	17.02	0	0	3	2	automatic
+Valiant	18.1	6	225	105	2.76	3.460	20.22	1	0	3	1	automatic
+Notice that each line of mtcars represents one model of car, which we can see in the row names. Each column is then one attribute of that car, such as the miles per gallon (or fuel efficiency), the number of cylinders, the displacement (or volume) of the car’s engine in cubic inches, whether the car has an automatic or manual transmission, and so on.
+
+Exploratory data analyses
+We begin the analysis by performing some initial explaratory data analysis to get a better idea of the existing patterns between variables in the data set. Normally in regression analysis scatter plot is a very effective tool. Below we create a nice pairwise scatter plots. This is a nice way to investigate the relationship between all the variables in this data set.
+
+library(GGally)
+library(ggplot2)
+
+ggpairs(mtcars, 
+        lower = list(continuous = "smooth",params = c(method = "loess", colour="blue")),
+        diag=list(continuous="bar", params=c(colour="blue")),
+        upper=list(params=list(corSize=15)), 
+        axisLabels='show')
+
+
+It is also worthwhile check how MPG varies by automatic versus manual transmission. For that purpose we create a Violin plot of MPG by automatic and manual transmissions. In our dataset 0 represents an automatic transmission and 1 means a manual transmission.
+
+library(stats) 
+ggplot(mtcars, aes(y=mpg, x=factor(am, labels = c("automatic", "manual")), fill=factor(am)))+
+        geom_violin(colour="black", size=1)+
+        xlab("transmission") + ylab("MPG")
+
+We can form a clear hypothesis from this visualization: it appears that automatic cars have a lower miles per gallon, and therefore a lower fuel efficiency, than manual cars do. But it is possible that this apparent pattern happened by random chance- that is, that we just happened to pick a group of automatic cars with low efficiency and a group of manual cars with higher efficiency. So to check whether that’s the case, we have to use a statistical test.
+
+Model fitting and hypothesis testing
+Two samples t-test
+We are interested to know if an automatic or manual transmission better for MPG. So first we test the hypothesis that cars with an automatic transmission use more fuel than cars with a manual transmission. To compare two samples to see if they have different means, we use two sample T-test.
+
+test <- t.test(mpg ~ am, data= mtcars, var.equal = FALSE, paired=FALSE ,conf.level = .95)
+result <- data.frame( "t-statistic"  = test$statistic, 
+                       "df" = test$parameter,
+                        "p-value"  = test$p.value,
+                        "lower CL" = test$conf.int[1],
+                        "upper CL" = test$conf.int[2],
+                        "automatic mean" = test$estimate[1],
+                        "manual mean" = test$estimate[2],
+                        row.names = "")
+kable(x = round(result,3),align = 'c')
+t.statistic	df	p.value	lower.CL	upper.CL	automatic.mean	manual.mean
+-3.767	18.332	0.001	-11.28	-3.21	17.147	24.392
+p-value that shows the probability that this apparent difference between the two groups could appear by chance is very low. The confidence interval also describes how much lower the miles per gallon is in manual cars than it is in automatic cars. We can be confident that the true difference is between 3.2 and 11.3.
+
+Simple linear regression model
+We can also fit factor variables as regressors and come up with thing like analysis of variance as a special case of linear regression models. From the “dummy variables” point of view, there’s nothing special about analysis of variance (ANOVA). It’s just linear regression in the special case that all predictor variables are categorical. Our factor variable in this case is Transmission (am).
+
+mtcars$amfactor <- factor(mtcars$am, labels = c("automatic", "manual")) 
+summary(lm(mpg ~ factor(amfactor), data = mtcars))$coef
+Estimate	Std. Error	t value	Pr(>|t|)
+(Intercept)	17.147368	1.124602	15.247492	0.000000
+factor(amfactor)manual	7.244939	1.764422	4.106127	0.000285
+All the estimates provided here are in comparison with automatic transmission. The intercept of 17.14 is simply the mean MPG of automatic transmission. The slope of 7.24 is the change in the mean between manual transmission and automatic transmission. You can verify that from the plot as well. The p-value of 0.000285 for the mean MPG difference between manual and automatic transmission is significant. Therefore we conclude that according to this model manual transmission if more fuel efficient.
+
+Fitting multivariable linear regression model
+Modeling based on only one predictor variable does not seem to be sufficient and good enough as we have other predictor variables that might affect MPG and therefore affect the difference in MPG by transmission. So the univariate model in this case is only part of the picture. Therefore in this part of the analysis we use multivariable linear regression to develop a model that includes the effect of other variables.
+
+Model selection procedure
+
+We want to know what combination of predictors will best predict fuel efficiency. Which predictors increase our accuracy by a statistically significant amount? We might be able to guess at the some of the trends from the graph, but really we want to perform a statistical test to determine which predictors are significant, and to determine the ideal formula for prediction.
+
+Including variables that we should’t have increases actuall standard errors of the regression variables.Thus we don’t want to idly throw variables into the model. To confirm this fact, you can see below that if we include all the variables, not of them will a significant predictor of MPG (judging by p-value at the 95% confidence level).
+
+summary(lm(mpg ~ cyl+disp+hp+drat+wt+qsec+factor(vs)+factor(am)+gear+carb, data = mtcars))$coef
+Estimate	Std. Error	t value	Pr(>|t|)
+(Intercept)	12.3033742	18.7178844	0.6573058	0.5181244
+cyl	-0.1114405	1.0450234	-0.1066392	0.9160874
+disp	0.0133352	0.0178575	0.7467585	0.4634887
+hp	-0.0214821	0.0217686	-0.9868407	0.3349553
+drat	0.7871110	1.6353731	0.4813036	0.6352779
+wt	-3.7153039	1.8944143	-1.9611887	0.0632522
+qsec	0.8210407	0.7308448	1.1234133	0.2739413
+factor(vs)1	0.3177628	2.1045086	0.1509915	0.8814235
+factor(am)1	2.5202269	2.0566506	1.2254035	0.2339897
+gear	0.6554130	1.4932600	0.4389142	0.6652064
+carb	-0.1994193	0.8287525	-0.2406258	0.8121787
+Detecting collinearity
+
+A major problem with multivariate regression is collinearity. If two or more predictor variables are highly correlated, and they are both entered into a regression model, it increases the true standard error and you get a very unstable estimates of the slope. We can assess the collinearity by variance inflation factor (VIF). Lets look at the variance inflation factors if we throw all the variables into the model.
+
+library(car)
+fitvif <- lm(mpg ~ cyl+disp+hp+drat+wt+qsec+factor(vs)+factor(am)+gear+carb, data = mtcars)
+kable(vif(fitvif),align = 'c')
+cyl	15.373833
+disp	21.620241
+hp	9.832037
+drat	3.374620
+wt	15.164887
+qsec	7.527958
+factor(vs)	4.965873
+factor(am)	4.648487
+gear	5.357452
+carb	7.908747
+Values for the VIF that are greater than 10 are considered large. We should also pay attention to VIf values between 5 and 10. At these point we might consider leaving only one of these variables in the model.
+
+Stepwise selection method
+
+Among available methods we decided to perform stepwise selection to help us select a subset of variables that best explain the MPG. Please note that we also treat the vc variable as a categorical variable.
+
+library(MASS)
+fit <- lm(mpg ~ cyl+disp+hp+drat+wt+qsec+factor(vs)+factor(am)+gear+carb, data = mtcars)
+step <- stepAIC(fit, direction="both", trace=FALSE)
+summary(step)$coeff
+Estimate	Std. Error	t value	Pr(>|t|)
+(Intercept)	9.617781	6.9595930	1.381946	0.1779152
+wt	-3.916504	0.7112016	-5.506882	0.0000070
+qsec	1.225886	0.2886696	4.246676	0.0002162
+factor(am)1	2.935837	1.4109045	2.080819	0.0467155
+summary(step)$r.squared
+## [1] 0.8496636
+This shows that in addition to transmission, weight of the vehicle as well as acceleration speed have the highest relation to explaining the variation in mpg. The adjusted R^2 is 84% which means that the model explains 84% of the variation in mpg indicating it is a robust and highly predictive model.
+
+Nested likelihood ratio test
+
+If the models of interest are nested and without lots of parameters differentiating them, it’s fairly uncontroversial to use nested likelihood ratio tests. So in order to verify the result of the stepwise selection model, we also perform this procedure below.
+
+fit1 <- lm(mpg ~ factor(am), data = mtcars)
+fit2 <- lm(mpg ~ factor(am)+wt, data = mtcars)
+fit3 <- lm(mpg ~ factor(am)+wt+qsec, data = mtcars)
+fit4 <- lm(mpg ~ factor(am)+wt+qsec+hp, data = mtcars)
+fit5 <- lm(mpg ~ factor(am)+wt+qsec+hp+drat, data = mtcars)
+anova(fit1, fit2, fit3, fit4, fit5)
+Res.Df	RSS	Df	Sum of Sq	F	Pr(>F)
+30	720.8966	NA	NA	NA	NA
+29	278.3197	1	442.576902	72.5359307	0.0000000
+28	169.2859	1	109.033768	17.8700375	0.0002579
+27	160.0665	1	9.219469	1.5110205	0.2299925
+26	158.6386	1	1.427847	0.2340163	0.6326111
+As you can see, the result is consistent with stepwise selection model and adding any more variable in addition to wt, am and qsec will dramatically increase the variation in the model, and the p-value immediately becomes insignificant.
+
+Fitting the final model
+
+Now using the selected variables, we can fit the final model.
+
+finalfit <- lm(mpg ~ wt+qsec+factor(am), data = mtcars)
+summary(finalfit)$coef
+Estimate	Std. Error	t value	Pr(>|t|)
+(Intercept)	9.617781	6.9595930	1.381946	0.1779152
+wt	-3.916504	0.7112016	-5.506882	0.0000070
+qsec	1.225886	0.2886696	4.246676	0.0002162
+factor(am)1	2.935837	1.4109045	2.080819	0.0467155
+You can observe that all the variables now are statistically significant. This model explains 84% of the variance in miles per gallon (mpg). Now when we read the coefficient for am, we say that, on average, manual transmission cars have 2.94 MPGs more than automatic transmission cars. However this effect was much higher than when we did not adjust for weight and qsec.
+
+Regression diagnostics
+In this section, we perform some diagnostics on the final regression model.
+
+Detecting collinearity
+
+This time looking at variance inflation factors reveal that the numbers are reasonable and we dont detect any sign of collinearity.
+
+fitvif <- lm(mpg ~ wt+qsec+factor(am), data = mtcars)
+kable(vif(fitvif),align = 'c')
+wt	2.482951
+qsec	1.364339
+factor(am)	2.541437
+Residuals versus the fitted values
+
+By plotting residuals versus the fitted values, we’re looking for any sort of pattern. Same thing with the fitted values versus the standardized, where it’s plotting a function of the standardized residuals. Plots below show that no specific pattern exist in the residuals.
+
+
+Normality of residuals
+
+The normal Q-Q plot, is you’re trying to figure out the normality of the errors by plotting the theoretical quantiles of the standard normal distribution by the standardized residuals.
+
+qqPlot(finalfit, main="Normal Q-Q plot")
+
+Influential Observations
+
+Residuals versus leverage and also cooks distance, that’s where we want to look at the comparison of fit at that point verses the potential for influence of that point. So this is also a very useful plot to look at.
+
+grid.arrange(diagPlts[["rvlevPlot"]],diagPlts[["cvlPlot"]],diagPlts[["cdPlot"]], ncol=3)

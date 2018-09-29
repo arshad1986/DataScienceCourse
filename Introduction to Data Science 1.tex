@@ -1,0 +1,386 @@
+\documentclass[12pt]{article}
+
+%opening
+\title{Data Science}
+\author{Kevin O'Brien}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+%---------------------------------------------------------- %
+\section{Coursera's Introduction to Data Science}
+
+\begin{itemize} 
+\item \textbf{Introduction}
+\item[0.1] Examples, data science articulated, history and context, technology landscape
+\item \textbf{Part 1 Data Manipulation, at Scale}
+\item[1.1] Databases and the relational algebra  
+\item[1.2] Parallel databases, parallel query processing, in-database analytics \\
+\item[1.3] MapReduce, Hadoop, relationship to databases, algorithms, extensions, languages  
+\item[1.4] Key-value stores and NoSQL; tradeoffs of SQL and NoSQL
+\item[1.5] Entity resolution, record linkage, data cleaning
+\end{itemize}
+
+\subsection{Data Semantics}
+Data semantics is the study of the meaning and use of specific pieces of data in computer programming and other areas that employ data. When studying a language, semantics refers to what individual words mean and what they mean when put together to form phrases or sentences. In data semantics, the focus is on how a data object represents a concept or object in the real word.
+
+Data semantics is highly subjective. If a person who has never worked with a computer database tries to pull information from it, the words and phrases used to access the database would make no sense. Semantic meaning occurs only when a group agrees on specific definitions for certain data types or words. For others to pick up on these semantic meanings, they cannot change. If the word "dog" referred to a furry, four-legged animal one day and a two-legged bird the next, it would lose its meaning and no one would know what another person meant when she said "dog."
+
+\subsection{Entity Resolution}
+
+Entity Resolution is the problem of identifying and linking/grouping different manifestations of of the same real world object. Examples of manifestations and objects:
+\begin{itemize}
+\item Different ways of addressing (names, email addresses, FaceBook
+accounts) the same person in text.
+\item Web pages with differing descriptions of the same business.
+\item Different photos of the same object.
+\end{itemize} 
+
+\subsection{Sparsity and Density}
+Sparsity and density are terms used to describe the percentage of cells in a database table that are not populated and populated, respectively. The sum of the sparsity and density should equal 100%.
+
+A table that is 10\% dense has 10\% of its cells populated with non-zero values. It is therefore 90\% sparse – meaning that 90\% of its cells are either not filled with data or are zeros.
+
+Because a processor adds up the zeros, sparcity can negatively impact processing time. In a multidimensional database sparsity can be avoided by linking cubes. Instead of creating a sparse cube for data that is not fully available, a separate but linked cube will ensure the data in the cubes remains consistent without slowing down processing.
+
+
+
+\section{Databases}
+Database management systems (DBMSs) and, in particular, relational DBMSs (RDBMSs)
+are designed to do all of these things well. Their strengths are
+
+\begin{itemize}
+\item[1.] To provide fast access to selected parts of large databases.
+\item[2.] Powerful ways to summarize and cross-tabulate columns in databases.
+\item[3.] Store data in more organized ways than the rectangular grid model of spreadsheets and R
+data frames.
+\item[4.] Concurrent access from multiple clients running on multiple hosts while enforcing security
+constraints on access to the data.
+\item[5.] Ability to act as a server to a wide range of clients.
+\end{itemize}
+
+%---------------------------------------------------------------------------- %
+
+\subsection{Graph Database}
+A graph database is a database that uses graph structures with nodes, edges, and properties to represent and store data. By definition, a graph database is any storage system that provides index-free adjacency. This means that every element contains a direct pointer to its adjacent element and no index lookups are necessary. General graph databases that can store any graph are distinct from specialized graph databases such as triplestores and network databases.
+
+Compared with relational databases, graph databases are often faster for associative data sets, and map more directly to the structure of object-oriented applications. They can scale more naturally to large data sets as they do not typically require expensive join operations. As they depend less on a rigid schema, they are more suitable to manage ad-hoc and changing data with evolving schemas. Conversely, relational databases are typically faster at performing the same operation on large numbers of data elements.
+
+Graph databases are a powerful tool for graph-like queries, for example computing the shortest path between two nodes in the graph. Other graph-like queries can be performed over a graph database in a natural way (for example graph's diameter computations or community detection).
+
+%---------------------------------------------------------------------------- %
+\subsection{PostgreSQL}
+PostgreSQL (pronounced "post-gress-Q-L") is an open source relational database management system ( DBMS ) developed by a worldwide team of volunteers. PostgreSQL is not controlled by any corporation or other private entity and the source code is available free of charge.
+
+%--------------------------------------------------------%
+\section{Big Data}
+\subsection{MapReduce}
+MapReduce is a software framework that allows developers to write programs that process massive amounts of unstructured data in parallel across a distributed cluster of processors or stand-alone computers. It was developed at Google for indexing Web pages and replaced their original indexing algorithms and heuristics in 2004.
+
+The framework is divided into two parts:
+\begin{itemize}
+\item \textbf{Map} a function that parcels out work to different nodes in the distributed cluster.
+\item \textbf{Reduce} another function that collates the work and resolves the results into a single value.
+\end{itemize}
+
+The MapReduce framework is fault-tolerant because each node in the cluster is expected to report back periodically with completed work and status updates. If a node remains silent for longer than the expected interval, a master node makes note and re-assigns the work to other nodes.
+
+
+MapReduce is a programming paradigm that allows for massive scalability across hundreds or thousands of servers in a Hadoop cluster. The MapReduce concept is fairly simple to understand for those who are familiar with clustered scale-out data processing solutions.
+\\
+The term MapReduce actually refers to two separate and distinct tasks that Hadoop programs perform. The first is the map job, which takes a set of data and converts it into another set of data, where individual elements are broken down into tuples (key/value pairs). The reduce job takes the output from a map as input and combines those data tuples into a smaller set of tuples. As the sequence of the name MapReduce implies, the reduce job is always performed after the map job.
+An example of MapReduce
+
+Let’s look at a simple example. Assume you have five files, and each file contains two columns (a key and a value in Hadoop terms) that represent a city and the corresponding temperature recorded in that city for the various measurement days. Of course we’ve made this example very simple so it’s easy to follow. You can imagine that a real application won’t be quite so simple, as it’s likely to contain millions or even billions of rows, and they might not be neatly formatted rows at all; in fact, no matter how big or small the amount of data you need to analyze, the key principles we’re covering here remain the same. Either way, in this example, city is the key and tempera­ture is the value.
+\begin{verbatim}
+Toronto, 20 
+Whitby, 25 
+New York, 22 
+Rome, 32 
+Toronto, 4 
+Rome, 33 
+New York, 18
+\end{verbatim}
+
+
+Out of all the data we have collected, we want to find the maximum tem­perature for each city across all of the data files (note that each file might have the same city represented multiple times). Using the MapReduce framework, we can break this down into five map tasks, where each mapper works on one of the five files and the mapper task goes through the data and returns the maximum temperature for each city. For example, the results produced from one mapper task for the data above would look like this:
+\begin{verbatim}
+(Toronto, 20) (Whitby, 25) (New York, 22) (Rome, 33)
+\end{verbatim}
+
+Let’s assume the other four mapper tasks (working on the other four files not shown here) produced the following intermediate results:
+\begin{verbatim}
+(Toronto, 18) (Whitby, 27) (New York, 32) (Rome, 37)(Toronto, 32) (Whitby, 20) (New York, 33) (Rome, 38)(Toronto, 22) (Whitby, 19) (New York, 20) (Rome, 31)(Toronto, 31) (Whitby, 22) (New York, 19) (Rome, 30)
+\end{verbatim}
+All five of these output streams would be fed into the reduce tasks, which combine the input results and output a single value for each city, producing a final result set as follows:
+\begin{verbatim}
+(Toronto, 32) (Whitby, 27) (New York, 33) (Rome, 38)
+\end{verbatim}
+As an analogy, you can think of map and reduce tasks as the way a cen­sus was conducted in Roman times, where the census bureau would dis­patch its people to each city in the empire. Each census taker in each city would be tasked to count the number of people in that city and then return their results to the capital city. There, the results from each city would be reduced to a single count (sum of all cities) to determine the overall popula­tion of the empire. This mapping of people to cities, in parallel, and then com­bining the results (reducing) is much more efficient than sending a single per­son to count every person in the empire in a serial fashion.
+
+\bigskip
+(source: hadoop.apache.org)\\
+Hadoop MapReduce is a software framework for easily writing applications which process vast amounts of data (multi-terabyte data-sets) in-parallel on large clusters (thousands of nodes) of commodity hardware in a reliable, fault-tolerant manner.
+
+A MapReduce job usually splits the input data-set into independent chunks which are processed by the map tasks in a completely parallel manner. The framework sorts the outputs of the maps, which are then input to the reduce tasks. Typically both the input and the output of the job are stored in a file-system. The framework takes care of scheduling tasks, monitoring them and re-executes the failed tasks.
+
+\subsection{NoSQL}
+
+NoSQL database, also called Not Only SQL, is an approach to data management and database design that's useful for very large sets of distributed data.  
+
+NoSQL, which encompasses a wide range of technologies and architectures, seeks to solve the scalability and big data performance issues that relational databases weren’t designed to address. NoSQL is especially useful when an enterprise needs to access and analyze massive amounts of unstructured data or data that's stored remotely on multiple virtual servers in the cloud.   
+
+Contrary to misconceptions caused by its name, NoSQL does not prohibit structured query language (SQL). While it's true that some NoSQL systems are entirely non-relational, others simply avoid selected relational functionality such as fixed table schemas and join operations. For example, instead of using tables, a NoSQL database might organize data into objects, key/value pairs or tuples.
+
+\subsection{NoSQL implementations}
+Arguably, the most popular NoSQL database is Apache Cassandra. Cassandra, which was once Facebook’s proprietary database, was released as open source in 2008. Other NoSQL implementations include SimpleDB, Google BigTable, Apache Hadoop, MapReduce, MemcacheDB, and Voldemort. Companies that use NoSQL include NetFlix, LinkedIn and Twitter.
+
+NoSQL is often mentioned in conjunction with other big data tools such as massive parallel processing, columnar-based databases and Database-as-a-Service (DaaS).
+
+\subsection{Background of NoSQL}
+Relational databases were introduced into the 1970s to allow applications to store data through a standard data modeling and query language (Structured Query Language, or SQL). At the time, storage was expensive and data schemas were fairly simple and straightforward. Since the rise of the web, the volume of data stored about users, objects, products and events has exploded. Data is also accessed more frequently, and is processed more intensively – for example, social networks create hundreds of millions of customized, real-time activity feeds for users based on their connections' activities.
+
+Even rendering a single web page or answering a single API request may take tens or hundreds of database requests as applications process increasingly complex information. Interactivity, large user networks, and more complex applications are all driving this trend.
+
+In response to this demand, computing infrastructure and deployment strategies have also changed dramatically. Low-cost, commodity cloud hardware has emerged to replace vertical scaling on highly complex and expensive single-server deployments. And engineers now use agile development methods, which aim for continuous deployment and short development cycles, to allow for quick response to user demand for features.
+
+\subsubsection{The Need for NoSQL}
+
+Relational databases were never designed to cope with the scale and agility challenges that face modern applications – and aren't built to take advantage of cheap storage and processing power that's available today through the cloud. Relational database vendors have developed two main technical approaches to address these shortcomings:
+
+\subsubsection{Manual Sharding}
+
+Tables are broken up into smaller physical tables and spread across multiple servers. Because the database does not provide this ability natively, development teams take on the work of deploying multiple relational databases across a number of machines. Data is stored in each database instance autonomously. Application code is developed to distribute the data, distribute queries, and aggregate the results of data across all of the database instances. Additional code must be developed to handle resource failures, to perform joins across the different databases, for data rebalancing, replication, and other requirements. Furthermore, many benefits of the relational database, such as transactional integrity, are compromised or eliminated when employing manual sharding.
+
+
+
+\subsubsection{Distributed Caches}
+
+A number of products provide a caching tier for database systems. These systems can improve read performance substantially, but they do not improve write performance, and they add complexity to system deployments. If your application is dominated by reads then a distributed cache should probably be considered, but if your application is dominated by writes or if you have a relatively even mix of reads and writes, then a distributed cache may not improve the overall experience of your end users.
+
+NoSQL databases have emerged in response to these challenges and in response to the new opportunities provided by low-cost commodity hardware and cloud-based deployment environments - and natively support the modern application deployment environment, reducing the need for developers to maintain separate caching layers or write and maintain sharding code.
+
+%Features of NoSQL Databases
+
+NoSQL encompasses a wide variety of different database technologies but generally all NoSQL databases have a few features in common.
+
+\subsubsection{Dynamic Schemas}
+
+Relational databases require that schemas be defined before you can add data. For example, you might want to store data about your customers such as phone numbers, first and last name, address, city and state – a SQL database needs to know this in advance.
+
+This fits poorly with agile development approaches, because each time you complete new features, the schema of your database often needs to change. So if you decide, a few iterations into development, that you'd like to store customers' favorite items in addition to their addresses and phone numbers, you'll need to add that column to the database, and then migrate the entire database to the new schema.
+
+If the database is large, this is a very slow process that involves significant downtime. If you are frequently changing the data your application stores – because you are iterating rapidly – this downtime may also be frequent. There's also no way, using a relational database, to effectively address data that's completely unstructured or unknown in advance.
+
+NoSQL databases are built to allow the insertion of data without a predefined schema. That makes it easy to make significant application changes in real-time, without worrying about service interruptions – which means development is faster, code integration is more reliable, and less database administrator time is needed.
+
+\subsubsection{Auto-Sharding, Replication \& Integrated Caching}
+
+Because of the way they are structured, relational databases usually scale vertically – a single server has to host the entire database to ensure reliability and continuous availability of data. This gets expensive quickly, places limits on scale, and creates a relatively small number of failure points for database infrastructure.
+
+The solution is to scale horizontally, by adding servers instead of concentrating more capacity in a single server. Cloud computing makes this significantly easier, with providers such as Amazon Web Services providing virtually unlimited capacity on demand, and taking care of all the necessary database administration tasks. Developers no longer need to construct complex, expensive platforms to support their applications, and can concentrate on writing application code. In addition, a group of commodity servers can provide the same processing and storage capabilities as a single high-end server for a fraction of the price.
+
+"Sharding" a database across many server instances can be achieved with SQL databases, but usually is accomplished through SANs and other complex arrangements for making hardware act as a single server. NoSQL databases, on the other hand, usually support auto-sharding, meaning that they natively and automatically spread data across an arbitrary number of servers, without requiring the application to even be aware of the composition of the server pool. Data and query load are automatically balanced across servers, and when a server goes down, it can be quickly and transparently replaced with no application disruption.
+
+Most NoSQL databases also support automatic replication, meaning that you get high availability and disaster recovery without involving separate applications to manage these tasks. The storage environment is essentially virtualized from the developer's perspective.
+
+Lastly, many NoSQL database technologies have excellent integrated caching capabilities, keeping frequently-used data in system memory as much as possible. This removes the need for a separate caching layer that must be maintained.
+
+\section{Data Analytics}
+Data analytics (DA) is the science of examining raw data with the purpose of drawing conclusions about that information. Data analytics is used in many industries to allow companies and organization to make better business decisions and in the sciences to verify or disprove existing models or theories. Data analytics is distinguished from data mining by the scope, purpose and focus of the analysis. Data miners sort through huge data sets using sophisticated software to identify undiscovered patterns and establish hidden relationships. Data analytics focuses on inference, the process of deriving a conclusion based solely on what is already known by the researcher.
+
+The science is generally divided into exploratory data analysis (EDA), where new features in the data are discovered, and confirmatory data analysis (CDA), where existing hypotheses are proven true or false. Qualitative data analysis (QDA) is used in the social sciences to draw conclusions from non-numerical data like words, photographs or video. In information technology, the term has a special meaning in the context of IT audits, when the controls for an organization's information systems, operations and processes are examined. Data analysis is used to determine whether the systems in place effectively protect data, operate efficiently and succeed in accomplishing an organization's overall goals.
+
+The term "analytics" has been used by many business intelligence (BI) software vendors as a buzzword to describe quite different functions. Data analytics is used to describe everything from online analytical processing (OLAP) to CRM analytics in call centers. Banks and credit cards companies, for instance, analyze withdrawal and spending patterns to prevent fraud or identity theft. Ecommerce companies examine Web site traffic or navigation patterns to determine which customers are more or less likely to buy a product or service based upon prior purchases or viewing trends. Modern data analytics often use information dashboards supported by real-time data streams. So-called real-time analytics involves dynamic analysis and reporting, based on data entered into a system less than one minute before the actual time of use.
+
+\subsection{Decision Tree Learning}
+Decision tree learning, used in statistics, data mining and machine learning, uses a decision tree as a predictive model which maps observations about an item to conclusions about the item's target value. 
+
+More descriptive names for such tree models are classification trees or regression trees. In these tree structures, leaves represent class labels and branches represent conjunctions of features that lead to those class labels.
+
+In decision analysis, a decision tree can be used to visually and explicitly represent decisions and decision making. In data mining, a decision tree describes data but not decisions; rather the resulting classification tree can be an input for decision making.
+
+\subsection{Data Mining and Machine Learning}
+Data Mining and Machine Learning are commonly confused, as they often employ the same methods and overlap significantly. They can be roughly defined as follows:
+\begin{itemize}
+\item Machine learning focuses on prediction, based on known properties learned from the training data.
+\item Data mining (which is the analysis step of \emph{\textbf{Knowledge Discovery in Databases}}) focuses on the discovery of (previously) unknown properties on the data.
+\end{itemize}
+The two areas overlap in many ways: data mining uses many machine learning methods, but often with a slightly different goal in mind. On the other hand, machine learning also employs data mining methods as "unsupervised learning" or as a preprocessing step to improve learner accuracy. 
+
+Much of the confusion between these two research communities (which do often have separate conferences and separate journals, ECML PKDD being a major exception) comes from the basic assumptions they work with: in machine learning, performance is usually evaluated with respect to the ability to reproduce known knowledge, while in Knowledge Discovery and Data Mining (KDD) the key task is the discovery of previously unknown knowledge.
+
+Evaluated with respect to known knowledge, an uninformed (unsupervised) method will easily be outperformed by supervised methods, while in a typical KDD task, supervised methods cannot be used due to the unavailability of training data.
+\subsection{Clustering}
+Given large data sets, whether they are text or numeric, it is often useful to group together, or cluster, similar items automatically. For instance, given all of the news for the day from all of the newspapers in the United States, you might want to group all of the articles about the same story together automatically; you can then choose to focus on specific clusters and stories without needing to wade through a lot of unrelated ones. Another example: Given the output from sensors on a machine over time, you could cluster the outputs to determine normal versus problematic operation, because normal operations would all cluster together and abnormal operations would be in outlying clusters.
+
+Like CF, clustering calculates the similarity between items in the collection, but its only job is to group together similar items. In many implementations of clustering, items in the collection are represented as vectors in an n-dimensional space. Given the vectors, one can calculate the distance between two items using measures such as the \textbf{Manhattan Distance}, \textbf{Euclidean distance}, or \textbf{cosine similarity}. Then, the actual clusters can be calculated by grouping together the items that are close in distance.
+There are many approaches to calculating the clusters, each with its own trade-offs. Some approaches work from the bottom up, building up larger clusters from smaller ones, whereas others break a single large cluster into smaller and smaller clusters. Both have criteria for exiting the process at some point before they break down into a trivial cluster representation (all items in one cluster or all items in their own cluster). Popular approaches include k-Means and hierarchical clustering. As I'll show later, Mahout comes with several different clustering approaches.
+
+\subsection{Categorization}
+The goal of categorization (often also called classification) is to label unseen documents, thus grouping them together. Many classification approaches in machine learning calculate a variety of statistics that associate the features of a document with the specified label, thus creating a model that can be used later to classify unseen documents. For example, a simple approach to classification might keep track of the words associated with a label, as well as the number of times those words are seen for a given label. Then, when a new document is classified, the words in the document are looked up in the model, probabilities are calculated, and the best result is output, usually along with a score indicating the confidence the result is correct.
+Features for classification might include words, weights for those words (based on frequency, for instance), parts of speech, and so on. Of course, features really can be anything that helps associate a document with a label and can be incorporated into the algorithm.
+%--------------------------------------------------------------- %
+\subsection{Collaborative filtering}
+Collaborative filtering (CF) is a technique, popularized by Amazon and others, that uses user information such as ratings, clicks, and purchases to provide recommendations to other site users. CF is often used to recommend consumer items such as books, music, and movies, but it is also used in other applications where multiple actors need to collaborate to narrow down data. 
+
+%--------------------------------------------------------------- %
+\subsection{Random Forest}
+Random forests are an ensemble learning method for classification (and regression) that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes output by individual trees. 
+\newpage
+\section{Parallel Computing}
+Parallel computing is a form of computation in which many calculations are carried out simultaneously,operating on the principle that large problems can often be divided into smaller ones, which are then solved concurrently ("in parallel"). There are several different forms of parallel computing: bit-level, instruction level, data, and task parallelism. Parallelism has been employed for many years, mainly in high-performance computing, but interest in it has grown lately due to the physical constraints preventing frequency scaling.
+
+As power consumption (and consequently heat generation) by computers has become a concern in recent years,parallel computing has become the dominant paradigm in computer architecture, mainly in the form of multicore processors.
+
+Parallel computers can be roughly classified according to the level at which the hardware supports parallelism, with multi-core and multi-processor computers having multiple processing elements within a single machine, while clusters, MPPs, and grids use multiple computers to work on the same task. Specialized parallel computer architectures are sometimes used alongside traditional processors, for accelerating specific tasks.
+
+Parallel computer programs are more difficult to write than sequential ones, because concurrency introduces several new classes of potential software bugs, of which race conditions are the most common. Communication and synchronization between the different subtasks are typically some of the greatest obstacles to getting good parallel program performance.
+
+The maximum possible speed-up of a program as a result of parallelization is known as Amdahl's law.
+
+\section{Data Protection - A Summary}
+What does the Data Protection Act cover?
+The DPA covers personal data which is defined as information relating to a living individual who can be identified from those data, or from those data and other information which is in the possession of or is likely to come into the possession of, the data controller.  Personal data includes expression of opinion and indications of the intentions of the data controller or any other person in respect of the individual.
+
+There is a subsection of personal data known as sensitive personal data, this includes information regarding racial or ethnic origin, political opinions, religious beliefs, membership of trade unions, physical or mental health, sexual life, the commission or alleged commission of any offence, and any related proceedings.
+
+What does the Data Protection Act mean for the University?
+The Information Commissioners Office (ICO) oversees the Data Protection Act; the University is registered with the ICO and must annually renew this notification.  The Data Protection Act regulates how the University can process personal information and sets out 8 principles which must be followed.
+
+\section{What are the 8 Data Protection Principles?}
+The Data Protection Principles outline best practice with regards to processing Personal Data and must be complied with. The principles are:-
+
+1. Personal data shall be processed fairly and lawfully.\\
+
+2. Personal data shall be obtained only for one or more specified purposes, and shall not be further processed in any manner incompatible with that purpose or those purposes.\\
+
+3. Personal data shall be adequate, relevant and not excessive.\\
+
+4. Personal data shall be accurate and where necessary, kept up to date.\\
+
+5. Personal data processed for any purpose or purposes shall not be kept for longer than is necessary.\\
+
+6. Personal data shall be processed in accordance with the rights of data subjects under the Act.\\
+
+7. Appropriate technical and organisational measures shall be taken against unauthorised or unlawful processing of personal data and against accidental loss or destruction of, or damage to, personal data.\\
+
+8. Personal data shall not be transferred to a country outside the European Economic Area unless that country ensures an adequate level of protection.\\
+
+How does the Data Protection Act affect how the University uses personal data?
+In addition to the Data Protection principles outlined above the DPA specifies conditions that must be met when processing personal data, the lists below are not exhaustive but contain the conditions that are likely to be relied upon by the University.When processing Personal Data one of the following conditions must be met:
+
+The individual has given consent.\\
+The processing is necessary for the performance of a contract.\\
+The processing is necessary for a legal obligation.\\
+The processing is necessary for the protection of the data subjects vital interests.\\
+The processing in necessary for the exercise of any other functions of a public nature exercised in the public interest.\\
+The processing is necessary for the purposes of legitimate interests pursued by the data controller.\\
+When processing Sensitive Personal Data not only must one of the above apply, but there are additional conditions, at least one of which must be met:\\
+
+The data subject has given his explicit consent.
+The processing is necessary for compliance with legal obligations in connection with employment.
+The processing is necessary to protect the vital interests of the data subject or another person where consent cannot be given by or on behalf of the data subject, and the data controller cannot reasonably be expected to obtain consent
+The processing in necessary to protect the vital interests of another person, in a case where consent of the data subject has been unreasonably withheld.
+The personal data has been made public as a result of steps deliberately taken by the data subject.
+The processing is necessary for the purpose of, or in connection with, any legal proceedings or for the purpose of obtaining legal advice.
+
+The processing is of sensitive personal data consisting of information as to racial or ethnic origin, is for the purpose of identifying or reviewing the existence or absence of equality of opportunity or treatment between persons of different racial or ethnic origins, with a view to enabling such equality to be promoted or maintained, and is carried out with appropriate safeguards for the rights and freedoms of data subjects.
+What happens if the DPA is breached?\\
+The Information Commissioner has the authority to carry out Assessments of any Data Controllers against whom he has received complaints, if they are found to be breaching the DPA enforcement notices will be issued to force compliance. Breaches can also be tried in court.\\
+
+The Act provides for separate personal liability for any of the offences in the Act. If a member of staff consents to an offence committed by the University, or that offence is attributable to any neglect on his/her part, that member of staff can be proceeded against and fined accordingly. Additionally, a data subject has the right to sue for compensation if he/she has suffered damage and/or distress as a result of the Universitys breach of the data protection regulations.
+
+\subsection{Offences under the act include}:
+
+Processing without notification
+Failure to notify the commissioner of changes to notification register entry
+Failure to comply with an enforcement notice/information notice/special information notice
+Knowingly or recklessly obtaining or disclosing personal data or the information contained in personal data without the consent of the data subject.
+
+
+%-----------------------------------------------------------------------------------------%
+%-----------------------------------------------------------------------------------------%
+%-----------------------------------------------------------------------------------------%
+\newpage
+%\chapter{Databases}
+
+\section{some key terms}
+\subsection{Primary Key}
+\subsection{Foreign Key}
+\subsection{Tuple}
+
+\section{Database Administration}
+Database administrators design, implement, maintain and repair an organisations database. The role includes developing and designing the database strategy, monitoring and improving database performance and capacity, and planning for future expansion requirements. They may also plan, co-ordinate and implement security measures to safeguard the database.
+
+A database administrator may
+\begin{itemize}
+\item undertake daily administration, including monitoring system performance, ensuring successful backups, and developing/implementing disaster recovery plans
+\item manage data to give users the ability to access, relate and report information in different ways
+\item develop standards to guide the use and acquisition of software and to protect valuable information
+\item modify existing databases or instruct programmers and analysts on the required changes
+\item test programs or databases, correct errors and make necessary modifications
+\item train users and answer questions
+\end{itemize}
+
+%-----------------------------------------------------------------------------------------%
+%-----------------------------------------------------------------------------------------%
+
+\section{Cluster Anlysis}
+
+\section{Data dredging}
+
+Data dredging (data fishing, data snooping) is the inappropriate (sometimes deliberately so) use of data mining to uncover misleading relationships in data. Data-snooping bias is a form of statistical bias that arises from this misuse of statistics. Any relationships found might appear to be valid within the test set but they would have no statistical significance in the wider population.
+\subsection{Data Dredging}
+Data dredging and data-snooping bias can occur when researchers either do not form a hypothesis in advance or narrow the data used to reduce the probability of the sample refuting a specific hypothesis. Although data-snooping bias can occur in any field that uses data mining, it is of particular concern in finance and medical research, both of which make heavy use of data mining techniques.
+
+\newpage
+
+
+
+
+Data mining (DMM), also called Knowledge-Discovery in Databases (KDD) or Knowledge-Discovery and Data Mining, is the process of automatically searching large volumes of data for patterns using tools such as classification, association rule mining, clustering, etc. Data mining is a complex topic and has links with multiple core fields such as computer science and adds value to rich seminal computational techniques from statistics, information retrieval, machine learning and pattern recognition.
+
+
+
+
+Data mining has been defined as \emph{"the nontrivial extraction of implicit, previously unknown, and potentially useful information from data"} and \emph{"the science of extracting useful information from large data sets or databases" }. It involves sorting through large amounts of data and picking out relevant information. It is usually used by businesses, intelligence organizations, and financial analysts, but is increasingly used in the sciences to extract information from the enormous data sets generated by modern experimental and observational methods. Metadata, or data about a given data set, are often expressed in a condensed data mine-able format, or one that facilitates the practice of data mining. Common examples include executive summaries and scientific abstracts.
+
+
+
+
+Although data mining is a relatively new term, the technology is not. Companies for a long time have used powerful computers to sift through volumes of data such as supermarket scanner data, and produce market research reports. Continuous innovations in computer processing power, disk storage, and statistical software are dramatically increasing the accuracy and usefulness of analysis. Data mining identifies trends within data that go beyond simple analysis. Through the use of sophisticated algorithms, users have the ability to identify key attributes of business processes and target opportunities. The term data mining is often used to apply to the two separate processes of knowledge discovery and prediction. Knowledge discovery provides explicit information that has a readable form and can be understood by a user.
+
+Forecasting, or predictive modeling provides predictions of future events and may be transparent and readable in some approaches (e.g. rule based systems) and opaque in others such as neural networks. Moreover, some data mining systems such as neural networks are inherently geared towards prediction and pattern recognition, rather than knowledge discovery.
+
+
+
+The term "data mining" is often used incorrectly to apply to a variety of other processes besides data mining. In many cases, applications may claim to perform "data mining" by automating the creation of charts or graphs with historic trends and analysis. Although this information may be useful and timesaving, it does not fit the traditional definition of data mining, as the application performs no analysis itself and has no understanding of the underlying data. Instead, it relies on templates or pre-defined macros (created either by programmers or users) to identify trends, patterns and differences. A key defining factor for true data mining is that the application itself is performing some real analysis. In almost all cases, this analysis is guided by some degree of user interaction, but it must provide the user some insights that are not readily apparent through simple slicing and dicing. Applications that are not to some degree self-guiding are performing data analysis, not data mining.
+
+
+
+
+\section{Predictive analytics}
+
+Predictive analytics encompasses a variety of techniques from statistics, data mining and game theory that analyze current and historical facts to make predictions about future events.
+
+In business, predictive models exploit patterns found in historical and transactional data to identify risks and opportunities. Models capture relationships among many factors to allow assessment of risk or potential associated with a particular set of conditions, guiding decision making for candidate transactions.
+
+Predictive analytics is used in financial services, insurance, telecommunications, retail, travel, healthcare, pharmaceuticals and other fields.
+
+One of the most well-known applications is credit scoring, which is used throughout financial services. Scoring models process a customer's credit history, loan application, customer data, etc., in order to rank-order individuals by their likelihood of making future credit payments on time.
+
+%\chapter{Research}
+
+% The Aim of Research
+
+Very simply, the aim of research is to add something of value to an existing body of knowledge.
+
+
+
+\end{document} 
+
+\end{document}

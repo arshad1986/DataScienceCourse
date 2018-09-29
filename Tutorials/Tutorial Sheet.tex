@@ -1,0 +1,126 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Advanced Data Modelling}
+%\input{tcilatex}
+
+\begin{document}
+Version: May 10th 2013
+
+
+
+\newpage
+\section{Logistic Regression}
+\textbf{What is the Logit Function}
+The logit function that you use in logistic regression is also known as the link function because it connects, or links, the values of the independent variables to the probability of occurrence of the event defined by the dependent variable.
+
+\[ \mbox{logit}[E(Y)] = log(\frac{p_i}{1-p_i}) = \beta_0 + \beta_1x_1 + \ldots + \beta_nx_n \]
+
+
+\textbf{Give a brief description of the purpose of the Cox-Snell R-square statistics}
+
+In standard regression, R (or R squared in particular) gives you an idea of how powerful your equation is at predicting the variable of interest. An R close to 1 is a very strong prediction, whereas a small R, closer to zero, indicates a weak relationship.
+
+There is no direct equivalent of R for logistic regression.
+
+However, to keep people happy who insist on an R value, statisticians have come up with several R-like measures for logistic regression. They are not R itself, R has no meaning in logistic regression.
+
+Some of the better known ones are:
+
+\begin{itemize}
+\item Cox and Snell's R-Square
+\item Pseudo-R-Square
+\item Hagle and Mitchell's Pseudo-R-Square
+\end{itemize}
+%--------------------------------------------------------------------------%
+\newpage
+\section{Supervised Learning}
+
+%http://cs.stackexchange.com/questions/2907/what-exactly-is-the-difference-between-supervised-and-unsupervised-learning
+
+\textbf{What is the difference between supervised and unsupervised learning?}
+
+The difference is that in supervised learning the 'categories' are known.
+
+In unsupervised learning, they are not, and the learning process attempts to find appropriate 'categories'. In both kinds of learning all parameters are considered to determine which are most appropriate to perform the classification.
+Whether you chose supervised or unsupervised should be based on whether or not you know what the
+'categories' of your data are. If you know, use supervised learning. If you do not know, then use
+unsupervised.
+
+
+\textbf{Give an example of a supervised learning methodology and an unsupervised learning methodology}
+
+Explain how the Akaike Information Criterion would be used in the context of model selection.
+
+
+
+
+Under what sort of modelling problem would you use Binary Logistic Regression?
+
+Discuss some of the traditional technique for dealing with Missing Data, making references to the limitations of each.
+
+
+
+\section*{Missing Data}
+
+\begin{itemize}
+\item[5.a] Describe three types of missing data.
+\item[5.b] what is meant by multiple imputation?
+\item[5.c] Compare and contrast the following types of missing data: Missing At Random, Missing
+Not At Random, Missing Completely at Random.
+\item[5.d]Briefly describe the technique of Multiple Imputation.
+\item[5.e] Discuss some of the traditional techniques for dealing with Missing Data. For each technique discuss the limitations of that technique.
+\item[5.f] What is meant by missing data? Discuss the implications of Missing data in the context of a statistical analysis.
+\end{itemize}
+
+
+
+\section*{MANOVA and Discriminant Analysis}
+\begin{itemize}
+\item[6.a] The MANOVA procedure is sensitive to Multivariate Outliers. What is a multivariate outlier? Describe a method for detecting multivariate outliers.
+
+\item[6.b] Pillai's Trace and Wilk's Lambda are two test procedures used in MANOVA, each fulfiling the same purpose.
+Describe the purpose of these tests.
+
+\item[6.c] What is the purpose of a discriminant analysis? How does discriminant analysis differ from MANOVA?
+
+\item[6.d] Explain the following terms: confusion matrix, prior probabilities cost of misclassification, and apparent error rate.
+
+\item[6.e] Distinguish between the True Error Rate and the Apparent Error Rate
+
+\item[6.f]  What is the confusion matrix? Explain how it is interpreted.
+
+\item[6.g] Explain why multinomial logistic regression may be used in preference to Discriminant Analysis.
+
+\item[6.h] The apparent error rate calculated when all observations are used to construct
+the discriminant rules is known to underestimate the true error rate. What can be done
+to overcome this problem?
+
+\item[6.i] Compare and contrast univariate and bivariate outliers. Describe how Mahalanobis Distance is used to detect bivariate outliers. Support your answer with an illustration.
+
+\end{itemize}
+
+
+
+\end{document}
+
+
+%------------------------------------------------------------------------% 

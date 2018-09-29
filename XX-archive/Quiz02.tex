@@ -1,0 +1,113 @@
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 1}
+If the output of a model is given by y=f(x;W), then which of the following choices for f are most appropriate when the task is binary classification?
+Your Answer		Score	Explanation
+Linear threshold	Correct	0.50	
+Linear	Correct	0.50	
+Binary threshold	Incorrect	0.00	
+Logistic sigmoid	Correct	0.50	
+Total		1.50 / 2.00	
+Question Explanation
+
+There can be more than one reasonable choice.
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 2}
+After learning using the Perceptron algorithm, how easy is it to express the learned weight vector in terms of the input vectors and the initial weight vector? Assume the input vectors have real-valued components.
+Your Answer		Score	Explanation
+It requires real numbers.			
+It is impossible.			
+It requires one bit per training case.			
+It requires only one integer per training case.	Correct	1.00	
+For every training case, it was added or subtracted from the weight vector an integer number of times during learning. 
+The integer you need is the number of additions minus the number of subtractions.
+Total		1.00 / 1.00	
+Question Explanation
+
+After running the perceptron algorithm and achieving zero errors, we will be able to express the final weight vector as the initial weight vector plus an integer combination of the inputs.
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 3}
+Suppose we are given three data points: 
+x1,01,10,1→t→1→1→0 
+Furthermore, we are given the following weight vector (where the bias is set to 0): 
+w=(0,−3) 
+Let ||w(t)−w(t−1)||2 be the distance between the weight vectors at iteration t and iteration t−1 of the perceptron learning algorithm. 
+Here, for a given 2D vector v, ||v||2=v21+v22−−−−−−√ (this is also called the Euclidean norm). 
+What is the maximum amount by which the weight vectors can change between successive iterations? Note that in this example we are not learning the bias.
+Your Answer		Score	Explanation
+2√	Correct	1.00	
+2			
+22√			
+1			
+Total		1.00 / 1.00	
+Question Explanation
+
+Let's say that at time t we observe that we have misclassified some point x^ with target t^. Then the learning algorithm will proceed as: 
+
+w(t)={w(t−1)+x^ if t^=1w(t−1)−x^ if t^=0 
+
+In either case, the distance between w(t) and w(t−1) will be ||w(t−1)−w(t−1)±x^||2=||±x^||2=||x^||2≤2√ since this is the length of the largest input vector (in this case, (1,1)).
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 4}
+Suppose that we have a perceptron with weight vector w and we create a new set of weights w∗=cw by scaling w by some positive constant c. Assume that the bias is zero. 
+
+True or false: if the perceptron now uses w∗ instead then it's classification decisions might change (that is, we have moved the classification boundary).
+Your Answer		Score	Explanation
+True			
+False	Correct	1.00	
+Total		1.00 / 1.00	
+Question Explanation
+
+If the bias term is zero, all of the hyperplanes that represent individual cases go through the origin of weight space. 
+So changing the length of the weight vector without changing its direction cannot change which side of the plane it lies on.
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 5}
+Suppose that we have a perceptron with weight vector w and we create a new set of weights w∗=w+c by adding some constant vector c to w. Assume that the bias is zero. 
+
+True or false: if the perceptron now uses w∗ instead then it's classification decisions might change (that is, we have moved the classification boundary).
+Your Answer		Score	Explanation
+True			
+False	Incorrect	0.00	
+Total		0.00 / 1.00	
+Question Explanation
+
+Adding a constant vector can change the direction of the weight vector. This might change the side on which some data points lie.
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 6}
+Suppose we are given four training cases: 
+x1,11,00,10,0→t→1→0→0→1 
+It is impossible for a binary threshold unit to produce the desired target outputs for all four cases. Now suppose that we add an extra input dimension so that each of the four input vectors consists of three numbers instead of two. 
+Which of the following ways of setting the value of the extra input will create a set of four input vectors that is linearly separable (i.e. that can be given the right target values by a binary threshold unit with appropriate weights and bias).
+Your Answer		Score	Explanation
+Make the third value of each input vector be the same as the target value for that input vector.	Incorrect	0.00	
+Make the third value of each input vector be the same as the first value.	Incorrect	0.00	
+Make the third value be 1 for one of the four input vectors and 0 for the other three.	Incorrect	0.00	Imagine the four input vectors as lying at the corners of a horizontal square. If we raise one corner of the square in the third dimension we can now insert a tilted plane that goes beneath two diagonally opposite corners and above the other two diagonally opposite corners.
+Make the third value of each input vector be the opposite of the first value (i.e. use 1 if the first value is 0 and 0 if the first value is 1)	Incorrect	0.00	
+Total		0.00 / 2.00	
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 7}
+Brian wants to use a neural network to predict the price of a stock tomorrow given today's price and the price over the last 10 days. The inputs to this network are price over the last 10 days and the output is tomorrow's price. The hidden units in this network receive information from the layer below, transmit information to the layer above and do not send information within the same layer. Is this an example of a feed-forward network or a recurrent network?
+Your Answer		Score	Explanation
+Feed-forward			
+Recurrent	Incorrect	0.00	
+Total		0.00 / 1.00	
+Question Explanation
+
+Even though Brian's network is modelling a sequence, it is doing this in an entirely feed-forward fashion. Another name for this kind of model is a nonlinear autoregressive process. Recurrent networks are much more powerful for this task and can do a much better job, however they are also more difficult to train.
+$----------------------------------------------------------------------------$
+\newpage
+\section*{Question 8}
+Brian and Andy are having an argument about the perceptron algorithm. They have a dataset that the perceptron cannot seem to classify (that is, it fails to converge to a solution). Andy reasons that if he could collect more examples, that might solve the problem by making the data set linearly separable and then the perceptron algorithm will converge. Brian claims that collecting more examples will not help. Which one of them is correct?
+Your Answer		Score	Explanation
+Brian			
+Andy	Incorrect	0.00	
+Total		0.00 / 1.00	
+Question Explanation
+
+If any set A of points is not linearly separable from set B, then adding more examples to either set cannot make them linearly separable.

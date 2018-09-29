@@ -1,0 +1,79 @@
+
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} 
+\usepackage{subfig} 
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{KNIME}\chead{Introduction to KNIME}\rhead{Dragonfly Statistics}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+\title{KNIME}
+\author{Dragonfly Statistics}
+
+% CURRENTLY RE_WRITING
+
+%-----------------------------------------------%
+\begin{document}
+\subsection*{KNIME Architecture} 
+The architecture of Knime was designed with three main
+principles in mind:
+\begin{enumerate}
+\item  visual, interactive framework: data flows should be combined
+by simple drag\&drop from a variety of processing
+units. Customized applications can be modelled through
+individual data pipelines.
+\item modularity: Processing units and data containers should
+not depend on each other in order to enable easy distribution
+of computation and allow for independent development
+of different algorithms. Data Types are encapsulated,
+that is, no types are predefined, new types can easily be
+added bringing along type specific renderers and comparators.
+New types can be declared compatible to existing
+types.
+\item  easy expandability: It should be easy to add new processing
+nodes, or views and distribute them through a simple
+plug\&play principle without the need for complicated \textit{install/
+deinstall} procedures.
+\end{enumerate}
+\subsection*{KNIME Data Structures}
+All data flowing between nodes is wrapped within a class
+called \texttt{DataTable} which holds meta-information concerning
+the type of its columns and the actual data. 
+
+The data can
+be accessed by iterating over instances of \texttt{DataRow}. Each
+row contains a unique identifier (or \texttt{primary key}) and a
+specific number of \texttt{DataCell} objects which hold the actual
+data. 
+
+The reason to avoid access by Row ID or index is
+scalability, that is, the desire to be able to process large
+amounts of data and therefore not be forced to keep all of
+the rows in memory for fast, random access.
+
+\end{document}

@@ -1,0 +1,562 @@
+
+I. Classical Techniques: Statistics, Neighborhoods and Clustering
+1.1. The Classics
+These two sections have been broken up based on when the data mining technique was developed and when it became technically mature enough to be used for business, especially for aiding in the optimization of customer relationship management systems.  Thus this section contains descriptions of techniques that have classically been used for decades the next section represents techniques that have only been widely used since the early 1980s.
+This section should help the user to understand the rough differences in the techniques and at least enough information to be dangerous and well armed enough to not be baffled by the vendors of  different data mining tools.
+The main techniques that we will discuss here are the ones that are used 99.9% of the time on existing business problems.  There are certainly many other ones as well as proprietary techniques from particular vendors - but in general the industry is converging to those techniques that work consistently and are understandable and explainable.
+1.2. Statistics
+By strict definition "statistics" or statistical techniques are not data mining.  They were being used long before the term data mining was coined to apply to business applications.  However, statistical techniques are driven by the data and are used to discover patterns and build predictive models.  And from the users perspective you will be faced with a conscious choice when solving a "data mining" problem as to whether you wish to attack it with statistical methods or other data mining techniques.  For this reason it is important to have some idea of how statistical techniques work and how they can be applied.
+What is different between statistics and data mining?
+I flew the Boston to Newark shuttle recently and sat next to a professor from one the Boston area Universities.  He was going to discuss the  drosophila (fruit flies) genetic makeup to a pharmaceutical company in New Jersey.  He had  compiled the world's largest database on the genetic makeup of the fruit fly and had made it available to other researchers on the internet through Java applications accessing a larger relational database.
+He explained to me that they not only now were storing the information on the flies but also were doing "data mining" adding as an aside "which seems to be very important these days whatever that is".  I mentioned that I had written a book on the subject and he was interested in knowing what the difference was between "data mining" and statistics.  There was no easy answer. 
+The techniques used in data mining, when successful, are successful for precisely the same reasons that statistical techniques are successful (e.g. clean data, a well defined target to predict and good validation to avoid overfitting).  And for the most part the techniques are used in the same places for the same types of problems (prediction, classification discovery).  In fact some of the techniques that are classical defined as "data mining" such as CART and CHAID arose from statisticians.
+So what is the difference?  Why aren't we as excited about "statistics" as we are about data mining?  There are several reasons.  The first is that the classical data mining techniques such as CART, neural networks and nearest neighbor techniques tend to be more robust to both messier real world data and also more robust to being used by less expert users.  But that is not the only reason.  The other reason is that the time is right.  Because of the use of computers for closed loop business data storage and generation there now exists large quantities of data that is available to users.  IF there were no data - there would be no interest in mining it.  Likewise the fact that computer hardware has dramatically upped the ante by several orders of magnitude in storing and processing the data makes some of the most powerful data mining techniques feasible today.
+The bottom line though, from an academic standpoint at least, is that there is little practical difference between a statistical technique and a classical data mining technique.  Hence we have included a description of some of the most useful in this section.
+What is statistics?
+Statistics is a branch of mathematics concerning the collection and the description of data.  Usually statistics is considered to be one of those scary topics in college right up there with chemistry and physics.  However, statistics is probably a much friendlier branch of mathematics because it really can be used every day.  Statistics was in fact born from very humble beginnings of real world problems from business, biology, and gambling!
+ Knowing statistics in your everyday life will help the average business person make better decisions by allowing them to figure out risk and uncertainty when all the facts either aren’t known or can’t be collected.  Even with all the data stored in the largest of data warehouses business decisions still just become more informed guesses.  The more and better the data and the better the understanding of statistics the better the decision that can be made.
+Statistics has been around for a long time easily a century and arguably many centuries when the ideas of probability began to gel.  It could even be argued that the data collected by the ancient Egyptians, Babylonians, and Greeks were all statistics long before the field was officially recognized.  Today data mining has been defined independently of statistics though “mining data” for patterns and predictions is really what statistics is all about.  Some of the techniques that are classified under data mining such as CHAID and CART really grew out of the statistical profession more than anywhere else, and the basic ideas of probability, independence and causality and overfitting are the foundation on which both data mining and statistics are built.
+Data, counting and probability
+One thing that is always true about statistics is that  there is always data involved,  and usually enough data so that the average person cannot keep track of all the data in their heads.   This is certainly more true today than it was when the basic ideas of probability and statistics were being formulated and refined early this century.  Today people have to deal with up to terabytes of data and have to make sense of it and glean the important patterns from it.  Statistics can help greatly in this process by helping to answer several important questions about your data:
+What patterns are there in my database? 
+What is the chance that an event will occur? 
+Which patterns are significant? 
+What is a high level summary of the data that gives me some idea of what is contained in my database? 
+Certainly statistics can do more than answer these questions but for most people today these are the questions that statistics can help answer.  Consider for example that a large part of statistics is concerned with summarizing data, and more often than not, this summarization has to do with counting.   One of the great values of statistics is in presenting a high level view of the database that provides some useful information without requiring every record to be understood in detail.  This aspect of statistics is the part that people run into every day when they read the daily newspaper and see, for example, a pie chart reporting the number of US citizens of different eye colors, or the average number of annual doctor visits for people of different ages.   Statistics at this level is used in the reporting of important information from which people may be able to make useful decisions.   There are many different parts of statistics but the idea of collecting data and counting it is often at the base of even these more sophisticated techniques.  The first step then in understanding statistics is to understand how the data is collected into a  higher level form - one of the most notable ways of doing this is with the histogram.
+Histograms
+One of the best ways to summarize data is to provide a histogram of the data.  In the simple example database shown in Table 1.1 we can create a histogram of eye color by counting the number of occurrences of different colors of eyes in our database.  For this example database of 10 records this is fairly easy to do and the results are only slightly more interesting than the database itself.   However, for a database of many more records this is a very useful way of getting a high level understanding of the database.
+
+ID
+Name
+Prediction
+Age
+Balance
+Income
+Eyes
+Gender
+1
+Amy
+No
+62
+$0
+Medium
+Brown
+F
+2
+Al
+No
+53
+$1,800
+Medium
+Green
+M
+3
+Betty
+No
+47
+$16,543
+High
+Brown
+F
+4
+Bob
+Yes
+32
+$45
+Medium
+Green
+M
+5
+Carla
+Yes
+21
+$2,300
+High
+Blue
+F
+6
+Carl
+No
+27
+$5,400
+High
+Brown
+M
+7
+Donna
+Yes
+50
+$165
+Low
+Blue
+F
+8
+Don
+Yes
+46
+$0
+High
+Blue
+M
+9
+Edna
+Yes
+27
+$500
+Low
+Blue
+F
+10
+Ed
+No
+68
+$1,200
+Low
+Blue
+M
+Table 1.1 An Example Database of Customers with Different Predictor Types
+This histogram shown in figure 1.1 depicts a simple predictor (eye color) which will have only a few different values no matter if there are 100 customer records in the database or 100 million.  There are, however, other predictors that have many more distinct values and can create a much more complex histogram.  Consider, for instance, the histogram of ages of the customers in the population.  In this case the histogram can be more complex but can also be enlightening.  Consider if you found that the histogram of your customer data looked as it does in figure 1.2.
+
+Figure 1.1 This histogram shows the number of customers with various eye colors.  This summary can quickly show important information about the database such as that blue eyes are the most frequent.
+
+Figure 1.2  This histogram shows the number of customers of different ages and quickly tells the viewer that the majority of customers are over the age of 50.
+By looking at this second histogram the viewer is in many ways looking at all of the data in the database for a particular predictor or data column.  By looking at this histogram it is also possible to build an intuition about other important factors.  Such as the average age of the population, the maximum and minimum age.  All of which are important.  These values are called summary statistics.  Some of the most frequently used summary statistics include:
+Max - the maximum value for a given predictor. 
+Min - the minimum value for a given predictor. 
+Mean - the average value for a given predictor. 
+Median - the value for a given predictor that divides the database as nearly as possible into two databases of equal numbers of records. 
+Mode - the most common value for the predictor. 
+Variance - the measure of how spread out the values are from the average value. 
+When there are many values for a given predictor the histogram begins to look smoother and smoother (compare the difference between the two histograms above).  Sometimes the shape of the distribution of data can be calculated by an equation rather than just represented by the histogram.  This is what is called a data distribution.  Like a histogram a data distribution can be described by a variety of statistics.  In classical statistics the belief is that there is some “true” underlying shape to the data distribution that would be formed if all possible data was collected.  The shape of the data distribution can be calculated for some simple examples. The statistician’s job then is to take the limited data that may have been collected and from that make their best guess at what the “true” or at least most likely underlying data distribution might be.
+Many data distributions are well described by just two numbers, the mean and the variance.  The mean is something most people are familiar with, the variance, however, can be problematic.  The easiest way to think about it is that it measures the average distance of each predictor value from the mean value over all the records in the database.  If the variance is high it implies that the values are all over the place and very different.  If the variance is low most of the data values are fairly close to the mean.  To be precise the actual definition of the variance uses the square of the distance rather than the actual distance from the mean and the average is taken by dividing the squared sum by one less than the total number of records.  In terms of prediction a user could make some guess at the value of a predictor without knowing anything else just by knowing the mean and also gain some basic sense of how variable the guess might be based on the variance.
+Statistics for Prediction 
+In this book the term “prediction” is used for a variety of types of analysis that may elsewhere be more precisely called regression.  We have done so in order to simplify some of the concepts and to emphasize the common and most important aspects of predictive modeling.  Nonetheless regression is a powerful and commonly used tool in statistics and it will be discussed here.
+Linear regression 
+In statistics prediction is usually synonymous with regression of some form.   There are a variety of different types of regression in statistics but the basic idea is that a model is created that maps values from predictors in such a way that the lowest error occurs in making a prediction.  The simplest form of regression is simple linear regression that just contains one predictor and a prediction.  The relationship between the two can be mapped on a two dimensional space and the records plotted for the prediction values along the Y axis and the predictor values along the X axis.  The simple linear regression model then could be viewed as the line that minimized the error rate between the actual prediction value and the point on the line (the prediction from the model).  Graphically this would look as it does in Figure 1.3. The simplest form of regression seeks to build a predictive model that is a line that maps between each predictor value to a prediction value.  Of the many possible lines that could be drawn through the data the one that minimizes the distance between the line and the data points is the one that is chosen for the predictive model.
+On average if you guess the value on the line it should represent an acceptable compromise amongst all the data at that point giving conflicting answers.  Likewise if there is no data available for a particular input value the line will provide the best guess at a reasonable answer based on similar data.
+
+Figure 1.3 Linear regression is similar to the task of finding the line that minimizes the total distance to a set of data.
+The predictive model is the line shown in Figure 1.3.  The line will take a given value for a predictor and map it into a given value for a prediction.  The actual equation would look something like: Prediction = a + b * Predictor.  Which is just the equation for a line Y = a + bX.  As an example for a bank the predicted average consumer bank balance might equal $1,000 + 0.01 * customer’s annual income.  The trick, as always with predictive modeling, is to find the model that best minimizes the error. The most common way to calculate the error is the square of the difference between the predicted value and the actual value.  Calculated this way points that are very far from the line will have a great effect on moving the choice of line towards themselves in order to reduce the error.  The values of a and b in the regression equation that minimize this error can be calculated directly from the data relatively quickly.
+What if the pattern in my data doesn't look like a straight line? 
+Regression can become more complicated than the simple linear regression we’ve introduced so far.  It can get more complicated in a variety of different ways in order to better model particular database problems.   There are, however, three main modifications that can be made:
+1.      More predictors than just one can be used. 
+2.      Transformations can be applied to the predictors. 
+3.      Predictors can be multiplied together and used as terms in the equation. 
+4.      Modifications can be made to accommodate response predictions that just have yes/no or 0/1 values. 
+Adding more predictors to the linear equation can produce more complicated lines that take more information into account and hence make a better prediction.  This is called multiple linear regression and might have an equation like the following if 5 predictors were used (X1, X2, X3, X4, X5):
+Y = a + b1(X1) + b2(X2) + b3(X3) + b4(X4) + b5(X5) 
+This equation still describes a line but it is now a line in a6 dimensional space rather than the two dimensional space.
+By transforming the predictors by squaring, cubing or taking their square root it is possible to use the same general regression methodology and now create much more complex models that are no longer simple shaped like lines.  This is called non-linear regression.  A model of just one predictor might look like this: Y = a + b1(X1)  + b2 (X12).  In many real world cases analysts will perform a wide variety of transformations on their data just to try them out.  If they do not contribute to a useful model their coefficients in the equation will tend toward zero and then they can be removed.  The other transformation of predictor values that is often performed is multiplying them together.  For instance a new predictor created by dividing hourly wage by the minimum wage might be a much more effective predictor than hourly wage by itself.
+When trying to predict a customer response that is just yes or no (e.g. they bought the product or they didn’t or they defaulted or they didn’t) the standard form of a line doesn’t work.  Since there are only two possible values to be predicted it is relatively easy to fit a line through them.  However, that model would be the same no matter what predictors were being used or what particular data was being used.  Typically in these situations a transformation of the prediction values is made in order to provide a better predictive model.  This type of regression is called logistic regression and because so many business problems are response problems, logistic regression is one of the most widely used statistical techniques for creating predictive models.
+1.3. Nearest Neighbor
+Clustering and the Nearest Neighbor prediction technique are among the oldest techniques used in data mining.  Most people have an intuition that they understand what clustering is - namely that like records are grouped or clustered together.  Nearest neighbor is a prediction technique that is quite similar to clustering - its essence is that in order to predict what a prediction value is in one record look for records with similar predictor values in the historical database and use the prediction value from the record that it “nearest” to the unclassified record.
+A simple example of clustering
+A simple example of clustering would be the clustering that most people perform when they do the laundry - grouping the permanent press, dry cleaning, whites and brightly colored clothes is important because they have similar characteristics.  And it turns out they have important attributes in common about the way they behave (and can be ruined) in the wash.  To “cluster” your laundry most of your decisions are relatively straightforward.  There are of course difficult decisions to be made about which cluster your white shirt with red stripes goes into (since it is mostly white but has some color and is permanent press).  When clustering is used in business the clusters are often much more dynamic - even changing weekly to monthly and many more of the decisions concerning which cluster a record falls into can be difficult.
+A simple example of nearest neighbor
+A simple example of the nearest neighbor prediction algorithm is that if you look at the people in your neighborhood (in this case those people that are in fact geographically near to you).  You may notice that, in general, you all have somewhat similar incomes.  Thus if your neighbor has an income greater than $100,000 chances are good that you too have a high income.  Certainly the chances that you have a high income are greater when all of your neighbors have incomes over $100,000 than if all of your neighbors have incomes of $20,000.  Within your neighborhood there may still be a wide variety of incomes possible among even your “closest”  neighbors but if you had to predict someone’s income based on only knowing their neighbors you’re best chance of being right would be to predict the incomes of the neighbors who live closest to the unknown person. 
+The nearest neighbor prediction algorithm works in very much the same way except that “nearness” in a database may consist of a variety of factors not just where the person lives.   It may, for instance, be far more important to know which school someone attended and what degree they attained when predicting income.  The better definition of “near” might in fact be other people that you graduated from college with rather than the people that you live next to.
+Nearest Neighbor techniques are among the easiest to use and understand because they work in a way similar to the way that people think - by detecting closely matching examples.  They also perform quite well in terms of automation, as many of the algorithms are robust with respect to dirty data and missing data.  Lastly they are particularly adept at performing complex ROI calculations because the predictions are made at a local level where business simulations could be performed in order to optimize ROI.   As they enjoy similar levels of accuracy compared to other techniques the measures of accuracy such as lift are as good as from any other.
+How to use Nearest Neighbor for Prediction
+One of the essential elements underlying the concept of clustering is that one particular object (whether they be cars, food or customers) can be closer to another object than can some third object.  It is interesting that most people have an innate sense of ordering placed on a variety of different objects.  Most people would agree that an apple is closer to an orange than it is to a tomato and that a Toyota Corolla is closer to a Honda Civic than to a Porsche.  This sense of ordering on many different objects helps us place  them in time and space and to make sense of the world.  It is what allows us to build clusters - both in databases on computers as well as in our daily lives.  This definition of nearness that seems to be ubiquitous also allows us to make predictions.
+The nearest neighbor prediction algorithm simply stated is:
+Objects that are “near” to each other will have similar prediction values as well.  Thus if you know the prediction value of one of the objects you can predict it for it’s nearest neighbors.
+Where has the nearest neighbor technique been used in business?
+One of the classical places that nearest neighbor has been used for prediction has been in text retrieval.  The problem to be solved in text retrieval is one where the end user defines a document (e.g. Wall Street Journal article, technical conference paper etc.) that is interesting to them and they solicit the system to “find more documents like this one”.  Effectively defining a target of: “this is the interesting document” or “this is not interesting”.  The prediction problem is that only a very few of the documents in the database actually have values for this prediction field (namely only the documents that the reader has had a chance to look at so far).  The nearest neighbor technique is used to find other documents that share important characteristics with those documents that have been marked as interesting.
+Using nearest neighbor for stock market data
+As with almost all prediction algorithms, nearest neighbor can be used in  a variety of places.  Its successful use is mostly dependent on the pre-formatting of the data so that nearness can be calculated and where individual records can be defined.  In the text retrieval example this was not too difficult - the objects were documents. This is not always as easy as it is for text retrieval. Consider what it might be like in a time series problem - say for predicting the stock market.  In this case the input data is just a long series of stock prices over time without any particular record that could be considered to be an object.   The value to be predicted is just the next value of the stock price.
+The way that this problem is solved for both nearest neighbor techniques and for some other types of prediction algorithms is to create training records by taking, for instance, 10 consecutive stock prices and using the first 9 as predictor values and the 10th as the prediction value.  Doing things this way, if you had 100 data points in your time series you could create 10 different training records. 
+You could create even more training records than 10 by creating a  new record starting at every data point.  For instance in the you could take the first 10 data points and create a record.  Then you could take the 10 consecutive data points starting at the second data point, then the 10 consecutive data point starting at the third data point.  Even though  some of the data points would overlap from one record to the next the prediction value would always be different.  In our example of 100 initial data points 90 different training records could be created this way as opposed to the 10 training records created via the other method.
+Why voting is better - K Nearest Neighbors
+One of the improvements that is usually made to the basic nearest neighbor algorithm is to take a vote from the “K” nearest neighbors rather than just relying on the sole nearest neighbor to the unclassified record.  In Figure 1.4 we can see that unclassified example C has a nearest neighbor that is a defaulter and yet is surrounded almost exclusively by records that are good credit risks.  In this case the nearest neighbor to record C is probably an outlier - which may be incorrect data or some non-repeatable idiosyncrasy.  In either case it is more than likely that C is a non-defaulter yet would be predicted to be a defaulter if the sole nearest neighbor were used for the prediction.
+
+Figure 1.4  The nearest neighbors are shown graphically for three unclassified records: A, B, and C.
+In cases like these a vote of the 9 or 15 nearest neighbors would provide a better prediction accuracy for the system than would just the single nearest neighbor.  Usually this is accomplished by simply taking the majority or plurality of predictions from the K nearest neighbors if the prediction column is a binary or categorical or taking the average value of the prediction column from the K nearest neighbors.
+How can the nearest neighbor tell you how confident it is in the prediction?
+Another important aspect of any system that is used to make predictions is that the user be provided with, not only the prediction, but also some sense of the confidence in that prediction (e.g. the prediction is defaulter with the chance of being correct 60% of the time).  The nearest neighbor algorithm provides this confidence information in a number of ways:
+The distance to the nearest neighbor provides a level of confidence.  If the neighbor is very close or an exact match then there is much higher confidence in the prediction than if the nearest record is a great distance from the unclassified record.
+The degree of homogeneity amongst the predictions within the K nearest neighbors can also be used.  If all the nearest neighbors make the same prediction then there is much higher confidence in the prediction than if half the records made one prediction and the other half made another prediction.
+1.4. Clustering
+Clustering for Clarity
+Clustering is the method by which like records are grouped together.  Usually this is done to give the end user a high level view of what is going on in the database.  Clustering is sometimes used to mean segmentation - which most marketing people will tell you is useful for coming up with a birds eye view of the business.  Two of these clustering systems are the PRIZM™ system from Claritas corporation and MicroVision™ from Equifax corporation.  These companies have grouped the population by demographic information into segments that they believe are useful for direct marketing and sales.  To build these groupings they use information such as income, age, occupation, housing and race collect in the US Census.  Then they assign memorable “nicknames” to the clusters.  Some examples are shown in Table 1.2. 
+Name
+Income
+Age
+Education       
+Vendor
+Blue Blood Estates
+Wealthy
+35-54
+College
+Claritas Prizm™
+Shotguns and Pickups
+Middle
+35-64
+High School
+Claritas Prizm™
+Southside City 
+Poor
+Mix
+Grade School
+Claritas Prizm™
+Living Off the Land
+Middle-Poor
+School Age Families
+Low
+Equifax MicroVision™
+University USA 
+Very low
+Young - Mix
+Medium to High
+Equifax MicroVision™
+Sunset Years
+Medium
+Seniors
+Medium
+Equifax MicroVision™
+Table 1.2 Some Commercially Available Cluster Tags
+This clustering information is then used by the end user to tag the customers in their database.  Once this is done the business user can get a quick high level view of what is happening within the cluster. Once the business user has worked with these codes for some time they also begin to build intuitions about how these different customers clusters will react to the marketing offers particular to their business.   For instance some of these clusters may relate to their business and some of them may not.  But given that their competition may well be using these same clusters to structure their business and marketing offers it is important to be aware of how you customer base behaves in regard to these clusters.
+Finding the ones that don't fit in - Clustering for Outliers
+Sometimes clustering is performed not so much to keep records together as to make it easier to see when one record sticks out from the rest.  For instance:
+Most wine distributors selling inexpensive wine in Missouri and that ship a certain volume of product produce a certain level of profit.  There is a cluster of stores that can be formed with these characteristics.  One store stands out, however, as producing significantly lower profit.   On closer examination it turns out that the distributor was delivering product to but not collecting payment from one of their customers.
+A sale on men’s suits is being held in all branches of a department store for southern California .   All stores with these characteristics  have seen at least a 100% jump in revenue since the start of the sale except one.  It turns out that this store had, unlike the others,  advertised via radio rather than television.
+How is clustering like the nearest neighbor technique?
+The nearest neighbor algorithm is basically a refinement of clustering in the sense that they both use distance in some feature space to create either structure in the data or predictions.  The nearest neighbor algorithm is a refinement since part of the algorithm usually is a way of automatically determining the weighting of the importance of the predictors and how the distance will be measured within the feature space.  Clustering is one special case of this where the importance of each predictor is considered to be equivalent.
+How to put clustering and nearest neighbor to work for prediction
+To see clustering and nearest neighbor prediction in use let’s go back to our example database and now look at it in two ways.  First let’s try to create our own clusters - which if useful we could use internally to help to simplify and clarify large quantities of data (and maybe if we did a very good job sell these new codes to other business users).  Secondly let’s try to create predictions based on the nearest neighbor.
+First take a look at the data.  How would you cluster the data in Table 1.3?
+ID
+Name
+Prediction
+Age
+Balance
+Income
+Eyes
+Gender
+1
+Amy
+No
+62
+$0
+Medium
+Brown
+F
+2
+Al
+No
+53
+$1,800
+Medium
+Green
+M
+3
+Betty
+No
+47
+$16,543
+High
+Brown
+F
+4
+Bob
+Yes
+32
+$45
+Medium
+Green
+M
+5
+Carla
+Yes
+21
+$2,300
+High
+Blue
+F
+6
+Carl
+No
+27
+$5,400
+High
+Brown
+M
+7
+Donna
+Yes
+50
+$165
+Low
+Blue
+F
+8
+Don
+Yes
+46
+$0
+High
+Blue
+M
+9
+Edna
+Yes
+27
+$500
+Low
+Blue
+F
+10
+Ed
+No
+68
+$1,200
+Low
+Blue
+M
+Table 1.3 A Simple Example Database
+If these were your friends rather than your customers (hopefully they could be both) and they were single, you might cluster them based on their compatibility with each other.  Creating your own mini dating service.  If you were a pragmatic person you might cluster your database as follows because you think that marital happiness is mostly dependent on financial compatibility and create three clusters as shown in Table 1.4.
+  
+ID
+Name
+Prediction
+Age
+Balance
+Income
+Eyes
+Gender
+ 
+3
+Betty
+No
+47
+$16,543
+High
+Brown
+F
+5
+Carla
+Yes
+21
+$2,300
+High
+Blue
+F
+6
+Carl
+No
+27
+$5,400
+High
+Brown
+M
+8
+Don
+Yes
+46
+$0
+High
+Blue
+M
+ 
+1
+Amy
+No
+62
+$0
+Medium
+Brown
+F
+2
+Al
+No
+53
+$1,800
+Medium
+Green
+M
+4
+Bob
+Yes
+32
+$45
+Medium
+Green
+M
+  
+7
+Donna
+Yes
+50
+$165
+Low
+Blue
+F
+9
+Edna
+Yes
+27
+$500
+Low
+Blue
+F
+10
+Ed
+No
+68
+$1,200
+Low
+Blue
+M
+ Table 1.4.  A Simple Clustering of the Example Database
+Is the another "correct" way to cluster?
+If on the other hand you are more of a romantic you might note some incompatibilities between 46 year old Don and 21 year old Carla (even though they both make very good incomes).  You might instead consider age and some physical characteristics to be most important in creating clusters of friends.  Another way you could cluster your friends would be based on their ages and on the color of their eyes.  This is shown in Table 1.5.  Here three clusters are created where each person in the cluster is about the same age and some attempt has been made to keep people of like eye color together in the same cluster.
+
+ID 
+Name 
+Prediction 
+Age 
+Balance 
+Income 
+Eyes 
+Gender 
+ 
+5
+Carla
+Yes
+21
+$2,300
+High
+Blue
+F
+9
+Edna
+Yes
+27
+$500
+Low
+Blue
+F
+6
+Carl
+No
+27
+$5,400
+High
+Brown
+M
+4
+Bob
+Yes
+32
+$45
+Medium
+Green
+M
+ 
+8
+Don
+Yes
+46
+$0
+High
+Blue
+M
+7
+Donna
+Yes
+50
+$165
+Low
+Blue
+F
+10
+Ed
+No
+68
+$1,200
+Low
+Blue
+M
+ 
+3
+Betty
+No
+47
+$16,543
+High
+Brown
+F
+2
+Al
+No
+53
+$1,800
+Medium
+Green
+M
+1
+Amy
+No
+62
+$0
+Medium
+Brown
+F
+ Table 1.5 A More "Romantic" Clustering of the Example Database to Optimize for Your Dating Service
+There is no best way to cluster.
+This example, though simple, points up some important questions about clustering.  For instance: Is it possible to say whether the first clustering that was performed above (by financial status) was better or worse than the second clustering (by age and eye color)?  Probably not since the clusters were constructed for no particular purpose except to note similarities between some of the records and that the view of the database could be somewhat simplified by using clusters.  But even the differences that were created by the two different clusterings were driven by slightly different motivations (financial vs. Romantic).  In general the reasons for clustering are just this ill defined because clusters are used more often than not for exploration and summarization as much as they are used for prediction.
+How are tradeoffs made when determining which records fall into which clusters?
+Notice that for the first clustering example there was a pretty simple rule by which the records could be broken up into clusters - namely by income.  In the second clustering example there were less clear dividing lines since two predictors were used to form the clusters (age and eye color).   Thus the first cluster is dominated by younger people with somewhat mixed eye colors whereas the latter two clusters have a mix of older people where eye color has been used to separate them out (the second cluster is entirely blue eyed people).   In this case these tradeoffs were made arbitrarily but when clustering much larger numbers of records these tradeoffs are explicitly defined by the clustering algorithm.
+Clustering is the happy medium between homogeneous clusters and the fewest number of clusters.
+In the best possible case clusters would be built where all records within the cluster had identical values for the particular predictors that were being clustered on.  This would be the optimum in creating a high level view since knowing the predictor values for any member of the cluster would mean knowing the values for every member of the cluster no matter how large the cluster was.  Creating homogeneous clusters where all values for the predictors are the same is difficult to do when there are many predictors and/or the predictors have many different values (high cardinality). 
+It is possible to guarantee that homogeneous clusters are created by breaking apart any cluster that is inhomogeneous into smaller clusters that are homogeneous.  In the extreme, though, this usually means creating clusters with only one record in them which usually defeats the original purpose of the clustering.  For instance in our 10 record database above 10 perfectly homogeneous clusters could be formed of 1 record each, but not much progress would have been made in making the original database more understandable.
+The second important constraint on clustering is then that a reasonable number of clusters are formed.  Where, again, reasonable is defined by the user but is difficult to quantify beyond that except to say that just one cluster is unacceptable (too much generalization) and that as many clusters and original records is also unacceptable  Many clustering algorithms either let the user choose the number of clusters that they would like to see created from the database or they provide the user a “knob” by which they can create fewer or greater numbers of clusters interactively after the clustering has been performed.
+What is the difference between clustering and nearest neighbor prediction?
+The main distinction between clustering and the nearest neighbor technique is that clustering is what is called an unsupervised learning technique and nearest neighbor is generally used for prediction or a supervised learning technique.  Unsupervised learning techniques are unsupervised in the sense that when they are run there is not particular reason for the creation of the models the way there is for supervised learning techniques that are trying to perform prediction.  In prediction, the patterns that are found in the database and presented in the model are always the most important patterns in the database for performing some particular prediction.  In clustering there is no particular sense of why certain records are near to each other or why they all fall into the same cluster.  Some of the differences between clustering and nearest neighbor prediction can be summarized in Table 1.6.
+
+
+Nearest Neighbor 
+Clustering 
+Used for prediction as well as consolidation.
+Used mostly for consolidating data into a high-level view and general grouping of records into like behaviors.
+Space is defined by the problem to be solved (supervised learning).
+Space is defined as default n-dimensional  space, or is defined by the user, or is a predefined space driven by past experience (unsupervised learning).
+Generally only uses distance metrics to determine nearness.
+Can use other metrics besides distance to determine nearness of two records - for example linking two points together.
+Table 1.6  Some of the Differences Between the Nearest-Neighbor Data Mining Technique and Clustering
+What is an n-dimensional space? Do I really need to know this?
+When people talk about clustering or nearest neighbor prediction they will often talk about a “space” of “N” dimensions.  What they mean is that in order to define what is near and what is far away it is helpful to have a “space” defined where distance can be calculated.  Generally these spaces behave just like the three dimensional space that we are familiar with where distance between objects is defined by euclidean distance (just like figuring out the length of a side in a triangle). 
+What goes for three dimensions works pretty well for more dimensions as well.  Which is a good thing since most real world problems consists of many more than three dimensions.  In fact each predictor (or database column) that is used can be considered to be a new dimension.  In the example above the five predictors: age, income, balance, eyes and gender can all be construed to be dimensions in an n dimensional space where n, in this case, equal 5.  It is sometimes easier to think about these and other data mining algorithms in terms of n-dimensional spaces because it allows for some intuitions to be used about how the algorithm is working.
+Moving from three dimensions to five dimensions is not too large a jump but there are also spaces in real world problems that are far more complex.  In the credit card industry credit card issuers typically have over one thousand predictors that could be used to create an n-dimensional space.  For text retrieval (e.g. finding useful Wall Street Journal articles from a large database, or finding useful web sites on the internet) the predictors (and hence the dimensions) are typically words or phrases that are found in the document records.  In just one  year of the Wall Street Journal there are more than 50,000 different words used - which translates to a 50,000 dimensional space in which nearness between records must be calculated.
+%-------------------------------------------------------------------------------------------%
+How is the space for clustering and nearest neighbor defined?
+For clustering the n-dimensional space is usually defined by assigning one predictor to each dimension.  For the nearest neighbor algorithm predictors are also mapped to dimensions but then those dimensions are literally stretched or compressed based on how important the particular predictor is in making the prediction.  The stretching of a dimension effectively makes that dimension (and hence predictor) more important than the others in calculating the distance.
+For instance if you are a mountain climber and someone told you that you were 2 miles from your destination the distance is the same whether it’s 1 mile north and 1 mile up the face of the mountain or 2 miles north on level ground but clearly the former route is much different from the latter. The distance traveled straight upward is the most important if figuring out how long it will really take to get to the destination and you would probably like to consider this “dimension” to be more important than the others.   In fact you, as a mountain climber, could “weight” the importance of the vertical dimension in calculating some new distance by reasoning that every mile upward is equivalent to 10 miles on level ground.
+If you used this rule of thumb to weight the importance of one dimension over the other it would be clear that in one case you were much “further away” from your destination (“11 miles”) than in the second (“2 miles”).  In the next section we’ll show how the nearest neighbor algorithm uses distance measure that similarly weight the important dimensions more heavily when calculating a distance measure.
+%-------------------------------------------------------------------------------------------%
+Hierarchical and Non-Hierarchical Clustering
+There are two main types of clustering techniques, those that create a hierarchy of clusters and those that do not.  The hierarchical clustering techniques create a hierarchy of clusters from small to big.  The main reason for this is that, as was already stated,  clustering is an unsupervised learning technique, and as such, there is no absolutely correct answer.  For this reason and depending on the particular application of the clustering, fewer or greater numbers of clusters may be desired.  With a hierarchy of clusters defined it is possible to choose the number of clusters that are desired.  At the extreme it is possible to have as many clusters as there are records in the database.   In this case the records within the cluster are optimally similar to each other (since there is only one) and certainly different from the other clusters.  But of course such a clustering technique misses the point in the sense that the idea of clustering is to find useful patters in the database that summarize it and make it easier to understand.  Any clustering algorithm that ends up with as many clusters as there are records has not helped the user understand the data any better.  Thus one of the main points about clustering is that there be many fewer clusters than there are original records.  Exactly how many clusters should be formed is a matter of interpretation.  The advantage of hierarchical clustering methods is that they allow the end user to choose from either many clusters or only a few.
+The hierarchy of clusters is usually viewed as a tree where the smallest clusters merge together to create the next highest level of clusters and those at that level merge together to create the next highest level of clusters.  Figure 1.5 below shows how several clusters might form a hierarchy.  When a hierarchy of clusters like this is created the user can determine what the right number of clusters is that adequately summarizes the data while still providing useful information (at the other extreme a single cluster containing all the records is a great summarization but does not contain enough specific information to be useful).
+This hierarchy of clusters is created through the algorithm that builds the clusters.  There are two main types of hierarchical clustering algorithms:
+Agglomerative - Agglomerative clustering techniques start with as many clusters as there are records where each cluster contains just one record.   The clusters that are nearest each other are merged together to form the next largest cluster.  This merging is continued until a hierarchy of clusters is built with just a single cluster containing all the records at the top of the hierarchy.
+Divisive - Divisive clustering techniques take the opposite approach from agglomerative techniques.  These techniques start with all the records in one cluster and then try to split that cluster into smaller pieces and then in turn to try to split those smaller pieces.  
+Of the two the agglomerative techniques are the most commonly used for clustering and have more algorithms developed for them.  We’ll talk about these in more detail in the next section. The non-hierarchical techniques in general are faster to create from the historical database but require that the user make some decision about the number of clusters desired or the minimum “nearness” required for two records to be within the same cluster.  These non-hierarchical techniques often times are run multiple times starting off with some arbitrary or even random clustering and then iteratively improving the clustering by shuffling some records around.  Or these techniques some times create clusters that are created with only one pass through the database adding records to existing clusters when they exist and creating new clusters when no existing cluster is a good candidate for the given record. Because the definition of which clusters are formed can depend on these initial choices of which starting clusters should be chosen or even how many clusters these techniques can be less repeatable than the hierarchical techniques and can sometimes create either too many or too few clusters because the number of clusters is predetermined by the user not determined solely by the patterns inherent in the database.
+%-------------------------------------------------------------------------------------------%
+Figure 1.5 Diagram showing a hierarchy of clusters.  Clusters at the lowest level are merged together to form larger clusters at the next level of the hierarchy.
+Non-Hierarchical Clustering
+There are two main non-hierarchical clustering techniques.  Both of them are very fast to compute on the database but have some drawbacks.  The first are the single pass methods.  They derive their name from the fact that the database must only be passed through once in order to create the clusters (i.e. each record is only read from the database once).  The other class of  techniques are called reallocation methods.  They get their name from the movement or “reallocation” of records from one cluster to another in order to create better clusters.  The reallocation techniques do use multiple passes through the database but are relatively fast in comparison to the hierarchical techniques.
+Some techniques allow the user to request the number of clusters that they would like to be pulled out of the data.  Predefining the number of clusters rather than having them driven by the data might seem to be a bad idea as there might be some very distinct and observable clustering of the data into a certain number of clusters which the user might not be aware of. 
+For instance the user may wish to see their data broken up into 10 clusters but the data itself partitions very cleanly into 13 clusters.  These non-hierarchical techniques will try to shoe horn these extra three clusters into the existing 10 rather than creating 13 which best fit the data.  The saving grace for these methods, however, is that, as we have seen, there is no one right answer for how to cluster so it is rare that by arbitrarily predefining the number of clusters that you would end up with the wrong answer.  One of the advantages of these techniques is that often times the user does have some predefined level  of summarization that they are interested in (e.g. “25 clusters is too confusing, but 10 will help to give me an insight into my data”).  The fact that greater or fewer numbers of clusters would better match the data is actually of secondary importance.
+%-------------------------------------------------------------------------------------------%
+Hierarchical Clustering 
+Hierarchical clustering has the advantage over non-hierarchical techniques in that the clusters are defined solely by the data (not by the users predetermining the number of clusters) and that the number of clusters can be increased or decreased by simple moving up and down the hierarchy.
+The hierarchy is created by starting either at the top (one cluster that includes all records) and subdividing (divisive clustering) or by starting at the bottom with as many clusters as there are records and merging (agglomerative clustering).  Usually the merging and subdividing are done two clusters at a time.
+The main distinction between the techniques is their ability to favor long, scraggly clusters that are linked together record by record, or to favor the detection of the more classical, compact or spherical cluster that was shown at the beginning of this section.  It may seem strange to want to form these long snaking chain like clusters, but in some cases they are the patters that the user would like to have detected in the database.  These are the times when the underlying space looks quite different from the spherical clusters and the clusters that should be formed are not based on the distance from the center of the cluster but instead based on the records being “linked” together.  Consider the example shown in Figure 1.6 or in Figure 1.7.  In these cases there are two clusters that are not very spherical in shape but could be detected by the single link technique.
+When looking at the layout of the data in Figure1.6  there appears to be two relatively flat clusters running parallel to each along the income axis.  Neither the complete link nor Ward’s method would, however, return these two clusters to the user.  These techniques rely on creating a “center” for each cluster and picking these centers so that they average distance of each record from this center is minimized. Points that are very distant from these centers would necessarily fall into a different cluster.
+What makes these clusters “visible” in this simple two dimensional space is the fact that each point in a cluster is tightly linked to some other point in the cluster.  For the two clusters we see the maximum distance between the nearest two points within a cluster is less than the minimum distance of the nearest two points in different clusters.  That is to say that for any point in this space, the nearest point to it is always going to be another point in the same cluster.  Now the center of gravity of a cluster could be quite distant from a given point but that every point is linked to every other point by a series of small distances.
+
+Figure 1.6  an example of elongated clusters which would not be recovered by the complete link or Ward's methods but would be by the single-link method.
+
+Figure 1.7  An example of nested clusters which would not be recovered by the complete link or Ward's methods but would be by the single-link method.
+1.5. Choosing the Classics
+There is no particular rule that would tell you when to choose a particular technique over another one.  Sometimes those decisions are made relatively arbitrarily based on the availability of data mining analysts who are most experienced in one technique over another.   And even choosing classical techniques over some of the newer techniques is more dependent on the availability of good tools and good analysts.  Whichever techniques are chosen whether classical or next generation all of the techniques presented here have been available and tried for more than two decades.  So even the next generation is a solid bet for implementation.
+

@@ -1,0 +1,61 @@
+
+\newpage
+\section{Data Scrubbing}
+
+Data scrubbing, sometimes called data cleansing, is the process of detecting and removing or correcting any information in a database that has some sort of error. This error can be because the data is wrong, incomplete, formatted incorrectly, or is a duplicate copy of another entry. Many data-intensive fields of business such as banking, insurance, retail, transportation, and telecommunications may use these sophisticated software applications to clean up a database's information.
+
+Errors are in databases can be the result of human error in entering the data, the merging of two databases, a lack of company wide or industry wide data coding standards, or due to old systems that contain inaccurate or outdated data. Before computers had the capabilities to sort through and clean data, most data scrubbing was done by hand. Not only was this time consuming and expensive, but it oftentimes led to even more human error.
+
+The need for data scrubbing is made clear when considering how easily errors can be made. For example, consider a database of names and addresses. One name is Bobby Johnson of Needham, MA. Another name is Bob Johnson of Needham, MA. This variation of names is most likely an error, and is referring to one person. However, a computer would normally deal with the information as though it were two different people. Specialized data scrubbing software is able to distinguish the discrepancy and fix it.
+
+While these small errors may seem like a trivial problem, when merging corrupt or erroneous data into multiple databases, the problem may be multiplied by the millions. This so-called "dirty data" has been a problem as long as there have been computers, but the problem is becoming more critical as businesses are becoming more complex and data warehouses are merging data from multiple sources. There is no point in having a comprehensive database if that database is filled with errors and disputed information.
+
+Companies using specialized data scrubbing software can either develop it in-house or buy it from a variety of vendors. The software is not cheap and can range anywhere from a price of $20,000 to $300,000. It oftentimes also requires some customization so that the software will work to the business' specific needs. The software goes through a process of using algorithms to standardize, correct, match, and consolidate data and is able to work with single or multiple sets of data.
+
+Data scrubbing is sometimes skipped as part of a Data Warehouse implementation but it is one of the most critical steps to having a good, accurate end product. Because mistakes will always be made in data entry, the need for data scrubbing will always be present.
+
+%------------------------------------------------------------------------------------------------%
+
+\section{Data Semantics}
+Data semantics is the study of the meaning and use of specific pieces of data in computer programming and other areas that employ data. When studying a language, semantics refers to what individual words mean and what they mean when put together to form phrases or sentences. In data semantics, the focus is on how a data object represents a concept or object in the real word.
+
+Data semantics is highly subjective. If a person who has never worked with a computer database tries to pull information from it, the words and phrases used to access the database would make no sense. Semantic meaning occurs only when a group agrees on specific definitions for certain data types or words. For others to pick up on these semantic meanings, they cannot change. If the word "dog" referred to a furry, four-legged animal one day and a two-legged bird the next, it would lose its meaning and no one would know what another person meant when she said "dog."
+
+%--------------------------------------------------------------------------------
+\newpage
+\section{Data Storage}
+
+
+Much of the information available today is contained in some type of database. Blogs use databases to store posts and user information, discussion sites use them to store information about members, and organizations use them to store useful data for their business — from financial records to customer information.
+
+
+The majority of the databases used today are relational databases that use structured queries to retrieve information and present it to the user. This was not always the case, and flat file databases were created to store information in a non-structured way.
+
+
+A flat file is a collection of data stored and accessed sequentially. A comma separated values (CSV) sheet in Microsoft Excel is a flat file. There are no application specific formats applied to the data contained within the file and only a comma denotes the end of one field in a record. Each record is written on a line in the file, allowing all data for a single record to be stored separately from other records.
+
+
+A flat file does not incorporate relationships with other tables that rely on special instructions to be used. The common database used today is a relational database. The data model used for this kind of storage allows information in one table to be related to information in other tables using key fields which exist in each table.
+
+
+For example, suppose a customer calls an organization to place an order. The customer information is entered and stored. Then the order information is entered and stored. In a flat file, this information would be stored with the information for the order itself to allow the record for the order and/or the customer to be retrieved. Keep in mind that flat file databases do not have to use a single flat file. Information about orders could be stored in one flat file, while information about customers is stored in a different flat file. These files are not related in any way, so the flat file database for customer information has no idea that any information exists about orders.
+
+
+To make a flat file data model functional, all relevant information about a record needs to be stored in the same file. Flat file databases can quickly become very large and difficult to manage because of the simple way they are organized. Many of today’s more advanced data models use tables to organize groups of related data. This makes the data easier to locate and more flexible to work with.
+
+
+The same customer example given above might look a bit different if a different data model were applied to the scenario. When the customer calls to place an order, his or her information is entered and stored in a customers table within the database. The information for his or her order is stored in two tables, order header and order details. Information like order number, order date, and customer id are stored in the order header table. The items ordered along with quantities and unit costs are stored in the order details table. The order details table also contains the order number, allowing this information to be related back to the order header information. In the order header table for this record, there is a reference to the customer id linking this order to the customer who ordered it.
+
+
+
+
+%--------------------------------------------------------------------------------
+\newpage
+\section{Direct-attached storage (DAS) }
+
+
+Direct-attached storage (DAS) is computer storage that is directly attached to one computer or server and is not, without special support, directly accessible to other ones. The main alternatives to direct-attached storage are network-attached storage (NAS) and the storage area network (SAN).
+
+
+For an individual computer user, the hard drive is the usual form of direct-attached storage. In an enterprise, providing for storage that can be shared by multiple computers and their users tends to be more efficient and easier to manage.
+%--------------------------------------------------------------------------------

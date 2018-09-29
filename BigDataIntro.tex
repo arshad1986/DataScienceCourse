@@ -1,0 +1,122 @@
+
+\documentclass[12pt]{article}
+
+%opening
+\title{Data Science}
+\author{Kevin O'Brien}
+
+\begin{document}
+	\section{Big Data}
+
+Big data (also spelled Big Data) is a general term used to describe the voluminous amount of unstructured and semi-structured data a company creates -- data that would take too much time and cost too much money to load into a relational database for analysis. Although Big data doesn't refer to any specific quantity, the term is often used when speaking about petabytes and exabytes of data.
+
+A primary goal for looking at big data is to discover repeatable business patterns. It’s generally accepted that unstructured data, most of it located in text files, accounts for at least 80\% of an organization’s data. If left unmanaged, the sheer volume of unstructured data that’s generated each year within an enterprise can be costly in terms of storage. Unmanaged data can also pose
+a liability if information cannot be located in the event of a compliance audit or lawsuit.
+
+
+
+Big data are measurements of data that have grown so large that normal databases are unable to contain and work with the massive amount of information. Data come in three sizes: small, medium and big; none of these measurements is strict; instead, each depends more on ease of use and what type of machine can handle the information. Special machines, much larger and complex than those used for ordinary databases, are needed for big data. These types of data are typically found in government and scientific agencies, but some very large websites also contain this large amount of information.
+
+
+Data come in three standard, but not strict, sizes. Small data are able to fit on a single computer or machine, such as a laptop. Medium data are able to fit on a disk array and are best managed by a database. Databases, no matter how large, are incapable of working with big data, and special systems much be used instead. While there is no strict guideline for what big data are, it typically starts around the terabyte (TB) level and goes up to the petabyte (PB) level.
+
+
+Attempting to work with big data on a database that is not specialized for this amount of data will cause several substantial problems. The database is not able to handle the amount of information, so some data must be erased. This is like trying to fit 100 gigabytes (GB) on a computer with only 50 GB of hard drive space; it cannot be done. The data left will be unwieldy to both control and manage, because any function would take a long time to complete and the database must be closed off to new submissions.
+
+
+While it is possible to keep purchasing machines and adding new data to the databases, this creates the unwieldy problem. This is because database software is only made to work with medium data. Larger datasets lead to errors and administrative problems, because the software simply cannot move or work with large data without encountering problems.
+
+
+Big data are not encountered by most organizations or websites. Defense and military agencies use this amount of information to create models and store test results, and many large scientific agencies need these specialized machines for similar reasons. Some very large websites need large data machines, but websites are not as common as agencies in this market. These organizations need to keep all their data, because it helps to better analyze future data and make predictions.
+
+\newpage
+\section{Big Data analytics}
+
+
+Big Data analytics is an area of rapidly growing diversity. Therefore, trying to define it is probably not helpful. What is helpful, however, is identifying the characteristics that are common to the technologies now identified with Big Data analytics. These include:
+
+\begin{itemize}
+	\item
+	The perception that traditional data warehousing processes are too slow and limited in scalability
+	\item
+	The ability to converge data from multiple data sources, both structured and unstructured
+	\item
+	The realization that time to information is critical to extract value from data sources that include mobile devices, RFID, the web and a growing list of automated sensory technologies
+\end{itemize}
+
+
+In addition, there are at least four major developmental segments that underline the diversity to be found within Big Data analytics. These segments are MapReduce, scalable database, real-time stream processing and Big Data appliance.
+
+%---------------------------------------------------------------------------------------------%
+\newpage
+\section{Big Data storage for Big Data analytics}
+
+
+The practitioners of Big Data analytics processes are generally hostile to shared storage. They prefer DAS in its various forms, from SSD to high-capacity SATA disk buried inside parallel processing nodes. Shared storage architectures, such as SAN and NAS, are typically perceived as relatively slow, complex and, above all, expensive. These qualities aren't consistent with Big Data analytics systems, which thrive on system performance, commodity infrastructure and low cost.
+
+
+Real-time or near-real-time information delivery is one of the defining characteristics of Big Data analytics; therefore, latency is avoided whenever and wherever possible. Data in memory is good; data on spinning disk at the other end of a Fibre Channel SAN connection is not. But perhaps worse than anything else, the cost of a SAN at the scale needed for analytics applications is thought to be prohibitive.
+
+
+There's a case to be made for shared storage in Big Data analytics. Yet storage vendors and the storage community in general, have yet to make that case to practitioners of Big Data analytics. An example can be seen in the integration of the ParAccel’s Analytic Database (PADB) with NetApp SAN storage.
+
+
+Developers of data storage technology are moving away from expressing storage as a physical device and toward the implementation of storage as a more virtual and abstract entity. As a result, the shared storage environment can and should be seen by Big Data practitioners as one in which they can find potentially valuable data services, such as:
+
+\begin{enumerate}
+	\item
+	Data protection and system availability: Storage-based copy functions that don’t require database quiescence can create restartable copies of data to recover from system failures and data corruption occurrences.
+	
+	\item
+	Reduced time to deployment for new applications and automated processes: Business agility is enhanced when new applications can be brought online quickly by building them around reusable data copies.
+	
+	\item
+	Change management: Shared storage can potentially lessen the impact of required changes and upgrades to the online production environment by helping to preserve an “always-on” capability.
+	
+	\item
+	Lifecycle management: The evolution of systems becomes more manageable and obsolete applications become easier to discard when shared storage can serve as the database of record.
+	
+	\item
+	Cost savings: Using shared storage as an adjunct to DAS in a shared-nothing architecture reduces the cost and complexity of processor nodes.
+\end{enumerate}
+
+
+Each of the above mentioned benefits can be mapped to shared-nothing analytics architectures. One can expect to see more storage vendors doing this over time. For example, while it hasn’t been announced, EMC could integrate Isilon or Atmos storage with its MapR-based appliance.
+
+
+Traditional data warehousing is a large but relatively slow producer of information to business analytics users. It draws from limited data resources and depends on reiterative extract, transform and load (ETL) processes. Customers are now looking for quick access to information that is based on culling nuggets from multiple data sources concurrently. Big Data analytics can be defined, to some extent, in relationship to the need to parse large data sets from multiple sources, and to produce information in real-time or near-real-time.
+
+
+Big Data analytics represents a big opportunity. IT organizations are exploring the analytics technologies outlined above to parse web-based data sources and extract value from the social networking boom. However, an even larger opportunity -- the Internet of Things -- is emerging as a data source. Cisco Systems Inc. estimates there are approximately 35 billion electronic devices that can connect to the Internet. Any electronic device can be connected (wired or wirelessly) to the Internet, and even automakers are building Internet connectivity into vehicles. “Connected” cars will become commonplace by 2012 and generate millions of transient data streams.
+
+%--------------------------------------------------------------------------------
+\section{Big Memory}
+
+A petabyte (derived from the SI prefix peta- ) is a unit of information equal to one quadrillion (short scale) bytes, or 1000 terabytes. The unit symbol for the petabyte is PB. The prefix peta (P) indicates the fifth power to 1000:
+
+\begin{verbatim}
+1 PB     = 1000000000000000B
+
+= 10005 B
+
+= 1015 B
+
+= 1 million gigabytes
+
+= 1 thousand terabytes
+\end{verbatim}
+
+The exabyte (derived from the SI prefix exa-) is a unit of information or computer storage equal to one quintillion bytes (short scale). The unit symbol for the exabyte is EB. The unit prefix exa indicates the sixth power of 1000:
+\begin{verbatim}
+
+1 EB     = 1,000,000,000,000,000,000B
+
+= 1018 bytes
+
+= 1,000,000,000 gigabytes
+
+= 1000000terabytes
+\end{verbatim}
+
+
+\end{document}

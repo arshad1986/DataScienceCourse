@@ -1,0 +1,78 @@
+
+ 
+k-Means Clustering
+
+Example
+Computations
+Interpretation of results
+GENERAL LOGIC
+
+This method of clustering is very different from the Joining (Tree Clustering) and Two-way Joining. Suppose that you already have hypotheses concerning the number of clusters in your cases or variables. You may want to "tell" the computer to form exactly 3 clusters that are to be as distinct as possible. This is the type of research question that can be addressed by the k- means clustering algorithm. In general, the k-means method will produce exactly k different clusters of greatest possible distinction. It should be mentioned that the best number of clusters k leading to the greatest separation (distance) is not known as a priori and must be computed from the data (see Finding the Right Number of Clusters).
+
+EXAMPLE
+
+In the physical fitness example (see Two-way Joining), the medical researchers may have a "hunch" from clinical experience that their heart patients fall basically into three different categories with regard to physical fitness. They might wonder whether this intuition can be quantified, that is, whether a k-means cluster analysis of the physical fitness measures would indeed produce the three clusters of patients as expected. If so, the means on the different measures of physical fitness for each cluster would represent a quantitative way of expressing the researchers' hypothesis or intuition (i.e., patients in cluster 1 are high on measure 1, low on measure 2, etc.).
+
+COMPUTATIONS
+
+Computationally, you may think of this method as analysis of variance (ANOVA) "in reverse." The program will start with k random clusters, and then move objects between those clusters with the goal to 1) minimize variability within clusters and 2) maximize variability between clusters. In other words, the similarity rules will apply maximally to the members of one cluster and minimally to members belonging to the rest of the clusters. This is analogous to "ANOVA in reverse" in the sense that the significance test in ANOVA evaluates the between group variability against the within-group variability when computing the significance test for the hypothesis that the means in the groups are different from each other. In k-means clustering, the program tries to move objects (e.g., cases) in and out of groups (clusters) to get the most significant ANOVA results.
+
+INTERPRETATION OF RESULTS
+
+Usually, as the result of a k-means clustering analysis, we would examine the means for each cluster on each dimension to assess how distinct our k clusters are. Ideally, we would obtain very different means for most, if not all dimensions, used in the analysis. The magnitude of the F values from the analysis of variance performed on each dimension is another indication of how well the respective dimension discriminates between clusters.
+
+%========================================================================================= %
+\newpage
+\subsection{EM (Expectation Maximization) Clustering}
+%
+%Introductory Overview
+%The EM Algorithm
+%INTRODUCTORY OVERVIEW
+
+The methods described here are similar to the k-Means algorithm described above, and you may want to review that section for a general overview of these techniques and their applications. The general purpose of these techniques is to detect clusters in observations (or variables) and to assign those observations to the clusters. A typical example application for this type of analysis is a marketing research study in which a number of consumer behavior related variables are measured for a large sample of respondents. The purpose of the study is to detect "market segments," i.e., groups of respondents that are somehow more similar to each other (to all other members of the same cluster) when compared to respondents that "belong to" other clusters. In addition to identifying such clusters, it is usually equally of interest to determine how the clusters are different, i.e., determine the specific variables or dimensions that vary and how they vary in regard to members in different clusters.
+
+k-means clustering. To reiterate, the classic k-Means algorithm was popularized and refined by Hartigan (1975; see also Hartigan and Wong, 1978). The basic operation of that algorithm is relatively simple: Given a fixed number of (desired or hypothesized) k clusters, assign observations to those clusters so that the means across clusters (for all variables) are as different from each other as possible.
+
+Extensions and generalizations. The EM (expectation maximization) algorithm extends this basic approach to clustering in two important ways:
+
+Instead of assigning cases or observations to clusters to maximize the differences in means for continuous variables, the EM clustering algorithm computes probabilities of cluster memberships based on one or more probability distributions. The goal of the clustering algorithm then is to maximize the overall probability or likelihood of the data, given the (final) clusters.
+Unlike the classic implementation of k-means clustering, the general EM algorithm can be applied to both continuous and categorical variables (note that the classic k-means algorithm can also be modified to accommodate categorical variables).
+
+
+
+\subsection*{THE EM ALGORITHM}
+
+The EM algorithm for clustering is described in detail in Witten and Frank (2001). The basic approach and logic of this clustering method is as follows. Suppose you measure a single continuous variable in a large sample of observations. Further, suppose that the sample consists of two clusters of observations with different means (and perhaps different standard deviations); within each sample, the distribution of values for the continuous variable follows the normal distribution. The resulting distribution of values (in the population) may look like this:
+
+
+
+Mixtures of distributions. The illustration shows two normal distributions with different means and different standard deviations, and the sum of the two distributions. Only the mixture (sum) of the two normal distributions (with different means and standard deviations) would be observed. The goal of EM clustering is to estimate the means and standard deviations for each cluster so as to maximize the likelihood of the observed data (distribution). Put another way, the EM algorithm attempts to approximate the observed distributions of values based on mixtures of different distributions in different clusters.
+
+With the implementation of the EM algorithm in some computer programs, you may be able to select (for continuous variables) different distributions such as the normal, log-normal, and Poisson distributions. You can select different distributions for different variables and, thus, derive clusters for mixtures of different types of distributions.
+
+Categorical variables. The EM algorithm can also accommodate categorical variables. The method will at first randomly assign different probabilities (weights, to be precise) to each class or category, for each cluster. In successive iterations, these probabilities are refined (adjusted) to maximize the likelihood of the data given the specified number of clusters.
+
+Classification probabilities instead of classifications. The results of EM clustering are different from those computed by k-means clustering. The latter will assign observations to clusters to maximize the distances between clusters. The EM algorithm does not compute actual assignments of observations to clusters, but classification probabilities. In other words, each observation belongs to each cluster with a certain probability. Of course, as a final result you can usually review an actual assignment of observations to clusters, based on the (largest) classification probability.
+
+%=================================================================================================== %
+
+\subsection*{Number of Clusters}
+
+ 
+Finding the Right Number of Clusters in k-Means and EM Clustering: v-Fold Cross-Validation
+
+An important question that needs to be answered before applying the k-means or EM clustering algorithms is how many clusters there are in the data. This is not known a priori and, in fact, there might be no definite or unique answer as to what value k should take. In other words, k is a nuisance parameter of the clustering model. Luckily, an estimate of k can be obtained from the data using the method of cross-validation. Remember that the k-means and EM methods will determine cluster solutions for a particular user-defined number of clusters. The k-means and EM clustering techniques (described above) can be optimized and enhanced for typical applications in data mining. The general metaphor of data mining implies the situation in which an analyst searches for useful structures and "nuggets" in the data, usually without any strong a priori expectations of what the analyst might find (in contrast to the hypothesis-testing approach of scientific research). In practice, the analyst usually does not know ahead of time how many clusters there might be in the sample. For that reason, some programs include an implementation of a v-fold cross-validation algorithm for automatically determining the number of clusters in the data.
+
+This unique algorithm is immensely useful in all general "pattern-recognition" tasks - to determine the number of market segments in a marketing research study, the number of distinct spending patterns in studies of consumer behavior, the number of clusters of different medical symptoms, the number of different types (clusters) of documents in text mining, the number of weather patterns in meteorological research, the number of defect patterns on silicon wafers, etc.
+
+The v-fold cross-validation algorithm applied to clustering. The v-fold cross-validation algorithm is described in some detail in Classification Trees and General Classification and Regression Trees (GC&RT). The general idea of this method is to divide the overall sample into a number of v folds. The same type of analysis is then successively applied to the observations belonging to the v-1 folds (training sample), and the results of the analyses are applied to sample v (the sample or fold that was not used to estimate the parameters, build the tree, determine the clusters, etc.; this is the testing sample) to compute some index of predictive validity. The results for the v replications are aggregated (averaged) to yield a single measure of the stability of the respective model, i.e., the validity of the model for predicting new observations.
+
+Cluster analysis is an unsupervised learning technique, and we cannot observe the (real) number of clusters in the data. However, it is reasonable to replace the usual notion (applicable to supervised learning) of "accuracy" with that of "distance." In general, we can apply the v-fold cross-validation method to a range of numbers of clusters in k-means or EM clustering, and observe the resulting average distance of the observations (in the cross-validation or testing samples) from their cluster centers (for k-means clustering); for EM clustering, an appropriate equivalent measure would be the average negative (log-) likelihood computed for the observations in the testing samples.
+
+Reviewing the results of v-fold cross-validation. The results of v-fold cross-validation are best reviewed in a simple line graph.
+
+
+
+Shown here is the result of analyzing a data set widely known to contain three clusters of observations (specifically, the well-known Iris data file reported by Fisher, 1936, and widely referenced in the literature on discriminant function analysis). Also shown (in the graph to the right) are the results for analyzing simple normal random numbers. The "real" data (shown to the left) exhibit the characteristic scree-plot pattern (see also Factor Analysis), where the cost function (in this case, 2 times the log-likelihood of the cross-validation data, given the estimated parameters) quickly decreases as the number of clusters increases, but then (past 3 clusters) levels off, and even increases as the data are overfitted. Alternatively, the random numbers show no such pattern, in fact, there is basically no decrease in the cost function at all, and it quickly begins to increase as the number of clusters increases and overfitting occurs.
+
+It is easy to see from this simple illustration how useful the v-fold cross-validation technique, applied to k-means and EM clustering can be for determining the "right" number of clusters in the data.

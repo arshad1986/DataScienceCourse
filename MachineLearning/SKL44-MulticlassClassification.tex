@@ -1,0 +1,63 @@
+
+Generalizing with multiclass classification
+In this recipe, we'll look at multiclass classification. Depending on your choice of algorithm,
+you either get multiclass classification for free, or you have to define a scheme for comparison.
+\subsubsection*{Getting Ready}
+When working with linear models such as logistic regression, we need to use
+OneVsRestClassifier. This scheme will create a classifier for each class.
+\subsubsection{Implementation}
+First, we'll walk through a cursory example of a Decision Tree fitting a multiclass dataset.
+Like we discussed earlier, we get multiclass for free with some classifiers, so we'll just fit
+the example to prove that it works, and move on.
+Second, we'll actually incorporate OneVsRestClassifier into our model:
+>>> from sklearn import datasets
+>>> X, y = datasets.make_classification(n_samples=10000, n_classes=3,
+n_informative=3)
+>>> from sklearn.tree import DecisionTreeClassifier
+>>> dt = DecisionTreeClassifier()
+>>> dt.fit(X, y)
+>>> dt.predict(X)
+array([1, 1, 0, .., 2, 1, 1])
+As you can see, we were able to fit a classifier with minimum e\item ort.
+%===================================================%
+% % Classifying Data with scikit-learn
+% % 146
+Now, let's move on to the case of the multiclass classifier. This will require us to import
+OneVsRestClassifier. We'll also import LogisticRegression while we're at it:
+>>> from sklearn.multiclass import OneVsRestClassifier
+>>> from sklearn.linear_model import LogisticRegression
+Now, we'll override the LogisticRegression classifier. Also, notice that we can parallelize
+this. If we think about how OneVsRestClassifier works, it's just training separate models
+and then comparing them. So, we can train the data separately at the same time:
+>>> mlr = OneVsRestClassifier(LogisticRegression(), n_jobs=2)
+>>> mlr.fit(X, y)
+>>> mlr.predict(X)
+array([1, 1, 0, ..., 2, 1, 1])
+How it works…
+If we want to quickly create our own OneVsRestClassifier, how might we do it?
+First, we need to construct a way to iterate through the classes and train a classifier for each
+classifier. Then, we need to predict each class first:
+>>> import numpy as np
+>>> def train_one_vs_rest(y, class_label):
+y_train = (y == class_label).astype(int)
+return y_train
+>>> classifiers = []
+>>> for class_i in sorted(np.unique(y)):
+l = LogisticRegression()
+y_train = train_one_vs_rest(y, class_i)
+l.fit(X, y_train)
+classifiers.append(l)
+Ok, so now that we have a one versus rest scheme set up, all we need to do is evaluate the
+data point's likelihood for each classifier. We will then assign the classifier to the data point
+with the largest likelihood.
+For example, let's predict X[0]:
+for classifier in classifiers
+>>> print classifier.predict_proba(X[0])
+[[ 0.90443776 0.09556224]]
+[[ 0.03701073 0.96298927]]
+[[ 0.98492829 0.01507171]]
+%===================================================%
+% % Chapter 4
+% % 147
+As you can see, the second classifier (the one in index 1) has the highest likelihood of being
+"positive", therefore we'll assign 1 to this point.

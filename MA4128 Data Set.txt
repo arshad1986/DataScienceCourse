@@ -1,0 +1,39 @@
+ENGA=rnorm(20,79.6,8.229)
+ENGB=rnorm(20,66.7,9.102)
+ENGC=rnorm(20,65.6,7.141)
+MATA=rnorm(20,63.9,8.446)
+MATB=rnorm(20,50.75,8.162)
+MATC=rnorm(20,50.46,7.717)
+#---------------------------------------#
+while( cor(ENGA,MATA) <0.7)
+ {
+ MATA=rnorm(20,63.9,8.446)
+ }
+while( cor(ENGB,MATB) <0.7)
+ {
+ MATB=rnorm(20,50.75,8.162)
+ }
+while( cor(ENGC,MATC) <0.7)
+ {
+ MATC=rnorm(20,50.46,7.717)
+ }
+Eng=c(ENGA,ENGB,ENGC)
+Mat=c(MATA,MATB,MATC)
+ 
+Eng=floor(Eng)
+Mat=floor(Mat)
+
+cor(ENGA,MATA)
+cor(ENGB,MATB)
+cor(ENGC,MATC)
+
+Y=rnorm(100,mean=77,sd=12)
+Y=round(Y,0)
+Y[Y>99]=sample(90:100,length(Y[Y>99]))
+X1=rnorm(34,mean=80,sd=5)
+X2=rnorm(66,mean=64,sd=5)
+X=floor(c(X1,X2))
+Coll=c(rep("A",34),rep("B",66))
+
+-----------------------------------------------------------
+http://www.statsci.org/data/multiple.html

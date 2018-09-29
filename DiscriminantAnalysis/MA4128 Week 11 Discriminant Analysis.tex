@@ -1,0 +1,502 @@
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+\title{Discriminant Analysis}
+\author{MA4128 Advanced Data Modelling}
+\begin{document}
+\maketitle
+\tableofcontents
+% DATA SETS
+% http://cw.psypress.com/multivariate-analysis/datasets/
+%
+% http://www.unesco.org/webworld/idams/advguide/Chapt9_1.htm
+% http://www.unesco.org/webworld/idams/advguide/Chapt9_2.htm
+% computerwranglers.com/Com531/Handouts/Discrim.doc
+% http://www.nils-beer-statistics.com/documents/3%20Discriminant%20Function%20Analysis.pdf
+% http://www.csun.edu/sites/default/files/advanced-statistics19.pdf
+% http://sites.stat.psu.edu/~ajw13/stat505/fa06/15_discrim/11_discrim_summary.htm
+% http://core.ecu.edu/ofe/StatisticsResearch/SPSS%20Discriminant%20Function%20Analysis.pdf
+% http://userwww.sfsu.edu/efc/classes/biol710/discrim/discrim.pdf
+
+%\begin{verbatim}
+%Discriminant Analysis
+%MANOVA
+%Purpose of Discriminant Analysis
+%Assumptions of Discriminant Analysis
+%Significance Tests for Discriminant Analysis
+%    Wilks
+%    Box's M
+%Example Data Sets
+%    Iris
+%    Height
+%    Graduate
+%\end{verbatim}
+
+
+%------------------------------------------------------------ %
+\newpage
+\section{Discriminant Analysis}
+The major purpose of discriminant analysis is to predict membership in two or more mutually exclusive groups from a set of predictors, when there is no natural ordering on the groups. So we may ask whether we can predict whether people vote Labour or Conservative from a knowledge of their age, their class, attitudes, values etc etc.
+
+\subsection{The purposes of discriminant analysis (DA)}
+Discriminant Function Analysis (DA) undertakes the same task as multiple linear regression
+by predicting an outcome. However, multiple linear regression is limited to cases where the
+dependent variable on the Y axis is an interval variable so that the combination of predictors
+will, through the regression equation, produce estimated mean population numerical
+Y values for given values of weighted combinations of X values. But many interesting
+variables are categorical, such as political party voting intention, migrant/non-migrant status,
+making a profit or not, holding a particular credit card, owning, renting or paying a mortgage
+for a house, employed/unemployed, satisfied versus dissatisfied employees, which customers are likely to buy a product or not buy, what distinguishes O'Briens customers from
+Starbucks clients, whether a person is a credit risk or not, etc.
+
+\subsection{Discriminant Analysis and Other Types of Analysis}
+
+Discriminant analysis is just the inverse of a one-way MANOVA, the multivariate analysis of variance. The levels of the independent variable (or factor) for MANOVA become the categories of the dependent variable for discriminant analysis, and the dependent variables of the MANOVA become the predictors for discriminant analysis. In MANOVA we ask whether group membership produces reliable differences on a combination of dependent variables. If the answer to that question is 'yes' then clearly that combination of variables can be used to predict group membership. Mathematically, MANOVA and discriminant analysis are the same; indeed, the SPSS MANOVA command can be used to print out the discriminant functions that are at the heart of discriminant analysis, though this is not usually the easiest way of obtaining them. 
+
+
+These discriminant functions are the linear combinations of the standardized independent variables which yield the biggest mean differences between the groups. If the dependent variable is a dichotomy, there is one discriminant function; if there are k levels of the dependent variable, up to k-1 discriminant functions can be extracted, and we can test how many it is worth extracting. Successive discriminant functions are orthogonal to one another, like principal components, but they are not the same as the principal components you would obtain if you just did a principal components analysis on the independent variables, because they are constructed to maximise the differences between the values of the dependent variable.
+
+The commonest use of discriminant analysis is where there are just two categories in the dependent variable; but as we have seen, it can be used for multi-way categories (just as MANOVA can be used to test the significance of differences between several groups, not just two). This is an advantage over logistic regression, which is always described for the problem of a dichotomous dependent variable.
+
+You will encounter discriminant analysis fairly often in journals. But it is now being replaced with multinomial logistic regression, as this approach requires fewer assumptions in theory, is more statistically robust in practice, and is easier to use and understand than discriminant analysis. 
+%----------------------------------------------------------------------------------------------------------------------------------%
+\begin{itemize}
+\item Discriminant function analysis is multivariate analysis of variance (MANOVA)
+reversed. \item In MANOVA, the independent variables are the groups and the
+dependent variables are the predictors. \item In Discriminant Analysis , the independent variables are the
+predictors and the dependent variables are the groups. 
+\end{itemize}
+
+As previously
+mentioned, Discriminant Analysis  is usually used to predict membership in naturally occurring
+groups. It answers the question: can a combination of variables be used to
+predict group membership? Usually, several variables are included in a study to
+see which ones contribute to the discrimination between groups.
+
+%%---------------------------------------------------------------------------%
+%\subsection{Purposes of Discriminant Analysis}
+%There are several purposes of Discriminant Analysis:
+%\begin{enumerate}
+%\item To investigate differences between groups on the basis of the attributes of the cases,
+%indicating which attributes contribute most to group separation. The descriptive technique
+%successively identifies the linear combination of attributes known as canonical
+%discriminant functions (equations) which contribute maximally to group separation.
+%\item Predictive Discriminant Analysis addresses the question of how to assign new cases to groups. The DA function uses a person's scores on the predictor variables to predict the category to
+%which the individual belongs.
+%\item determine the most parsimonious way to distinguish between groups.
+%\item To classify cases into groups. Statistical significance tests using chi square enable you to see how well the function separates the groups.
+%\item To test theory whether cases are classified as predicted.
+%\end{enumerate}
+
+\subsection{Assumptions of Discriminant Analysis}
+The major underlying assumptions of DA are:
+\begin{itemize}
+\item the observations are a random sample;
+\item each predictor variable is normally distributed;
+\item each of the allocations for the dependent categories in the initial classification are
+correctly classified;
+\item there must be at least two groups or categories, with each case belonging to only one
+group so that the groups are mutually exclusive and collectively exhaustive (all cases
+can be placed in a group);
+\item each group or category must be well defined, clearly differentiated from any other
+group(s) and natural. Putting a median split on an attitude scale is not a natural way to
+form groups. Partitioning quantitative variables is only justifiable if there are easily
+identifiable gaps at the points of division;
+for instance, three groups taking three available levels of amounts of housing loan;
+the groups or categories should be defined before collecting the data;
+\item the attribute(s) used to separate the groups should discriminate quite clearly between
+the groups so that group or category overlap is clearly non-existent or minimal;
+\item group sizes of the dependent should not be grossly different and should be at least five
+times the number of independent variables.
+\end{itemize}
+
+
+%---------------------------------------------------------------------------------------%
+\subsection{Steps in Discriminant Analysis}
+Discriminant function analysis is broken into a 2-step process:
+\begin{itemize}
+\item[(1)] testing
+significance of a set of discriminant functions, \item(2) classification
+\end{itemize}. The first
+step is computationally identical to MANOVA. There is a matrix of total variances
+and covariances; likewise, there is a matrix of pooled within-group variances and
+covariances. The two matrices are compared via multivariate $F-tests$ in order to
+determine whether or not there are any significant differences (with regard to all
+variables) between groups. One first performs the multivariate test, and, if
+statistically significant, proceeds to see which of the variables have significantly
+different means across the groups.
+
+%---------------------------------------------------------------------------------------%
+\subsection{Discriminant Function}
+
+Discriminant Analysis involves the determination of a linear equation like regression that will predict which
+group the case belongs to. The form of the equation or function is:
+\[D=v_1X_1 + v_2X_2 + \ldots + a\]
+
+ Where D = discriminate function\\
+ v = the discriminant coefficient or weight for that variable\\
+ X = respondent’s score for that variable\\
+ a = a constant\\
+ i = the number of predictor variables\\
+ 
+This function is similar to a regression equation . The \textbf{v}’s are unstandardized
+discriminant coefficients analogous to the \textbf{b}’s in the regression equation. These v’s maximize
+the distance between the means of the criterion (dependent) variable. Standardized
+discriminant coefficients can also be used like beta weight in regression. 
+
+Good predictors
+tend to have large weights. What you want this function to do is maximize the distance
+between the categories, i.e. come up with an equation that has strong discriminatory power
+between groups. 
+
+After using an existing set of data to calculate the discriminant function
+and classify cases, any new cases can then be classified. The number of discriminant functions is one less the number of groups. There is only one function for the basic two group discriminant analysis.
+
+
+The coefficients for the first discriminant function are derived so as to maximize the differences between the group means. The coefficients for the second discriminant function are derived to maximize the difference between the group means, subject to the constraint that the values on the second discriminant function are not correlated with the values on the first discriminant function, and so on.
+
+In other words, the second discriminant function is \textbf{orthogonal} to the first, and the third discriminant function is orthogonal to the second, and so on. The maximum number of unique functions that can be derived is equal to the number of groups minus one or equal to the number of discriminating variables, whichever is less.
+
+The discriminant functions are generated from a sample of individuals (or cases), for which group membership is known. The functions can then be applied to new cases with measurements on the same set of variables, but unknown group membership.
+
+\begin{itemize}
+\item A latent variable of a linear combination of independent variables
+\item One discriminant function for 2-group discriminant analysis
+\item For higher order discriminant analysis, the number of discriminant function is equal to $n-1$ (where $n$ is the number of categories of dependent/grouping variable).
+\item The first function maximizes the difference between the values of the dependent variable.
+\item The second function maximizes the difference between the values of the dependent variable while controlling the first function.etc etc
+\item The first function will be the most powerful differentiating dimension.
+\item The second and later functions may also represent additional significant dimensions of differentiation
+\end{itemize}
+
+% http://www.unesco.org/webworld/idams/advguide/Chapt9_1.htm
+% http://www.unesco.org/webworld/idams/advguide/Chapt9_2.htm
+
+
+
+\subsection{Assumptions of discriminant analysis}
+The major underlying assumptions of DA are:
+\begin{itemize}
+\item the observations are a random sample;
+\item each predictor variable is normally distributed;
+\item each of the allocations for the dependent categories in the initial classification are
+correctly classified;
+\item there must be at least two groups or categories, with each case belonging to only one
+group so that the groups are mutually exclusive and collectively exhaustive (all cases
+can be placed in a group);
+\item each group or category must be well defined, clearly differentiated from any other
+group(s) and natural. Putting a median split on an attitude scale is not a natural way to
+form groups. Partitioning quantitative variables is only justifiable if there are easily
+identifiable gaps at the points of division;
+\item for instance, three groups taking three available levels of amounts of housing loan;
+the groups or categories should be defined before collecting the data;
+\item the attribute(s) used to separate the groups should discriminate quite clearly between
+the groups so that group or category overlap is clearly non-existent or minimal;
+\item group sizes of the dependent should not be grossly different and should be at least five
+times the number of independent variables.
+\end{itemize}
+There are several purposes of DA:
+
+\begin{itemize}
+\item To investigate differences between groups on the basis of the attributes of the cases,
+indicating which attributes contribute most to group separation. The descriptive technique successively identies the linear combination of attributes known as canonical
+discriminant functions (equations) which contribute maximally to group separation.
+\item  Predictive DA addresses the question of how to assign new cases to groups. The DA
+function uses a person’s scores on the predictor variables to predict the category to
+which the individual belongs.
+\item To determine the most parsimonious way to distinguish between groups.
+\item To classify cases into groups. Statistical significance tests using chi square enable you
+to see how well the function separates the groups.
+\item To test theory whether cases are classified as predicted.
+\end{itemize}
+
+\subsection{Discriminant Score}
+The aim of the statistical analysis in DA is to combine (weight) the variable scores in
+some way so that a single new composite variable, the discriminant score, is produced. A discriminant score is a weighted linear combination (sum) of the
+discriminating variables.
+%---------------------------------------------------------------------------------------%
+\subsection{Discriminant Analysis : Comparison to Logistic Regression}
+
+Discriminant function analysis is very similar to logistic regression, and both can be used to answer the same research questions. Logistic regression does not have as many assumptions and restrictions as discriminant analysis. However, when discriminant analysis assumptions are met, it is more powerful than logistic regression. Unlike logistic regression, discriminant analysis can be used with small sample sizes. It has been shown that when sample sizes are equal, and homogeneity of variance/covariance holds, discriminant analysis is more accurate.With all this being considered, logistic regression is
+the common choice nowadays, since the assumptions of discriminant analysis are rarely met.
+
+Discriminant analysis uses a collection of interval variables to predict a categorical variable
+that may be a dichotomy or have more than two values. The technique involves finding a linear
+combination of predictors variables the discriminant function that creates
+the maximum difference between group membership in the categorical dependent variable.
+
+\end{document}
+
+
+%Stepwise DA is also available to determine the best combinations of predictor variables.
+%Thus discriminant analysis is a tool for predicting group membership from a linear combination
+%of variables.
+%---------------------------------------------------------------------------%
+\section{Steps for Interpreting Discriminant Analysis}
+
+\textbf{1. Overall significance}//
+
+Overall test significance is indicated by a test known as Wilk’s lambda. It is found in the SPSS output after the heading Canonical Discriminant Functions. Be careful not to confuse it with the individual lambdas associated with the univariate F tests.
+
+Wilk's lambda ranges from 0 to 1 and represents the ratio of between to within groups error lambda = SSwithin/SStotal. As the within groups variance increases the ratio approaches 1 indicating that it is difficult to discriminate groups. The significance of lambda is usually tested with a 2 test. If the test is nonsignificant discard the solution.
+
+The canonical correlation provides a measure of the power of the relationship between variables and group prediction. It is the discriminant analysis equivalent of eta.
+
+\textbf{2. The number of significant functions.}//
+
+The relationship between individual variables and functions can be identified by examining r in the structure matrix correlations. If r > .3 then there is at least some degree of correlation between variables and functions. Univariate F tests provide a test of each variable’s individual power to discriminate the groups. Univariate F tests are interpreted as one way ANOVAs.
+
+The lambdas associated with the univariate tests provide an indication of which variables best discriminate the groups. The lower the lambda values the more that variable discriminates between groups.
+
+\textbf{3. Group centroids should be reported.}//
+
+Group centroids represent the average predicted solution. These can be used to evaluate the fit of the solution. Occular discrepancy solutions involve using the SPSS plot and map functions. Group centroids should fall in the center of the group plots.
+
+\textbf{4. The structure matrix is reported last}//
+
+The structure matrix is produced with the CORR subcommand and indicates the correlation between individual variables and functions. These are the unstandardised discriminant function coefficients. These coefficients represent the weightings variables have on functions and are thus analogous to B weights in multiple regression. These loadings can be used to create a linear discriminant function equation;
+
+\[D = B0 + B1X1 + B2X2 + B3X3 + \ldots + BpXp\]
+
+Coefficients are represented by the B’s and the values of the independent variables are represented by X’s. Discriminant functions only have meaning if the groups being discriminated differ in their D values.
+
+
+\subsection{Summary}
+What is Discriminant function analysis
+\begin{itemize}
+\item It builds a predictive model for group membership
+\item The model is composed of a discriminant function based on linear combinations of predictor variables.
+\item Those predictor variables provide the best discrimination between groups.
+\end{itemize}
+
+Purpose of Discriminant analysis
+\begin{itemize}
+\item to maximally separate the groups.
+\item to determine the most parsimonious way to separate groups
+\item to discard variables which are little related to group distinctions
+\end{itemize}
+
+\newpage
+\section{SPSS Exercise}
+\begin{verbatim}
+DATA SET Week 11 Data 1
+1 Analyse >>Classify >> Discriminant
+2 Select ‘smoke’ as your grouping variable and enter it into the Grouping Variable Box
+3 Click Define Range button and enter the lowest and highest code for your groups (here
+it is 1 and 2).
+4 Click Continue.
+5 Select your predictors (IV’s) and enter into Independents box  and select
+Enter Independents Together. If you planned a stepwise analysis you would at this
+point select Use Stepwise Method and not the previous instruction.
+6 Click on Statistics button and select Means, Univariate Anovas, Box’s M, Unstandardized
+and Within-Groups Correlation.
+7 Continue >> Classify. Select Compute From Group Sizes, Summary Table, Leave
+One Out Classification, Within Groups, and all Plots.
+8 Continue >> Save and select Predicted Group Membership and Discriminant Scores.
+9 Click OK.
+\end{verbatim}
+Brief Discussion of Ouput this week. More Discussion of output next week.
+\end{document}
+%Computationally, discriminant function analysis is similar to the analysis of variance (ANOVA)
+
+
+
+
+
+%http://www.csun.edu/sites/default/files/advanced-statistics19.pdf
+%\section{Discriminant Analysis}
+%Linear discriminant function analysis (i.e., discriminant analysis) performs a multivariate test of differences between groups.   In addition, discriminant analysis is used to determine the minimum number of dimensions needed to describe these differences.  A distinction is sometimes made between descriptive discriminant analysis and predictive discriminant analysis.
+%\subsection{What is Discriminant Analysis?}
+
+
+
+
+%http://www.cs.uu.nl/docs/vakken/arm/SPSS/spss6.pdf
+% http://www.uk.sagepub.com/burns/website%20material/Chapter%2025%20-%20Discriminant%20Analysis.pdf
+%\begin{verbatim}
+%Confusion Matrix
+%MANOVA
+%\end{verbatim}
+%
+%
+%\begin{verbatim}
+%1) Purpose of DA
+%2) Eigen Values
+%3) Wilk's Lambda
+%\end{verbatim}
+
+
+
+
+
+%----------------------------------------------------------------------------------------------------------------------------------%
+
+Once group means are found to be statistically significant, classification of
+variables is undertaken. DA automatically determines some optimal combination
+of variables so that the first function provides the most overall discrimination
+between groups, the second provides second most, and so on. Moreover, the
+functions will be independent or orthogonal, that is, their contributions to the
+discrimination between groups will not overlap. The first function picks up the
+most variation; the second function picks up the greatest part of the unexplained
+variation, etc...
+
+Computationally, a canonical correlation analysis is performed
+that will determine the successive functions and canonical roots. Classification is
+then possible from the canonical functions. Subjects are classified in the groups
+in which they had the highest classification scores. The maximum number of
+discriminant functions will be equal to the degrees of freedom, or the number of
+variables in the analysis, whichever is smaller.
+
+%---------------------------------------------------------------------------------------%
+\subsubsection{Standardized coefficients and the structure matrix}
+Discriminant functions are interpreted by means of standardized coefficients and
+the structure matrix. Standardized beta coefficients are given for each variable in
+each discriminant (canonical) function, and the larger the standardized
+coefficient, the greater is the contribution of the respective variable to the
+discrimination between groups. However, these coefficients do not tell us
+between which of the groups the respective functions discriminate. We can
+identify the nature of the discrimination for each discriminant function by looking
+at the means for the functions across groups.
+
+Group means are centroids.
+Differences in location of centroids show dimensions along which groups differ.
+We can, thus, visualize how the two functions discriminate between groups by
+plotting the individual scores for the two discriminant functions.
+Another way to determine which variables define a particular discriminant
+function is to look at the factor structure. The factor structure coefficients are the
+correlations between the variables in the model and the discriminant functions.
+The discriminant function coefficients denote the unique contribution of each
+variable to the discriminant function, while the structure coefficients denote the
+simple correlations between the variables and the functions.
+
+%---------------------------------------------------------------------------%
+\subsubsection{Summary}
+To summarize, when interpreting multiple discriminant functions, which arise
+from analyses with more than two groups and more than one continuous
+variable, the different functions are first tested for statistical significance. If the
+functions are statistically significant, then the groups can be distinguished based
+on predictor variables. Standardized b coefficients for each variable are
+determined for each significant function. The larger the standardized b
+coefficient, the larger is the respective variable's unique contribution to the
+discrimination specified by the respective discriminant function. In order to
+identify which independent variables help cause the discrimination between
+dependent variables, one can also examine the factor structure matrix with the
+correlations between the variables and the discriminant functions. Finally, the
+means for the significant discriminant functions are examined in order to
+determine between which groups the respective functions seem to discriminate.
+
+
+
+
+Summary: we are interested in the relationship between a group of independent variables and one categorical variable. We would like to know how many dimensions we would need to express this relationship. Using this relationship, we can predict a classification based on the independent variables or assess how well the independent variables separate the categories in the classification.
+
+It is similar to regression analysis
+
+We use maximum likelihood technique to assign a case to a group from a specified cut-off score.
+\begin{itemize}
+\item If group size is equal, the cut-off is mean score.
+\item If group size is not equal, the cut-off is calculated from weighted means.
+\end{itemize}
+
+Grouping variables
+\begin{itemize}
+\item Categorical variables
+\item Can have more than two values
+\item The codes for the grouping variables must be integers
+\item Independent variables
+\item Continuous
+\item Nominal variables must be recoded to dummy variables
+\end{itemize}
+
+
+%---------------------------------------------------------------------------------------%
+\subsection{Assumptions }
+\begin{itemize}
+\item Cases should be independent.
+\item Predictor variables should have a multivariate normal distribution, and within-group variance-covariance matrices should be equal across groups.
+\item Group membership is assumed to be mutually exclusive
+\item The procedure is most effective when group membership is a truly categorical variable; if group membership is based on
+values of a continuous variable (for example, high IQ versus low IQ), consider using linear regression to take advantage of the richer
+information that is offered by the continuous variable itself.
+\end{itemize}
+
+Assumptions(similar to those for linear regression)
+\begin{itemize}
+\item Linearity, normality, multilinearity, equal variances
+\item Predictor variables should have a multivariate normal distribution.
+\item fairly robust to violations of the most of these assumptions. But highly sensitive to outliers.
+\item Model specification
+\end{itemize}
+
+%---------------------------------------------------------------------------------------%
+\subsection{Test of significance}
+\begin{itemize}
+\item For two groups, the null hypothesis is that the means of the two groups on the discriminant function-the centroids, are equal.
+\item Centroids are the mean discriminant score for each group.
+\item Wilk's lambda is used to test for significant differences between groups.
+\item Wilk's lambda is between 0 and 1. It tells us the variance of dependent variable that is not explained by the discriminant function.
+\item Wilk's lambda is also used to test for significant differences between the groups on the individual predictor variables.
+\item It tells which variables contribute a significant amount of prediction to help separate the groups
+\end{itemize}
+
+
+
+
+\subsection{Significance of Discriminant Function}
+% Websites: http://www.unesco.org/webworld/idams/advguide/Chapt9_2.htm
+
+The most common test for the statistical significance of the discriminant function is based on the residual discrimination in the system prior to deriving that function. If the residual discrimination is too small, then it is meaningless to derive any more functions. The most appropriate formula in this context is \textbf{\textit{Wilk's lambda}} L which is defined as follows:
+
+
+\subsection{Group statistics tables}
+In discriminant analysis we are trying to predict a group membership, so firstly we examine
+whether there are any significant differences between groups on each of the independent
+variables using group means and ANOVA results data.
+
+The Group Statistics and Tests of
+Equality of Group Means tables provide this information. If there are no significant group
+differences it is not worthwhile proceeding any further with the analysis. A rough idea
+of variables that may be important can be obtained by inspecting the group means and
+standard deviations.
+
+For example, mean differences between self-concept scores and
+anxiety scores depicted in Table 25.1 suggest that these may be good discriminators as the
+separations are large.
+
+ Table 25.2 provides strong statistical evidence of significant differences
+between means of smoke and no smoke groups for all predictor variabless with self-concept and
+anxiety producing very high value F's. The Pooled Within-Group Matrices (Table 25.3)
+also supports use of these predictor variabls's as inter-correlations are low.
+%---------------------------------------------------------------------------%
+\subsection{ConfusionTable (Classification table)}
+Finally, there is the classification phase. The classification table, also called a confusion
+table, is simply a table in which the rows are the observed categories of the dependent and
+the columns are the predicted categories.
+
+When prediction is perfect all cases will lie on the
+diagonal. The percentage of cases on the diagonal is the percentage of correct classifications.
+
+
+The cross validated set of data is a more honest presentation of the power of the
+discriminant function than that provided by the original classifications and often produces
+a poorer outcome.
+
+ The cross validation is often termed a ``jack-knife" classification, in that
+it successively classifies all cases but one to develop a discriminant function and then
+categorizes the case that was left out. This process is repeated with each case left out in
+turn.
+
+This cross validation produces a more reliable function. The argument behind it is that
+one should not use the case you are trying to predict as part of the categorization process.
+%--------------------------------------------------------------------------------------------%
+\newpage
+\section{Example Data Sets}
+Examples of discriminant function analysis
+
+Example 1. A large international air carrier has collected data on employees in three different job classifications: 1) customer service personnel, 2) mechanics and 3) dispatchers.  The director of Human Resources wants to know if these three job classifications appeal to different personality types.  Each employee is administered a battery of psychological test which include measures of interest in outdoor activity, sociability and conservativeness.
+
+Example 2. There is Fisher's (1936) classic example of discriminant analysis involving three varieties of iris and four predictor variables (petal width, petal length, sepal width, and sepal length).  Fisher not only wanted to determine if the varieties differed significantly on the four continuous variables, but he was also interested in predicting variety classification for unknown individual plants.
+%-----------------------------------------------------------------------------&
+\end{document}

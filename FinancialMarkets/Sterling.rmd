@@ -1,0 +1,18 @@
+The Sterling Ratio
+==================================
+The Sterling Ratio (SR) is a measure of the risk-adjusted return of an investment portfolio.
+
+Multiple definitions of the Sterling ratio exist. 
+The original definition was most likely suggested by Deane Sterling Jones:
+
+$$SR=\frac{Annual\ Portfolio\ Return}{Average\ Largest\ Drawdown + 10\%}$$
+
+The Calmar Ratio
+==================================
+
+The Calmar ratio is another method of creating a risk-adjusted measure for ranking
+investments.
+
+### Usage
+ > CalmarRatio(R, scale = NA)
+ > SterlingRatio(R, scale = NA, excess = 0.1)

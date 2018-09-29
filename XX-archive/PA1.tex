@@ -1,0 +1,50 @@
+Question 1
+Which of the provided datasets are linearly separable? Check all that apply.
+Your Answer		Score	Explanation
+Dataset 1	Correct	0.25	
+Dataset 2	Correct	0.25	
+Dataset 3	Inorrect	0.00	
+Dataset 4	Inorrect	0.00	
+Total		0.50 / 1.00	
+Question 2
+True or false: if the dataset is linearly separable, then it is possible for the number of classification errors to increase during learning.
+Your Answer		Score	Explanation
+True			
+False	Inorrect	0.00	
+Total		0.00 / 1.00	
+Question Explanation
+
+One training case might send the parameters off in a bad direction, that suddenly makes the perceptron misclassify many other training cases, before it finds a parameter setting that works for all training cases.
+Question 3
+True or false: If a generously feasible region exists, then the distance between the current weight vector and any weight vector in the feasible region will monotonically decrease as the learning proceeds.
+Your Answer		Score	Explanation
+True	Correct	1.00	
+False			
+Total		1.00 / 1.00	
+Question Explanation
+
+If a generously feasible region exists then the problem is linearly separable, however it is not true that the distance between the current weight vector and a vector that is merely in the feasible region will monotonically decrease as the learning proceeds. It is possible to verify this using the program.
+Question 4
+The perceptron algorithm as implemented and described in class implicitly uses a learning rate of 1. We can modify the algorithm to use a different learning rate α so that the update rule for an input x and target t becomes: 
+w(t)←w(t−1)+α(t−prediction)x, 
+where prediction is the decision made by the perceptron using the current weight vector w(t−1), given by: 
+prediction={1 if wTx≥00 otherwise 
+True or false: if we use a learning rate of 2, then the perceptron algorithm will always converge to a solution for linearly separable datasets.
+Your Answer		Score	Explanation
+True			
+False	Inorrect	0.00	
+Total		0.00 / 1.00	
+Question Explanation
+
+This is equivalent to doubling the magnitude of each training example, which will not change the fact that the dataset is still linearly separable.
+Question 5
+According to the code, how many iterations does it take for the perceptron to converge to a solution on dataset 3 using the provided initial weight vector w_init? 
+Note: the program will output
+Number of errors in iteration x:	0
+You simply need to report x.
+Your Answer		Score	Explanation
+2			
+6			
+9	Correct	1.00	
+It doesn't converge.			
+Total		1.00 / 1.00

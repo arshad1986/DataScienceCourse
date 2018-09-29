@@ -1,0 +1,626 @@
+\documentclass[]{report}
+
+\voffset=-1.5cm
+\oddsidemargin=0.0cm
+\textwidth = 480pt
+
+%\usepackage{framed}
+%\usepackage{subfiles}
+%\usepackage{enumerate}
+%\usepackage{graphics}
+%\usepackage{newlfont}
+%\usepackage{eurosym}
+%\usepackage{amsmath,amsthm,amsfonts}
+%\usepackage{amsmath}
+%\usepackage{color}
+%\usepackage{amssymb}
+%\usepackage{multicol}
+%\usepackage[dvipsnames]{xcolor}
+%\usepackage{graphicx}
+\begin{document}
+
+\begin{verbatim}
+
+Contents
+Section 10.1 Unit Introduction 223
+Section 10.2 Unit Learning Objectives 223
+Section 10.3 Multiple Regression Model 223
+        10.3.1 Multicollinearity 229
+Section 10.4 Quadratic Regression Model 233
+Section 10.5 Quantitative and Qualitative Predictor Variables 236
+Section 10.6 Interpreting Residual Plots 239
+Section 10.7 Unit Review 240
+Section 10.8 SAQs 242
+Section 10.9 Exam Revision – Short Questions 244
+Section 10.10 SAQs Suggested Answers 245
+Section 10.11 Solutions to Exercises 249
+221
+\end{verbatim}
+%%---    UNIT 10 MULTIPLE REGRESSION
+\newpage
+%- \section*{UNIT 10: Multiple Regression}
+%% Unit 10:AUA 15/01/2010 14:56 Page 221
+%% 222
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 222
+%%-- 222
+%%-- QUALITY SCIENCE I
+%%-- Section 10.1
+\section*{Multiple Regression: Unit Introduction}
+\begin{itemize}
+	\item Previously you learned regression analysis techniques for bivariate data. In this unit, you
+	will extend this to multivariate data where you will be dealing with a number of
+	independent variables and their relationship with a dependent variable. 
+	\item It is important
+	that you work through this unit carefully, ensuring that you understand each model
+	presented before moving on to the next. All calculations will be presented using Minitab.
+%\item	As is the case for each unit, you should refer to the core text and attempt all the selfassessment
+%	questions before moving on. One of these questions is marked as an
+%	exam-type question.
+%\item The principal goals of Six Sigma are to improve customer satisfaction and reduce costs.
+%	For that reason, when answering questions, you should always try to focus on the
+%	commercial implications of what the data are telling you.
+%	Remember that you will need to use the core text and web resources provided on the
+%	module web site to write suitable answers to some of the exam revision questions at
+%	the end of the unit.
+\end{itemize}
+
+%%-- CORE TEXT READING:
+%%-- Mendenhall, Beaver, and Beaver: Chapter 13
+\newpage
+%- \section*{Section 10.2: }
+\section*{Unit Learning Objectives}
+When you have successfully completed this unit, you will be able to:
+\begin{itemize}
+	\item  Find and interpret a multiple regression equation for a simple first order model
+using Minitab.
+	\item  Perform a stepwise regression procedure using Minitab.
+	\item  Extend a linear model to a quadratic model using Minitab.
+	\item  Fit and interpret a model using qualitative variables.
+\end{itemize}
+
+
+%=================================================================================================%
+%%-- \section*{Section 10.3:}
+\section*{Multiple Regression Model}
+The ultimate objective of a multiple regression analysis is to develop a
+model that will accurately predict a dependent variable (y) as a function
+of a set of independent variables $(x_1, x_2, x_3, x_4 \ldots x_k)$.
+
+%%-- 223
+%%-- UNIT 10 MULTIPLE REGRESSION
+%%-- UNIT 10
+%%-- Multiple Regression
+There is quite a lot of mathematical theory behind the multiple regression model and
+much of this is explained in the core text. In this unit, you will be learning at a higher
+level but, at times, it may be necessary to introduce some maths for a clearer
+understanding.
+The concepts of a regression model and a regression equation, introduced in Unit 9 for
+linear regression, equally apply to multiple regression.
+The general regression model has the following form:
+Where:
+\begin{itemize}
+\item y is the dependent or response variable that you want to predict
+\item $\beta_0$, $beta_1$, $\beta_2$, and $\beta_3$ are the parameters or constants
+\item x1, x2, x3, and x4 are the independent variables or predictor variables
+\item $\varepsilon$ is the error term and accounts for the variability in y that cannot be explained
+\end{itemize}
+by the linear effect of the independent variables
+There are some assumptions about the error term. These will be dealt with later in this
+unit when discussing residual plots. As with linear regressions, one of these assumptions
+is that the average value of the error term is zero. If this assumption is true, then the
+average value of y can be assumed to have the following regression equation:
+
+This model applies to population data. Because you will be dealing with sample data,
+the estimated model has the form:
+As was the case with simple linear regression, there are some questions that always
+arise when you build a model to predict the relationship between the dependent variable
+and a number of independent variables. These are:
+1 How well does the model fit?
+2 How strong is the relationship between y and the predictor (independent)
+variables?
+
+The multiple regression model is made up of an equation that best
+describes how the dependent variable (y) is related to the independent
+variables $\{x_1, x_2, x_3, x_4 \ldots x_k\}$ and an error term (Greek letter epsilon).
+
+The most difficult part of regression analysis is choosing the correct
+model for a practical application
+
+
+3 Have any important assumptions been violated?
+4 How good are the estimates and predictions?
+For the rest of this unit, these steps will be applied through examples as this is the best
+way to learn about multiple regression. You will begin with a simple example and build
+up to more complicated examples.
+\subsection{Example 10.1}
+A company wants to know the relationship between weekly revenue and expenditure
+on advertising on television and in newspapers. They collect the following data for the
+previous 8 weeks.
+
+TABLE 10.1 Revenue vs. Expenditure
+First, you will use simple linear regression to analyse the data for television advertising
+only. Then, you will add the newspaper advertising to the model and compare both sets
+of results.
+
+There is a basic step by step approach that you can use when performing
+a multiple regression analysis:
+\begin{enumerate}
+\item Obtain a fitted prediction model.
+\item Use the analysis of variance F-test and R-sq to determine how
+well the model fits the data.
+\item Check the t-tests for the partial regression coefficients to see
+which ones are contributing significant information in the
+presence of others.
+\item If you choose to compare several different models, use R-sq
+(adj) to compare their effectiveness.
+\item Use residual plots to check for violation of the regression
+assumptions.
+\end{enumerate}
+%%-- 225
+%%---    UNIT 10 MULTIPLE REGRESSION
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 225
+1 Enter the data into 3 columns in Minitab, as shown in Figure 10.1.
+FIGURE 10.1 Data Entered in Minitab
+\begin{verbatim}
+Click Stat > Regression > Regression. 
+\end{verbatim}
+As illustrated in Figure 10.2, the
+Regression dialog box appears.
+FIGURE 10.2 Regression Dialog Box
+3 Select Weekly Revenue as the response and Television Advertising as the
+predictor.
+4 Click OK. The results are presented in the Session pane, as illustrated in Figure
+10.3.
+226
+%%---  QUALITY SCIENCE I
+%%---  Unit 10:AUA 15/01/2010 14:56 Page 226
+FIGURE 10.3: Results
+5 Now, repeat the process but, this time, include Newspaper Advertising as a
+predictor as shown in Figure 10.4.
+FIGURE 10.4: Regression Dialog Box
+6 Click OK. The results are presented in the Session pane, as illustrated in Figure
+10.5.
+%%-- 227
+%%-- UNIT 10 MULTIPLE REGRESSION
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 227
+%%-- FIGURE 10.5 Results of the Full Model
+\begin{itemize}
+	\item As you can see, both outputs from Minitab have a similar format so the interpretation
+	is similar. In the first set of results, shown in Figure 10.3, television advertising explains
+	65.3\% of the variation in revenue with a P-value of 0.015 for both the t test and the
+	F-test.
+	
+\item However, in the second set of results, shown in Figure 10.5, the equation is different and
+	the coefficient for television advertising has increased from 1.60 in the first set of
+	results to 2.29. Both sources of advertising combined in the model contribute to 91.9%
+	of the variation in revenue.
+\item As stated in the basic steps presented earlier, because you are comparing two models,
+	you should look at the R-sq (adj) for a more accurate comparison. These values are
+	59.5\% and 88.7\% respectively and they clearly demonstrate that the second model is
+	explaining much more of the variation in revenue.
+\item  The P-value for the F-test, which has
+	gone from 0.015 to 0.002, is further evidence that the second model is a much better
+	fit.
+\end{itemize}
+
+
+The P-values of the t-tests for both television and newspaper are also significant. By
+adding the extra variable, the multiple regression model gives a better picture of the
+company’s weekly revenue, although approximately 11\% of the variation is still
+unexplained.]
+As you can see, you interpret the results using similar techniques to those used in Unit
+9. The following difference, however, does exist when it comes to interpreting the
+regression equation.
+The first set of the results gave the regression equation:
+\[ \mbox{Revenue} = 88.6 + 1.60 \mbox{Television}\]
+This equation tells you that the revenue would be 88.6 if there was zero television
+advertising expenditure and, for every €1,000 spent on television advertising, the
+revenue would increase by 1.6 times the expenditure.
+The interpretation is slightly different for the multiple regression equation:
+Revenue = 83.2 + 2.29 Television + 1.30 Newspaper
+In this case, the estimated change in revenue due to each increase of €1,000 in
+%===========================%
+%%-- 228
+%%---    QUALITY SCIENCE I
+%%---    Unit 10:AUA 15/01/2010 14:56 Page 228
+
+TABLE 10.2 Automotive Data
+Using multiple regression, find the model that best fits the data.
+Should any independent variables be omitted from the model? If so, justify why these
+should be omitted.
+Solution
+The first step in the analysis is to build a multiple regression model that includes all the
+variables. Using Minitab, you get the model given in Figure 10.6.
+It is clear from the analysis in Figure 10.6 that multicollinearity is present. The R-sq
+value of 99.4\% is large indicating a good fit; however, 3 of the individual t-tests are not
+significant.
+FIGURE 10.6: Model with All Variables
+%===========================%
+%%--- 230
+%%--- QUALITY SCIENCE I
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 230
+To further investigate, you generate a correlation matrix using Minitab and check if
+there are large correlations between any of the independent (predictor) variables.
+1 To do this,
+\begin{verbatim}
+ click Stat > Basic Statistics > Correlation.
+\end{verbatim}
+ As illustrated in Figure
+10.7, the Correlation dialog box appears.
+2 Add all the variables as shown in Figure 10.7 and click OK.
+FIGURE 10.7: Correlation Dialog Box
+The correlation matrix is given in Figure 10 .8.
+FIGURE 10.8 Correlation Matrix
+As you can see from the matrix, the number of retail outlets is highly correlated with
+both the number of registered autos and personal income. Both values are greater than
+0.7 and significant. This is further proof of the existence of multicollinearity. A stepwise
+regression using Minitab will choose those variables that make a significant
+contribution to the model.
+%%--- 231
+%%--- UNIT 10 MULTIPLE REGRESSION
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 231
+
+In doing so Minitab achieves an R-sq value of 99.14%. The other 2 independent values
+have been omitted from the model. The complete model is given in Figure 10.11.
+FIGURE 10.11 The Best Model
+\newpage
+
+
+
+\section*{Overfitting}
+Overfitting describes the error which occurs when a fitted model is too closely fit to a limited set of observations.
+Overfitting the model generally takes the form of making an overly complex model (i.e. using an excessive
+amount of independent variables) to explain the behaviour in the data under study. In reality, the data being
+studied often has some degree of error or random noise within it. Thus attempting to make the model conform
+too closely to sample data can undermine the model and reduce its predictive power.
+
+\section*{Quadratic Regression Model}
+\begin{itemize}
+	\item In some cases, you may want to test the relationship between two variables; however,
+	when you first create a scatterplot for the data, you find that there is no linear
+	relationship even though there appears to be a pattern in the data.
+	\item  An example of this
+	would be when the dependent variable increases as the independent variable increases
+	to a point and then starts to decrease for higher values. 
+	\item In this case, a line drawn
+	through the data would look like a curve rather than a straight line. This relationship
+	is known as curvilinear.
+	
+\item Even though the data is bivariate to start with, you can use multiple regression
+	techniques to fit a model that will best describe the relationship.
+	\item  This involves adding
+	a second independent variable that is the square of the original independent variable.
+	This gives you the following estimated regression equation:
+	Equation 10.4
+	
+\item This is known as a \textbf{second order model}. When the data is entered into Minitab, a third
+	column is created. 
+\item This is the square of each of the values of the independent variable.
+	A multiple regression equation is also created. The results of the F-test will tell if the
+	model is a good fit or not.
+	
+\end{itemize}
+\newpage
+\subsection*{Example 10.3}
+The manager of an injection moulding plant wanted to investigate the relationship
+between pull strength and the height of the paste used in the process. A large sample
+of units was measured and the details were entered into Minitab. At first, it was thought
+that a linear model would best fit the data, but initial investigations produced the
+scatterplot shown in Figure 10.12.
+You can use a quadratic model if, after viewing the scatterplot, a
+pattern exists that is not linear.
+%%---  233
+%%---  UNIT 10 MULTIPLE REGRESSION
+%%---  Unit 10:AUA 15/01/2010 14:56 Page 233
+%%---  FIGURE 10.12 Initial Scatterplot
+At first glance, it appears that there is a positive linear relationship; however, when
+you look more closely, you will notice that the data forms a curve. A second plot is
+created and, this time, a quadratic model is fitted. This produces the plot shown in
+Figure 10.13.
+FIGURE 10.13 Quadratic Fitted Line Plot
+To produce a fitted plot:
+\begin{verbatim}
+1 Click Stat > Regression > Fitted Line Plot.
+\end{verbatim}
+
+2 Choose the Quadratic option, as illustrated in Figure 10.14.
+3 Click OK.
+%%-- 234
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 234
+FIGURE 10.14 Fitted Line Plot Dialog Box
+The fitted plot in Figure 10.13 is a much better fit. Notice that this plot uses a multiple
+regression equation—this is given above the graph in Figure 10.13.
+The complete regression analysis is given in Figure 10.15.
+FIGURE 10.15 Regression Results
+The regression equation is:
+\[Pull Strength = 0.246 + 1.72 Height - 1.58 Height Squared\]
+All the P-values are 0.00 and the model explains 90.9\% of the variation in pull strength.
+The data in Example 10.3 demonstrates the need to look closely at the data before
+deciding on the model that best fits. You will learn more about this when you study
+design of experiments in later modules.
+%%--- 235
+%%--- UNIT 10 MULTIPLE REGRESSION
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 235
+\section{Section 10.5: Quantitative and Qualitative Predictor Variables}
+For instance, you might need to look at two different groups such as male and female,
+or you might want to look at the interaction between two independent variables as
+you did in the factorial experiments in Unit 8. The flexibility of the regression model
+enables you to do this.
+%==============================================%
+\newpage
+\section*{Analysis of covariance}
+Predictors that are qualitative in nature, for example, eye color, are sometimes described as categorical or
+called factors. We wish to incorporate these predictors into the regression analysis. Analysis of covariance
+(ANCOVA) refers to regression problems where there is a mixture of quantitative and qualitative predictors.
+The terminology used in ANOVA-type problems is sometimes different. Predictors are now all qualitative
+and are now typically called factors, which have some number of levels. The regression parameters are now often
+called effects. We shall consider only models where the parameters are considered fixed, but unknowncalled
+fixed-effects models. Random-effects models are used where parameters are taken to be random variables and
+are not covered in this text.
+\newpage
+
+%\subsection*{LEARNING ACTIVITY 10.1}
+
+\subsection*{Example 10.4}
+The managers of a car maintenance and repairs company want to be able to predict the
+repair time for different maintenance requests. Repair time is believed to be related to
+two factors, the miles driven since the last service and the type of repair (mechanical
+or electrical). The data for a sample of 15 cars is given in Table 10.3.
+TABLE 10.3 Maintenance and Repair Data
+The data was entered into Minitab as shown in Figure 10.16.
+When fitting a multiple regression model, you may need to include
+qualitative and quantitative variables as independent variables.
+%===============================%
+%%-- 236
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 236
+FIGURE 10.16 Data in Worksheet
+The dependent variable (Y) is time and the independent variables are miles (x1) and
+type (x2 = 0 for mechanical and x2 = 1 for electrical).
+To find the regression results:
+\begin{verbatim}
+1 Click Stat > Regression > Regression.
+\end{verbatim}
+
+2 Fill in the Regression dialog box as illustrated in Figure 10.17.
+FIGURE 10.17 Regression Dialog Box
+3 Minitab automatically recognises the type of data. Click OK to get the results
+shown in Figure 10.18.
+%===============================%
+%%--- 237
+%%--- UNIT 10 MULTIPLE REGRESSION
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 237
+
+
+FIGURE 10.19 Normal Probability Plot
+FIGURE 10.20 Residuals Versus Fits Plot
+Based on the two plots, there is no reason to suspect that the assumptions have been
+violated. The Normal Probability plot shows the data very much in a straight line and
+there is no obvious pattern in the Residuals Versus Fits plot.
+\newpage
+\section{Best Subsets Regression}
+\begin{itemize}
+	\item Best subsets regression identifies the best fitting regression models that can be constructed with
+	the predictor variables that you specify.
+	\item  By default, all possible subsets of the predictors are
+	evaluated, beginning with all models containing one predictor, and then all models containing
+	two predictors, and so on. 
+	\item By default, Minitab reports the two best models that can be
+	constructed with each number of predictors.
+\item For example, suppose you conduct a best subsets regression with three predictors. Minitab will
+	report the best and second best one-predictor models, followed by the best and second best
+	two-predictor models, followed by the full model containing all three predictors.
+\item Models are evaluated based on R2, however, adjusted R2, Cp, and s are also reported.
+	Best subsets regression is an efficient way to identify models that achieve your goals with as few
+	predictors as possible. 
+	\item Subset models may actually estimate the regression coefficients and
+	predict future responses with smaller variance than the full model using all predictors [15].
+\end{itemize}
+
+\newpage
+Using the best subsets regression procedure
+The best subsets regression procedure can be used to select a group of likely models for further
+analysis. The general method is to select the smallest subset that fulfills certain statistical criteria.
+The reason that you would use a subset of variables rather than a full set is because the subset
+model may actually estimate the regression coefficients and predict future responses with smaller
+variance than the full model using all predictors [15].
+The statistics R2, adjusted R2, Cp, and s (square root of MSE) are calculated by the best subsets
+procedure and can be used as comparison criteria.
+Typically, you would only consider subsets that provide the largest R2 value. However, R2 almost
+always increases with the size of the subset. For example, the best 5-predictor model will almost
+always have a higher R2 than the best 4-predictor model. Therefore, R2 is most useful when
+comparing models of the same size. When comparing models with the same number of
+predictors, choosing the model with the highest R2 is equivalent to choosing the model with the
+smallest SSE.
+Use adjusted R2 and Cp to compare models with different numbers of predictors. In this case,
+choosing the model with the highest adjusted R2 is equivalent to choosing the model with the
+smallest mean square error (MSE). If adjusted R2 is negative (usually when there is a large
+number of predictors and small R2) then MINITAB sets the adjusted R2 to zero.
+
+The Cp statistic is given by the formula
+\[MALLOWCP\]
+where SSEp is SSE for the best model with p parameters (including the intercept, if it is in the
+equation), and MSEm is the mean square error for the model with all m predictors.
+In general, look for models where Cp is small and close to p. If the model is adequate (i.e., fits
+the data well), then the expected value of Cp is approximately equal to p (the number of
+parameters in the model). A small value of Cp indicates that the model is relatively precise (has
+small variance) in estimating the true regression coefficients and predicting future responses.
+
+This precision will not improve much by adding more predictors. Models with considerable
+lack-of-fit have values of Cp larger than p.
+
+%% See [15] for additional information on Cp.
+
+Exercise caution when using variable selection procedures such as best subsets (and stepwise
+regression). These procedures are automatic and therefore do not consider the practical
+importance of any of the predictors. In addition, anytime you fit a model to data, the goodness of
+the fit comes from two basic sources:
+\begin{itemize}
+	\item fitting the underlying structure of the data (a structure that will appear in other data sets
+	gathered in the same way)
+\item fitting the peculiarities of the one particular data set you analyze
+\end{itemize}
+
+Unfortunately, when you search through many models to find the “best,” as you do in best
+subsets regression, a good fit is often chosen largely for the second reason. There are two ways
+that you can verify a model obtained by a variable selection procedure. You can
+
+verify the model using a new set of data.
+You can also take the original data set and randomly divide it into two parts. Then use the variable selection
+procedure on one part to select a model and verify the fit using the second part.
+%=================================================================%
+\newpage
+\section{Section 10.7: Unit Review}
+The general regression model has the following form:
+
+For sample data, providing the assumptions are true, the estimated model has the form:
+b0 is the y-intercept and all other parameters have a similar interpretation. For instance,
+b1 is the estimated change in y due to each increase of one unit of x1, provided all other
+variables are held constant.
+%===============================%
+%%-- 240
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 240
+
+\section{Section 10.8: SAQs}
+\begin{enumerate}
+	\item 
+
+\item A Department of Education analyst is interested in investigating the pay structure
+of primary school teachers. He believes there are 3 factors that affect the salaries
+of teachers: years of experience, a rating of teaching effectiveness given by a
+department inspector, and whether the teacher has a masters degree. A sample
+of 20 teachers produced the results given in Table 10.4.
+TABLE 10.4 Teacher Data
+\begin{enumerate}
+\item Create a regression model for the data.
+\item Is there any evidence of multicollinearity? Justify your answer.
+\item If you said that there was multicollinearity, use stepwise regression to
+eliminate the variable(s).
+\item Discuss your findings.
+\end{enumerate}
+\item The manager of a major retail company with customers nationwide wants to
+know the effect of tyre pressure on fuel economy for its fleet of 24 company
+cars used by its regional sales representatives. He conducts an experiment that
+entails having the tyre pressure set at 6 different levels from 30 pounds of
+pressure to 35 pounds of pressure and dividing up the sales reps into groups of
+4 so that each of the different tyre pressures is used by 4 sales reps. The miles
+per gallon (mph) for each sales rep was recorded and the results are presented
+in Table 10.5.
+%%--- 242
+%%--- QUALITY SCIENCE I
+%%--- Unit 10:AUA 15/01/2010 14:56 Page 242
+%%--- TABLE 10.5 The MPH Data
+Develop a suitable regression model to relate tyre pressure to fuel economy. What
+appears to be the best level of tyre pressure?
+\end{enumerate}
+3 Exam-type Question
+A well known supermarket chain located in a number of regions would like to
+expand into other communities. In preparation for a presentation to the bank, the
+owner would like to better understand the factors that make a particular outlet
+profitable. He selects 15 stores and records the average daily sales, the floor
+space, the number of parking spaces, and the median income of families in the
+region that each store is located. This data was entered into Minitab and the
+details from the printout are as follows:
+Regression Analysis: Daily Sales versus Area, Parking Spaces, Income
+The regression equation is:
+\[S = 13.4243 R-Sq = 83.5\% R-Sq (adj) = 79.0\%\]
+Analysis of Variance
+Give a complete analysis of the printout and interpret the results.
+What advice would you give the owner based on these results?
+243
+%%---    UNIT 10 MULTIPLE REGRESSION
+Unit 10:AUA 15/01/2010 14:56 Page 243
+
+\newpage
+\section{Section 10.9: Exam Revision – Short Questions}
+\begin{enumerate}
+\item  What is meant by multicollinearity?
+\item How does stepwise regression work and why would you use it?
+\item How would you fit a quadratic regression model to bivariate data and why?
+\item How do you create a model that allows for interaction between predictor variables?
+\end{enumerate}
+
+%%---- 244
+%%---    QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 244
+
+\section{Section 10.10: SAQs Suggested Answers}
+
+FIGURE 10.21 Regression Results
+The regression analysis results given in Figure 10.21 show that the model is a
+good fit.
+
+\begin{itemize}
+	\item The R-sq value is high (90.8\%), yet the t-test results for masters are not
+	significant. 
+	\item In addition, the sign of the coefficient of masters is negative. This is
+	strange as it is saying that having a masters has a negative effect on pay.
+	\item  This
+	does not seem logical and suggests the presence of multicollinearity in the model.
+	\item The correlation matrix given in Figure 10.22 does not appear to indicate that
+	there is any strong correlation between the independent variables, but it does
+	indicate that the correlation between masters and salary is not significant.
+\end{itemize}
+
+FIGURE 10.22 Correlation Matrix
+%%
+%%===============================%
+%%-- 245
+%%-- UNIT 10 MULTIPLE REGRESSION
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 245
+The stepwise regression given in Figure 10.23 eliminates masters from the model
+as a non-contributing variable.
+FIGURE 10.23 Stepwise Regression
+The best model therefore appears to be the one in Figure 10.24. It demonstrates
+that experience and a good rating contribute to 90.6% of the variation in salaries
+and all the t-tests are significant.
+FIGURE 10.24 Final Regression Model
+2 The linear regression analysis shown in Figure 10.25 does not indicate that a
+linear model is suitable as it only explains 17.0% of the variation in fuel economy.
+Therefore, further investigation is necessary to try to build a better model.
+%===============================%
+%%-- 246
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 246
+FIGURE 10.25 Linear Regression Model
+The scatterplot in Figure 10.26 shows that, while there is some justification for
+a linear model and fuel economy does increase as the tyre pressure increases, fuel
+economy seems to peak at a tyre pressure of 33 and then starts to decrease
+again. This would indicate that a quadratic model might be more appropriate.
+FIGURE 10.26 Scatterplot with Fitted Line
+The fitted line plot given in Figure 10.27 confirms this so a quadratic model is
+chosen and the results are given in Figure 10.28.
+
+%===============================%
+%%-- 247
+
+%%-- %%---    UNIT 10 MULTIPLE REGRESSION
+Unit 10:AUA 15/01/2010 14:56 Page 247
+FIGURE 10.27 Quadratic Fitted Line Plot
+FIGURE 10.28 Quadratic Regression Model
+Comparing the 2 models using R-sq (adj), you can see that the quadratic model
+is a much better fit. The R-sq (adj) value of 13.2\% in the linear model increases
+to 75.6\% when the extra variable is introduced. There is still however 24.4%
+unexplained and this may be due to other factors such as traffic, type of roads,
+driver, and so on. Based on this model, 33 pounds of pressure is the preferred tyre
+pressure to maximise fuel economy.
+3 The regression equation is:
+\[Daily Sales = 1481 + 0.731 Area + 9.99 Parking Spaces - 2.31 Income\]
+The regression equation would seem to suggest that the number of parking
+spaces is the variable that contributes most to daily sales, followed by the floor
+space. It would also suggest that personal income has a negative effect. The
+model explains 83.5\% of the variation in daily sales and this is very high. Looking
+at the individual t-tests, personal income is not significant because the P-value
+is greater than 0.05. This might indicate the presence of multicollinearity
+depending on the type of business and the population that the business is
+targeting.
+\end{document}
+%%-- 248
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 248
+%%-- 250
+%%-- QUALITY SCIENCE I
+%%-- Unit 10:AUA 15/01/2010 14:56 Page 250

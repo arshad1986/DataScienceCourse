@@ -1,0 +1,54 @@
+% http://www.stat.columbia.edu/~martin/W1111/LinearRegression.pdf
+
+% http://www.ats.ucla.edu/stat/stata/faq/compreg2.htm
+
+\begin{framed}
+\begin{verbatim}
+use http://www.ats.ucla.edu/stat/stata/webbooks/reg/elemapi
+\end{verbatim}
+\end{framed}
+
+Once you have read the file, you probably want to store a copy of it on your computer (so you don't need to read it over the web every time).  Let's say you are using Windows and want to store the file in a folder called c:\regstata (you can choose a different name if you like). First, you can make this folder within Stata using the mkdir command. We can then change to that directory using the cd command.
+
+\begin{framed}
+\begin{verbatim}
+mkdir c:\regstata
+cd c:\regstata
+\end{verbatim}
+\end{framed}
+
+And then if you save the file it will be saved in the c:\regstata folder. Let's save the file as elemapi .
+
+\begin{framed}
+\begin{verbatim}
+save elemapi
+\end{verbatim}
+\end{framed}
+Now the data file is saved as \texttt{c:\regstata\elemapi.dta} and you could quit Stata and the data file would still be there.  When you wish to use the file in the future, you would just use the cd command to change to the c:\regstata directory (or whatever you called it) and then use the elemapi file.
+
+\begin{framed}
+\begin{verbatim}
+cd c:\regstata
+use elemapi
+describe
+\end{verbatim}
+\end{framed}
+\newpage
+\section{Regression }
+\subsection{Simple Linear Regression}
+\begin{framed}
+\begin{verbatim}
+regress api00 enroll
+\end{verbatim}
+\end{framed}
+
+
+\subsection{Multiple Linear Regression}
+\begin{framed}
+\begin{verbatim}
+regress api00 acs_k3 meals full
+\end{verbatim}
+\end{framed}
+
+
+\end{document}

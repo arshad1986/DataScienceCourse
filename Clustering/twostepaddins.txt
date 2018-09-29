@@ -1,0 +1,27 @@
+http://www.upg-bulletin-se.ro/archive/2010-3/7.%20Schiopu.pdf
+
+The TwoStep Cluster Analysis
+TwoStep Cluster is an algorithm primarily designed to analyze large datasets. The algorithm
+groups the observations in clusters, using the approach criterion2
+. The procedure uses an
+agglomerative hierarchical clustering method3
+. Compared to classical methods of cluster
+analysis, TwoStep enables both continuous and categorical attributes. Moreover, the method can
+automatically determine the optimal number of clusters.
+TwoStep Cluster involves performing the following steps:
+o pre-clustering;
+o solving atypical values (outliers) - optional;
+o clustering.
+In the pre-clustering step, it scans the data record one by one and decides whether the current
+record can be added to one of the previously formed clusters or it starts a new cluster, based on
+the distance criterion4
+. The method uses two types of distance measuring: Euclidian distance
+and log-likelihood distance5
+.
+Pre-clustering procedure is implemented by building a data structure called CF (cluster feature)
+tree, which contains the cluster centers. The CF tree consists of levels of nodes, each node
+having a number of entries. A leaf entry is a final sub-cluster. For each record, starting from the
+root node, the nearest child node is found recursively, descending along the CF tree. Once
+reaching a leaf node, the algorithm finds the nearest leaf entry in the leaf node. If the record is
+within a threshold distance of the nearest leaf entry, then the record is added into the leaf entry
+and the CF tree is updated. Otherwise, it creates a new value for the leaf node. If there is enough 
