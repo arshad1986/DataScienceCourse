@@ -1,68 +1,0 @@
-\subsection{Main Concepts of Torch}
-%http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CBB0C8A5FE34F6D6DAFF997F6B6A205A?doi=10.1.1.8.9850&rep=rep1&type=pdf
-
-Torch has been developed using an object-oriented paradigm and implemented in C++. In order to
-simplify the modification of existing algorithms or the design of new algorithms or methods, a modular
-strategy was chosen through the denition of the following broad classes:
-
-\begin{descrption}
-\item[DataSet:] this 
-lass handles data. Several sub
-lasses provide ways to handle stati
- or dynami
-
-data, data that 
-an t into memory or whi
-h 
-ould be a
-
-essed on-the-y from disk (for very
-large data sets for example), et
-...
- Ma
-hine: this 
-lass represents any bla
-k-box that, given an (optional) input (again, either stati
-
-or dynami
-) and some (optional) parameters, returns an output. It 
-ould be for instan
-e a
-neural network, a support ve
-tor ma
-hine, a hidden Markov model, et
-...
- Trainer: this 
-lass is used to sele
-t an optimal set of parameters of a ma
-hine a
-
-ording to a
-given 
-riterion and a given DataSet, and test it using another (or the same) DataSet.
- Measurer: ob je
-ts of this 
-lass print in dierent les various measures of interest. It 
-ould be
-for example the 
-lassi
-ation error, the mean-squared error or the log-likelihood.
-Thus, the general idea of Tor
-h is very simple: rst the DataSet produ
-es one or several training
-examples. The Trainer gives them to the Ma
-hine whi
-h 
-omputes an output, whi
-h is used by the
-Trainer to tune the parameters of the Ma
-hine. During this pro
-ess, one or more Measurer(s) 
-an
-be used to monitor the performan
-e of the system. Note however that some ma
-hines 
-an only be
-trained by spe
-i
- trainers:
