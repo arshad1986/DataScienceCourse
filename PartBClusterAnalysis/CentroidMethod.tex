@@ -1,0 +1,47 @@
+
+\subsection{Nearest neighbour method} 
+(Also known as the single linkage method).\\
+In this method the distance between two clusters is defined to be the distance between
+the two closest members, or neighbours. This method is relatively simple but is often
+criticised because it doesnt take account of cluster structure and can result in a problem
+called chaining whereby clusters end up being long and straggly. However, it is better
+than the other methods when the natural clusters are not spherical or elliptical in shape.
+
+\subsection{Furthest neighbour method}
+(Also known as the complete linkage method).\\
+In this case the distance between two clusters is defined to be the maximum distance
+between members  i.e. the distance between the two subjects that are furthest apart.
+This method tends to produce compact clusters of similar size but, as for the nearest
+neighbour method, does not take account of cluster structure. It is also quite sensitive
+to outliers.
+
+\subsection{Average (between groups) linkage method }
+(sometimes referred to as UPGMA).\\
+The distance between two clusters is calculated as the average distance between all pairs
+of subjects in the two clusters. This is considered to be a fairly robust method.
+
+\subsection{Centroid method}
+Here the centroid (mean value for each variable) of each cluster is calculated and the
+distance between centroids is used. Clusters whose centroids are closest together are
+merged. This method is also fairly robust.
+
+\subsection{Wards method}
+In this method all possible pairs of clusters are combined and the sum of the squared
+distances within each cluster is calculated. This is then summed over all clusters. The
+combination that gives the lowest sum of squares is chosen. This method tends to
+produce clusters of approximately equal size, which is not always desirable. It is also
+quite sensitive to outliers. Despite this, it is one of the most popular methods, along
+with the average linkage method.
+
+%\subsection{Ward's Method}
+%This method is distinct from other methods because it uses an \textbf{\textit{analysis of variance}} approach to evaluate the distances between clusters. In general, this method is very efficient.
+%
+%Cluster membership is assessed by calculating the total sum of squared deviations from the mean of a cluster. The criterion for fusion is that it should produce the smallest possible increase
+%in the error sum of squares.
+%
+%
+%
+%\subsection{Ward's Linkage}
+%
+%Ward's linkage is a method for hierarchical cluster analysis . The idea has much in common with analysis of variance (ANOVA). The linkage function specifying the distance between two clusters is computed as the increase in the "error sum of squares" (ESS) after fusing two clusters into a single cluster. Ward's Method seeks to choose the successive clustering steps so as to minimize the increase in ESS at each step.
+

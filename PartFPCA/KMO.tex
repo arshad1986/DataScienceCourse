@@ -1,0 +1,116 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Principal Component Analysis}
+%\input{tcilatex}
+
+\begin{document}
+
+\section{Principal Compoment Analysis}
+\subsection{Orthogonal versus Oblique Solutions (Ignore for 2016)}
+\begin{itemize}
+\item This course will discuss only principal component analysis that result in \textbf{orthogonal solutions}.
+An orthogonal solution is one in which the components remain uncorrelated (orthogonal means
+uncorrelated).
+
+\item It is possible to perform a principal component analysis that results in correlated components.
+Such a solution is called an \textbf{oblique solution}.  In some situations, oblique solutions are superior
+to orthogonal solutions because they produce cleaner, more easily-interpreted results.
+\item However, oblique solutions are also somewhat more complicated to interpret, compared to
+orthogonal solutions.  For this reason, we will focus only on the interpretation of orthogonal solutions
+\end{itemize}
+
+	
+\subsection{Sampling adequacy (KMO Statistic)}
+\begin{itemize}
+\item Measured by the Kaiser-Meyer-Olkin (KMO) statistics, sampling adequacy predicts if the PCA analyses are likely to perform well, based on correlation and partial correlation. 
+\item \textbf{IMPORTANT} KMO can also be used to assess which variables to drop from the model because they are too multi-collinear.
+
+\item KMO varies from 0 to 1.0 and KMO overall should be 0.60 or higher to proceed with PCA analysis. There is a KMO statistic for each individual variable, and their sum is the KMO overall statistic. 
+\item \textbf{Interpretation:} Values below 0.5 imply that factor analysis or PCA may not be appropriate.
+\begin{itemize}
+\item[$\ast$] Approach to overcoming this: If it is not, drop the \textbf{indicator variables} with the lowest individual KMO statistic values, until KMO overall rises above 0.60.
+\end{itemize} 
+
+\item To compute KMO overall, the numerator is the sum of squared correlations of all variables in the analysis (except the 1.0 self-correlations of variables with themselves, of course). 
+
+%\item The denominator is this same sum plus the sum of squared partial correlations of each variable i with each variable $j$, controlling for others in the analysis. The concept is that the partial correlations should not be very large if one is to expect distinct factors to emerge from factor analysis.
+\end{itemize}
+
+\begin{itemize}
+\item KMO values greater than 0.8 can be considered good, i.e. an indication that component or factor analysis will be useful for these variables. This usually occurs when most of the zero-order correlations are positive. 
+\item KMO values less than 0.5 occur when most of the zero-order correlations are negative. KMO values less than 0.5 require remedial action, either by deleting the offending variables or by including other variables related to the offenders. Perhaps the variables reflect responses to a questionnaire where some items were written so that high scores reflect the trait in question while other items were structured so that low scores reflect the trait. 
+\end{itemize}
+
+
+\subsection{Bartlett's Test for Sphericity}
+\begin{itemize}
+	\item
+Bartlett's measure tests the null hypothesis that the original correlation matrix is an identity
+matrix. \textit{(Each Variable is uncorrelated with every other variable.)}
+
+\[
+\textbf{R} = \left( \begin{array}{ccccc}
+ 1 & 0 & 0 & \ldots & 0 \\ 
+ 0 & 1 & 0 & \ldots & 0 \\ 
+ 0 & 0 & 1 & \ldots & 0 \\ 
+ \vdots  & \vdots & \vdots & \ddots & \vdots \\ 
+ 0 & 0 & 0 & \ldots & 1 \\ 
+\end{array} \right)
+\]  
+\item \textbf{IMPORTANT:} For PCA to work we need some relationships between variables and if the correlation
+matrix were an identity matrix then all correlation coefficients would be zero. Information would be lost if dimensionality reduction took place.
+
+\item Therefore, we
+want this test to be signifcant (i.e. have a significance value less than 0.05). 
+\item A significant test
+tells us that the correlation matrix is not an identity matrix; therefore, there are some relationships
+between the variables we hope to include in the analysis. 
+\item For these data, Bartlett's test is
+highly significant ($p < 0.001$), and therefore factor analysis is appropriate.
+\end{itemize}
+%====================================================%
+
+\section{Review of Important Definitions}
+\begin{itemize}
+\item An observed variable can be measured directly, is sometimes called a measured variable or an indicator or a
+manifest variable.
+\item A principal component is a linear combination of weighted observed variables. Principal components are
+uncorrelated and orthogonal.
+\item A latent construct can be measured indirectly by determining its influence to responses on measured variables. A latent construct could is also referred to as a factor, underlying construct, or unobserved variable.
+\item Factor scores are estimates of underlying latent constructs.
+\item Unique factors refer to unreliability due to measurement error and variation in the data.
+\item Principal component analysis minimizes the sum of the squared perpendicular distances to the axis of the
+principal component while least squares regression minimizes the sum of the squared distances perpendicular to the
+x axis (not perpendicular to the fitted line).
+\item Principal component scores are actual scores.
+\item Eigenvectors are the weights in a linear transformation when computing principal component scores.
+Eigenvalues indicate the amount of variance explained by each principal component or each factor.
+\item Orthogonal means at a 90 degree angle, perpendicular.
+Obilque means other than a 90 degree angle.
+\item An observed variable \textbf{\emph{loads}} on a factors if it is highly correlated with the factor, has an eigenvector of greater magnitude on that factor.
+\item Communality is the variance in observed variables accounted for by a common factors. Communality is more
+relevant to EFA than PCA.
+\end{itemize}
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{framed}
+\usepackage{graphicx}
+
+%----------------------------------------------------------------%
+
+% Euclidean Distance
+% Squared Euclidean Distance
+% City Block Distance
+%----------------------------------------------------------------%
+\begin{document}
+\author{Kevin O'Brien}
+\title{Cluster Analysis - Cars Data Set}
+
+\section*{Cluster Analysis with \texttt{R}- The Cars Data Set}
+
+\subsection*{Description}
+\begin{itemize}
+\item Consumer Reports measured the gas mileage of 38 1978-79 model cars. 
+\item Other measurements about each car, such as weight and drive ratio, were reported by the manufacturer. 
+\item A cluster analysis of MPG, Weight, and Drive Ratio for cars reveals three main clusters, which we might identify as large sedans (Ford LTD, Chevrolet Caprice Classic), compact cars (Datsun 210, Chevrolet Chevette), and upscale, but smaller, sedans (BMW 320i, Audi 5000).
+
+
+\item The example is effective because common knowledge is sufficient to identify the groups and yet the third group may not be expected before the data are examined.
+\item
+On statistics packages capable of a three-dimensional, rotating scatterplot, the same three groups can be seen, especially if they are colored or displayed with different symbols. If available, a rotating plot helps to display what the cluster analysis finds.
+\end{itemize}
+\subsection*{Variable Names:}
+\begin{description}
+\item[Country:] Nationality of manufacturer (eg. U.S., Japan)
+\item[Car:] Car name (Make and model)
+\item[MPG:] Miles per gallon, a measure of gas mileage
+\item[Drive\_Ratio:] Drive ratio of the automobile
+\item[Horsepower:] Horsepower
+\item[Displacement:] Displacement of the car (in cubic inches)
+\item[Cylinder:] Number of cylinders
+\end{description}
+
+\newpage
+
+\subsection*{Loading the data set}
+\begin{itemize}
+\item Save the \texttt{cars.csv} file to your working directory.
+\item You can find out what the working directory is by using the \texttt{getwd()} command.
+\item Load the file in to the \texttt{R} workspace with the \texttt{read.csv()} command.
+\item To check that everything is OK, use a simple data inspection command, such as \texttt{head()}.
+\end{itemize}
+\begin{framed}
+\begin{verbatim}
+getwd()
+# [1] "C:/Users/Computer5/Documents"
+cars = read.csv("cars.csv",header=TRUE)
+head(cars)
+\end{verbatim}
+\end{framed}
+\begin{verbatim}
+> head(cars)
+  Country                Car  MPG Weight Drive_Ratio Horsepower Displacement
+1    U.S. Buick Estate Wagon 16.9  4.360        2.73        155          350
+2   Japan         Dodge Colt 35.1  1.915        2.97         80           98
+3 Germany          VW Rabbit 31.9  1.925        3.78         71           89
+4   Japan          Mazda GLC 34.1  1.975        3.73         65           86
+5 Germany        VW Scirocco 31.5  1.990        3.78         71           89
+6   Japan         Datsun 210 31.8  2.020        3.70         65           85
+  Cylinders
+1         8
+2         4
+3         4
+4         4
+5         4
+6         4
+\end{verbatim}
+
+
+
+
+\end{document}

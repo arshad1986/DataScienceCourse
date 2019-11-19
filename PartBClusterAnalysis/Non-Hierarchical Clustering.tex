@@ -1,0 +1,34 @@
+\section{Non-Hierarchical Clustering}
+This method of clustering is very different from the hierarchical clustering and Ward method, which are applied when there is no prior knowledge of how many clusters there may be or what they are characterized by. The k-means clustering approach is used when you already have hypotheses concerning the number of clusters in your cases or variables. For example, you may want to specify exactly three clusters that are to be as distinct as possible.
+
+This is the type of research question that can be addressed by the k-means clustering algorithm. In general, the k-means method will produce the exact k different clusters demanded of greatest possible distinction. Very often, both the hierarchical and the k-means techniques are used successively.
+\begin{itemize}
+\item Ward's method is used to get some sense of the possible number of clusters and the way they merge as seen from the dendrogram.
+\item Then the clustering is rerun with only a chosen optimum number in which to place all
+the cases (i.e. k means clustering).
+\end{itemize}
+%-------------------------------------------------------------------------------------------------%
+In these methods the desired number of clusters is specified in advance and the `best' solution
+is chosen. The steps in such a method are as follows:
+\begin{itemize}
+\item[1] Choose initial cluster centres (essentially this is a set of observations that are far apart
+ each subject forms a cluster of one and its centre is the value of the variables for
+that subject).
+\item[2] Assign each subject to its `nearest' cluster, defined in terms of the distance to the
+centroid.
+\item[3] Find the centroids of the clusters that have been formed
+\item[4] Re-calculate the distance from each subject to each centroid and move observations that
+are not in the cluster that they are closest to.
+\item[5] Continue until the centroids remain relatively stable.
+\end{itemize}
+%-------------------------------------------------------------------------------------------------%
+Non-hierarchical cluster analysis tends to be used when large data sets are involved. It is
+sometimes preferred because it allows subjects to move from one cluster to another (this is
+not possible in hierarchical cluster analysis where a subject, once assigned, cannot move to a
+different cluster). Two disadvantages of non-hierarchical cluster analysis are: 
+\begin{itemize}
+\item[1]it is often
+diffcult to know how many clusters you are likely to have and therefore the analysis may have
+to be repeated several times 
+\item[2] it can be very sensitive to the choice of initial cluster centres. Again, it may be worth trying di?erent ones to see what impact this has.
+\end{itemize}

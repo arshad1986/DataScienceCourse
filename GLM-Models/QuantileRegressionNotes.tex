@@ -1,0 +1,198 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{framed}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode"CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 201113:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{Advanced Data Modelling} \rhead{Logistic Regression} \chead{MA4128} %\input{tcilatex}
+
+%============================================================%
+Quantile regression is a type of regression analysis used in statistics and econometrics. Whereas the method of least squares results in estimates that approximate the conditional mean of the response variable given certain values of the predictor variables, quantile regression aims at estimating either the conditional median or other quantiles of the response variable.
+
+%============================================================%
+%Contents  [hide] 
+%1	Advantages and applications
+%2	Mathematics
+%3	History
+%4	Quantiles
+%5	Example
+%6	Intuition
+%7	Sample quantile
+%8	Conditional quantile and quantile regression
+%9	Computation
+%10	Asymptotic properties
+%11	Equivariance
+%11.1	Scale equivariance
+%11.2	Shift equivariance
+%11.3	Equivariance to reparameterization of design
+%11.4	Invariance to monotone transformations
+%12	Bayesian methods for Quantile Regression
+%13	Censored Quantile Regression
+%14	Implementations
+%15	References
+%16	Further reading
+%============================================================%
+\subsection{Advantages and applications}
+Quantile regression is desired if conditional quantile functions are of interest. One advantage of quantile regression, relative to the ordinary least squares regression, is that the quantile regression estimates are more robust against outliers in the response measurements. However, the main attraction of quantile regression goes beyond that. Different measures of central tendency and statistical dispersion can be useful to obtain a more comprehensive analysis of the relationship between variables.[1][page needed]
+
+In ecology, quantile regression has been proposed and used as a way to discover more useful predictive relationships between variables in cases where there is no relationship or only a weak relationship between the means of such variables. The need for and success of quantile regression in ecology has been attributed to the complexity of interactions between different factors leading to data with unequal variation of one variable for different ranges of another variable.[2]
+
+Another application of quantile regression is in the areas of growth charts, where percentile curves are commonly used to screen for abnormal growth.[3][4]
+
+%============================================================%
+\subsection{Mathematics}
+The mathematical forms arising from quantile regression are distinct from those arising in the method of least squares. The method of least squares leads to a consideration of problems in an inner product space, involving projection onto subspaces, and thus the problem of minimizing the squared errors can be reduced to a problem in numerical linear algebra. Quantile regression does not have this structure, and instead leads to problems in linear programming that can be solved by the simplex method.
+
+%============================================================%
+\subsection{History}
+The idea of estimating a median regression slope, a major theorem about minimizing sum of the absolute deviances and a geometrical algorithm for constructing median regression was proposed in 1760 by Ruđer Josip Bošković, a Jesuit Catholic priest from Dubrovnik.[1]:4[5] Median regression computations for larger data sets are quite tedious compared to the least squares method, for which reason it has historically generated a lack of popularity among statisticians, until the widespread adoption of computers in the latter part of the 20th century.
+
+%============================================================%
+\subsection{Quantiles}
+Let Y be a real valued random variable with cumulative distribution function $F_{Y}(y)=P(Y\leq y)$. The $\tau$-th quantile of Y is given by
+\[
+Q_{Y}(\tau)=F_{Y}^{-1}(\tau)=\inf\left\{ y:F_{Y}(y)\geq\tau\right\}]\
+where \tau\in[0,1].
+
+Define the loss function as \rho_{\tau}(y)=|y(\tau-\mathbb{I}_{(y<0)})|, where \mathbb{I} is an indicator variable. A specific quantile can be found by minimizing the expected loss of Y-u with respect to u:[1]:5–6
+
+\underset{u}{\min}E(\rho_{\tau}(Y-u))=\underset{u}{\min}(\tau-1)\int_{-\infty}^{u}(y-u)dF_{Y}(y)+\tau\int_{u}^{\infty}(y-u)dF_{Y}(y).
+This can be shown by setting the derivative of the expected loss function to 0 and letting q_{\tau} be the solution of
+
+0=(1-\tau)\int_{-\infty}^{q_{\tau}}dF_{Y}(y)-\tau\int_{q_{\tau}}^{\infty}dF_{Y}(y).
+This equation reduces to
+
+0=F_{Y}(q_{\tau})-\tau,
+and then to
+
+F_{Y}(q_{\tau})=\tau.
+Hence q_{\tau} is \tauth quantile of the random variable Y.
+
+%============================================================%
+\subsection{Example}
+Let Y be a discrete random variable that takes values 1,2,..,9 with equal probabilities. The task is to find the median of Y, and hence the value \tau=0.5 is chosen. The expected loss, L(u), is
+
+L(u)=\frac{(\tau-1)}{9}\sum_{y_{i}<u}(y_{i}-u)+\frac{\tau}{9}\sum_{y_{i}\geq u}(y_{i}-u)=\frac{0.5}{9}\left(-\sum_{y_{i}<u}(y_{i}-u)+\sum_{y_{i}\geq u}(y_{i}-u)\right) .
+Since {0.5/9} is a constant, it can be taken out of the expected loss function (this is only true if \tau=0.5). Then, at u=3,
+
+L(3) \propto\sum_{i=1}^{2}-(i-3)+\sum_{i=3}^{9}(i-3) =[(2+1)+(0+1+2+...+6)] =24.
+Suppose that u is increased by 1 unit. Then the expected loss will be changed by (3)-(6)=-3 on changing u to 4. If, u=5, the expected loss is
+
+L(5) \propto \sum_{i=1}^{4}i+\sum_{i=0}^{4}i=20,
+and any change in u will increase the expected loss. Thus u=5 is the median. The Table below shows the expected loss (divided by {0.5/9}) for different values of u.
+
+u	1	2	3	4	5	6	7	8	9
+Expected loss	36	29	24	21	20	21	24	29	36
+
+%============================================================%
+\subsection{Intuition}
+Consider \tau=0.5 and let q be an initial guess for q_{\tau}. The expected loss evaluated at q is
+
+-0.5\int_{-\infty}^{q}(y-q)dF_{Y}(y)+0.5\int_{q}^{\infty}(y-q)dF_{Y}(y) .
+In order to minimize the expected loss, we move the value of q a little bit to see whether the expect loss will rise or fall. Suppose we increase q by 1 unit. Then the change of expected loss would be
+
+\[\int_{-\infty}^{q}1dF_{Y}(y)-\int_{q}^{\infty}1dF_{Y}(y) .\]
+The first term of the equation is $F_{Y}(q)$ and second term of the equation is $1-F_{Y}(q)$. 
+
+Therefore the change of expected loss function is negative if and only if F_{Y}(q)<0.5, that is if and only if q is smaller than the median. Similarly, if we reduce q by 1 unit, the change of expected loss function is negative if and only if q is larger than the median.
+
+In order to minimize the expected loss function, we would increase (decrease) L(q) if q is smaller (larger) than the median, until q reaches the median. The idea behind the minimization is to count the number of points (weighted with the density) that are larger or smaller than q and then move q to a point where q is larger than $\tau$\% of the points.
+
+\subsection{Sample quantile}
+The $\tau$ sample quantile can be obtained by solving the following minimization problem
+
+\[\hat{q}_{\tau}=\underset{q\in R}{\mbox{arg min}}\sum_{i=1}^{n}\rho_{\tau}(y_{i}-q) ,
+=\underset{q\in R}{\mbox{arg min}}  \left[(1 - \tau)\sum_{y_{i}<q}(q - y_{i})+\tau\sum_{y_{i}\geq q}(y_{i}-q) \right]\]. The intuition is the same as for the population quantile.
+\subsection{Conditional quantile and quantile regression}
+Suppose the $\tau$th conditional quantile function is  $Q_{Y|X}(\tau)=X\beta_{\tau}$. Given the distribution function of Y, $\beta_{\tau}$ can be obtained by solving
+
+\[\beta_{\tau}=\underset{\beta\in R^{k}}{\mbox{arg min}}E(\rho_{\tau}(Y-X\beta))\].
+Solving the sample analog gives the estimator of $\beta$.
+
+\[\hat{\beta_{\tau}}=\underset{\beta\in R^{k}}{\mbox{arg min}}\sum_{i=1}^{n}(\rho_{\tau}(Y_{i}-X\beta)) .\]
+\subsection{Computation}
+The minimization problem can be reformulated as a linear programming problem
+
+\[\underset{\beta^{+},\beta^{-},u^{+},u^{-}\in R^{2k}\times R_{+}^{2n}}{\min}\left\{ \tau1_{n}^{'}u^{+}+(1-\tau)1_{n}^{'}u^{-}|X(\beta^{+}-\beta^{-})+u^{+}-u^{-}=Y\right\} ,\]
+where
+
+\[\beta_{j}^{+}=\max(\beta_{j},0),    \beta_{j}^{-}=-\min(\beta_{j},0),    u_{j}^{+}=\max(u_{j},0) ,    u_{j}^{-}=-\min(u_{j},0).\]
+Simplex methods[1]:181 or interior point methods[1]:190 can be applied to solve the linear programming problem.
+
+\subsection{Asymptotic properties}
+For $\tau\in(0,1)$, under some regularity conditions, $\hat{\beta}_{\tau}$ is asymptotically normal:
+
+\[\sqrt{n}(\hat{\beta}_{\tau}-\beta_{\tau})\overset{d}{\rightarrow}N(0,\tau(1-\tau)D^{-1}\Omega_{x}D^{-1}),\]
+where
+
+\[D=E(f_{Y}(X\beta)XX^{\prime}) and \Omega_{x}=E(X^{\prime} X) .\]
+Direct estimation of the asymptotic variance-covariance matrix is not always satisfactory. Inference for quantile regression parameters can be made with the regression rank-score tests or with the bootstrap methods.[6]
+
+\subsection{Equivariance}
+See invariant estimator for background on invariance or see equivariance.
+
+\end{document}
+\subsection{Scale equivariance}
+For any $a>0$ and $\tau\in[0,1]$
+
+\hat{\beta}(\tau;aY,X)=a\hat{\beta}(\tau;Y,X),
+\hat{\beta}(\tau;-aY,X)=-a\hat{\beta}(1-\tau;Y,X).
+Shift equivariance[edit]
+For any \gamma\in R^{k} and \tau\in[0,1]
+
+\hat{\beta}(\tau;Y+X\gamma,X)=\hat{\beta}(\tau;Y,X)+\gamma .
+Equivariance to reparameterization of design[edit]
+Let A be any p\times p nonsingular matrix and \tau\in[0,1] 
+
+\hat{\beta}(\tau;Y,XA)=A^{-1}\hat{\beta}(\tau;Y,X) .
+Invariance to monotone transformations[edit]
+If h is a nondecreasing function on 'R, the following invariance property applies:
+
+h(Q_{Y|X}(\tau))\equiv Q_{h(Y)|X}(\tau).
+
+%============================================================%
+Example (1):
+
+Let Y=\ln(W) and Q_{Y|X}(\tau)=X\beta_{\tau}, then Q_{W|X}(\tau)=\exp(X\beta_{\tau}). The mean regression does not have the same property since \operatorname{E} (\ln(Y))\neq \ln(\operatorname{E}(Y)).
+
+%============================================================%
+Bayesian methods for Quantile Regression[edit]
+Because quantile regression does not normally assume a parametric likelihood for the conditional distributions of Y|X, the Bayesian methods work with a working likelihood. A convenient choice is the asymmetric Laplacian likelihood,[7] because the mode of the resulting posterior under a flat prior is the usual quantile regression estimates. The posterior inference, however, must be interpreted with care. Yang and He [8] showed that one can have asymptotically valid posterior inference if the working likelihood is chosen to be the empirical likelihood.
+
+%============================================================%
+Censored Quantile Regression[edit]
+If the response variable is subject to censoring, the conditional mean is not identifiable without additional distributional assumptions, but the conditional quantile is often identifiable. For recent work on censored quantile regression, see: Portnoy [9] and Wang and Wang [10]
+
+%============================================================%
+Example (2):
+
+Let $Y^{c}=\max(0,Y) and Q_{Y|X}=X\beta_{\tau}, then Q_{Y^{c}|X}(\tau)=\max(0,X\beta_{\tau})$. This is the censored quantile regression model: estimated values can be obtained without making any distributional assumptions, but at the cost of computational difficulty,[11] some of which can be avoided by using a simple three step censored quantile regression procedure as an approximation.[12]
+
+For random censoring on the response variables, the censored quantile regression of Portnoy (2003) provides consistent estimates of all identifiable quantile functions based on reweighting each censored point appropriately.
+
+%============================================================%
+\subsection{Implementations}
+Numerous statistical software packages include implementations of quantile regression:
+
+Eviews, since version 6.[citation needed]
+gretl.[citation needed]
+R offers several packages that implement quantile regression, most notably quantreg by Roger Koenker,[13] but also gbm,[14] and quantregForest.[15]
+SAS through proc quantreg (ver. 9.2) and proc quantselect (ver. 9.3).[16]
+Stata, via the qreg command.[17]
+Vowpal Wabbit, via --loss_function quantile.[citation needed]
+\end{document}

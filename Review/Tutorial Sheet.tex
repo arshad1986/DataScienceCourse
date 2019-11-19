@@ -1,0 +1,161 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Advanced Data Modelling}
+%\input{tcilatex}
+
+\begin{document}
+Version: May 10th 2013
+\section*{Principal Component Analysis and Factor Analysis}
+\begin{itemize}
+\item[1.a] What is Dimensionality Reduction
+\item[1.b] What is the KMO statistic? Describe how to interpret the KMO statistic.
+\item[1.c] What is the Bartlett Test of Sphericity used for?
+\item[1.d] varimax, quartimax and equamax are the commonly used methods in a certain procedure. What is this procedure? What is the purpose of the procedure.
+Which method is the most commonly used?
+\item[1.e] Describe how to use a Scree plot in the context of dimensionality reduction techniques.
+\item[1.f] \textbf{IGNORE} What problems occur if a principal component analysis is done on a data matrix where the columns contain measurements on very difference scales?  What can be done to overcome this problem?
+\item[1.g] Principal Component Analysis is a data reduction technique. Explain what this term
+means.
+\item[1.h] The KMO is used to measure what characteristic of the data. Explain how the KMO
+measure should be interpreted.
+\item[1.i] Briefly describe the Bartlett Test for Sphericity, with reference to the null and alternative
+hypotheses, and how those statements relate to the purpose of the test.
+\item[1.j] Discuss three techniques for determining the appropriate number of principal components.
+\item[1.k] \textbf{IGNORE} In the context of principal components what is meant by orthogonality.
+
+\item[1.l] What is the purpose of a principal component analysis? Compare and contract PCA and variable selection procedures such as backward selection. 
+\item[1.m] \textbf{IGNORE} Explain the difference between PCA and factor analysis
+\item[1.n] Explain what is meant by the "true" dimension of the data? How does an analyst determine the appropriate number of components to retain. Make reference to three difference techniques
+\end{itemize}
+
+\section*{Clustering Analysis}
+\begin{itemize}
+\item[2.a] What is the difference between agglomerative and divisive clustering?
+\item[2.b] What is the difference between hierarchical and non-hierarchical clustering?
+\item[2.c] How do we determine the appropriate number of clusters?  Give two different visualization methods that are used to display the outcome of a cluster analysis.
+
+\item[2.d]In the context of hierarchical cluster analyses, distinguish between agglomerative clustering and divisive clustering.
+\item[2.e] What is a vertical icicle plot used for? Give a brief dscription, supporting your answer
+with sketches.
+\item[2.f] Compute the squared Euclidean distance and the Manhattan (a.k.a. city block) distance between the following points A and B.
+\[ \mbox{A} =\{2,5,1,7\}  \]
+\[ \mbox{B} =\{1,6,3,6\}  \]
+\item[2.g] What is a dendrogram? What does does a dendrogram depict?% Question
+\item[2.h] What is the purpose of a cluster analysis? % Question
+
+\item[2.i] What is two-step clustering analysis?
+\item[2.j] Explain why squared Euclidean Distance may be used in preference to Euclidean Distance.
+\item[2.k] Compare and contrast any two linkage methods. % Question
+
+\item[2.l] Explain the difference between Ward's method and K-means clustering.% Question
+\item[2.m] Discriminant Analysis is very similar to Clustering Analysis, but one key difference. Explain this difference.% Question
+\item[2.n] What is the difference between a linkage method and a similarity measure? Discuss the purpose of both.% Question
+\item[2.o] Compare and contrast any two linkage methods.
+\item[2.p] Discus how to determine the appropriate number of clusters.
+\end{itemize}
+\section*{Linear Models}
+\begin{itemize}
+
+\item[3.a] What is Multicollinearity? Describe the implications of Multicollinearity?
+\item[3.b] Contrast the uses of Training Data, Validation Data and Testing Data.
+\item[3.c] What is meant by overfitting?
+\item[3.d] Describe how you would use the Variance Inflation Factor to make an assessment about multicollinearity.
+\item[3.e] Describe how to use to the Akaike Information Criterion for model selection.
+\item[3.f] Explain what variable selection procedures are used for.
+\item[3.g] Describe the process of model validation, with reference to training, validation and testing phases.
+\item[3.h] State two ways of methodically diagnosing the severity of multi-collinearity. How are these techniques related? How are they used to make decisions about the data?
+\item[3.i] State two ways in which a multiple regression technique could be affected by severe multicollinearity?
+\item[3.j] Explain what variable selection procedures are used for.
+\item[3.k] Compare and contrast three types of variable selection procedure.
+\end{itemize}
+
+\section*{Logistic Regression}
+\begin{itemize}
+
+\item[4.a] What is a logit? How can you transform it into a probability?
+\item[4.b] Suppose that the probability of a success is 0.70. Compute the corresponding odds.
+\item[4.c] The usual assumptions placed on the error terms in ordinary least squares
+regression are:
+\begin{itemize}
+\item independently distributed
+\item identically distributed (equal variance)
+\item normally distributed
+\end{itemize}
+Which of these assumptions are violated when dealing with binary response
+data? Explain briefly how each is violated.
+\item[4.d] What is a dummy variable? Explain how it is used in Logistic Regression. Support your answer with an example.
+\item[4.e] There are three variants for the forward selection procedures used by SPSS. Name these three.
+\item[4.f] What is the Likelihood Ration Test? Describe how it used in Logistic regression.
+\item[4.g] Suppose the odds of an outcome are 4. What is the probability of that outcome?
+\item[4.h] Suppose the probability of an outcome is 70\%. What is the odds of that outcome occuring?
+\item[4.i]  What is a logit? how is it computed into a probability?
+\item[4.j] Suppose that, out of a samle of 100 women and 100 men, 80 men drank alcohol in the last week, while 20 women drank alcohol in past week. Compute the odds ratio for Women to men
+\item[4.k] What is logistic regression? How does it differ from linear regression? Under what circumstances would you use it?
+\end{itemize}
+\section*{Missing Data}
+
+\begin{itemize}
+\item[5.a] Compare and contrast three types of missing data.
+\item[5.b] \textbf{IGNORE} What is meant by multiple imputation?
+\item[5.c] Compare and contrast the following types of missing data: Missing At Random, Missing
+Not At Random, Missing Completely at Random.
+\item[5.d]Briefly describe the technique of Multiple Imputation.
+\item[5.e] \textbf{IGNORE} Discuss some of the traditional techniques for dealing with Missing Data. For each technique discuss the limitations of that technique.
+\item[5.f] What is meant by missing data? Discuss the implications of Missing data in the context of a statistical analysis.
+\item[5.g] Compare and contrast Censored Data and Truncated Data
+\item[5.h] Compare and contrast Missing Data, Interval Data and Censored Data.
+\item[5.i] Describe two cases of censored data. Give a Practical exam for both cases. \textit{(hint: Limits of Detection, Speedometers etc)}
+\end{itemize}
+
+
+
+\section*{IGNORE FOR 2016: MANOVA and Discriminant Analysis}
+\begin{itemize}
+\item[6.a] The MANOVA procedure is sensitive to Multivariate Outliers. What is a multivariate outlier? Describe a method for detecting multivariate outliers.
+
+\item[6.b] Pillai's Trace and Wilk's Lambda are two test procedures used in MANOVA, each fulfiling the same purpose.
+Describe the purpose of these tests.
+
+\item[6.c] What is the purpose of a discriminant analysis? How does discriminant analysis differ from MANOVA?
+
+\item[6.d] Explain the following terms: confusion matrix, prior probabilities cost of misclassification, and apparent error rate.
+
+\item[6.e] Distinguish between the True Error Rate and the Apparent Error Rate
+
+\item[6.f]  What is the confusion matrix? Explain how it is interpreted.
+
+\item[6.g] Explain why multinomial logistic regression may be used in preference to Discriminant Analysis.
+
+\item[6.h] The apparent error rate calculated when all observations are used to construct
+the discriminant rules is known to underestimate the true error rate. What can be done
+to overcome this problem?
+
+\item[6.i] Compare and contrast univariate and bivariate outliers. Describe how Mahalanobis Distance is used to detect bivariate outliers. Support your answer with an illustration.
+
+\end{itemize}
+
+
+
+\end{document}
+
+
+%------------------------------------------------------------------------% 

@@ -1,0 +1,170 @@
+\documentclass[RCluster.tex]{subfiles}
+\begin{document}
+
+%----------------------------------------------%
+% 1  Clustering Techniques
+
+
+
+
+\begin{itemize}
+\item Cluster analysis is a convenient method for identifying homogenous groups of
+objects called clusters. 
+\item A cluster is a group of relatively homogeneous cases or observations. Objects (or cases, observations) in a specific cluster share
+many characteristics, but are very dissimilar to objects not belonging to that cluster.
+\item  There are three cluster analysis approaches: 
+\begin{itemize}
+  \item hierarchical methods,
+  \item partitioning methods (more precisely, k-means), 
+  \item and two-step clustering,
+\textit{essentially a combination of the first two methods.}
+\end{itemize}
+%In the last class we looked as hierarchical clustering analysis.
+\item Each of these procedures
+follows a different approach to grouping the most similar objects into a cluster and
+to determining each object’s cluster membership. 
+\item Software packages, such as \texttt{R} calculate a measure
+of (dis)similarity by estimating the \textbf{\textit{distance}} between pairs of objects. \\ Objects with
+smaller distances between one another are more similar, whereas objects with larger
+distances are more dissimilar.
+%\item Some approaches – most notably hierarchical methods – require us to specify how similar or different objectsare in order to identify different clusters. 
+\item \textbf{Number of Clusters:} An important problem in the application of cluster analysis is the decision
+regarding how many clusters should be derived from the data. 
+%This question is explored in the next step of the analysis. 
+Sometimes, however,
+number of segments that have to be derived from the data will be known in advance.
+\item
+By choosing a specific clustering procedure, we determine how clusters are to be
+formed. This always involves optimizing some kind of criterion, such as minimizing
+the within-cluster variance (i.e., the clustering variables’ overall variance of
+objects in a specific cluster), or maximizing the distance between the objects or
+clusters). 
+\item The procedure could also address the question of how to determine the
+(dis)similarity between objects in a newly formed cluster and the remaining objects
+in the dataset.
+\end{itemize}
+\newpage
+\section{Statistical Considerations}
+\subsection{Statistical Significance Testing}
+
+Note that the previous discussions refer to clustering algorithms and do not mention anything about statistical significance testing. In fact, cluster analysis is not as much a typical statistical test as it is a ``collection" of different algorithms that ``put objects into clusters according to well defined similarity rules."
+
+The point here is that, unlike many other statistical procedures, cluster analysis methods are mostly used when we do not have any \textbf{\textit{a priori hypotheses}}, but are still in the exploratory phase of our research. In a sense, cluster analysis finds the ``most significant solution possible." Therefore, statistical significance testing is really not appropriate here, even in cases when p-values are reported.
+
+\subsection{Multicollinearity}
+In statistics, the occurrence of several  variables in a multiple regression model are \textbf{closely correlated} to one another, and carrying the same information, more or less. Multi-collinearity can cause strange results when attempting to study how well individual independent variables contribute to an understanding of the dependent variable, often undermining the analysis.
+
+\section{Types of Hierarchical Clustering}
+\begin{itemize}
+\item
+Hierarchical clustering procedures are characterized by the tree-like structure
+established in the course of the analysis. Most hierarchical techniques fall into a
+category called \textbf{\textit{agglomerative clustering}}. In this category, clusters are consecutively
+formed from objects. 
+\item Initially, this type of procedure starts with each object
+representing an individual cluster. These clusters are then sequentially merged
+according to their similarity. 
+\item First, the two most similar clusters (i.e., those with
+the smallest distance between them) are merged to form a new cluster at the bottom
+of the hierarchy. In the next step, another pair of clusters is merged and linked to a
+higher level of the hierarchy, and so on. This allows a hierarchy of clusters to be
+established from the bottom up.
+\item A cluster hierarchy can also be generated top-down. In this divisive clustering,
+all objects are initially merged into a single cluster, which is then gradually split up. 
+\item \textbf{\textit{Divisive procedures}} are quite rarely used in practice. We therefore
+concentrate on the agglomerative clustering procedures.
+\item A consequence of the Hierarchical Clustering method is that that if an object is assigned
+to a certain cluster, there is no possibility of reassigning this object to another
+cluster.\textit{ This is an important distinction between these types of clustering and
+partitioning methods such as \textbf{\textit{k-means}}.}
+\end{itemize}
+\noindent \textbf{Summary} Within hierarchical clustering analysis there are two subcategories: 
+\begin{itemize}
+\item Agglomerative (start from n clusters,to get to 1 cluster)
+\item Divisive (start from 1 cluster, to get to $n$ cluster)
+\end{itemize}
+\newpage
+\section{Hierarchical agglomerative clustering methods}
+\begin{itemize}
+\item Another class of clustering methods, known as \textbf{\textit{hierarchical agglomerative clustering methods}}, starts out by putting each observation into its own separate cluster. It then examines all the distances between all the observations and pairs together the two closest ones to form a new cluster. 
+\item This is a simple operation, since hierarchical methods require a distance matrix, and it represents exactly what we want - the distances between individual observations. 
+\item So finding the first cluster to form simply means looking for the smallest number in the distance matrix and joining the two observations that the distance correspnds to into a new cluster. Now there is one less cluster than there are observations. 
+\end{itemize}
+\subsection{Agglomeration Methods}
+\begin{itemize}
+\item To determine which observations will form the next cluster, we need to come up with a method for finding the distance between an existing cluster and individual observations, since once a cluster has been formed, we'll determine which observation will join it based on the distance between the cluster and the observation. Some of the methods that have been proposed to do this are to take the minimum distance between an observation and any member of the cluster, to take the maximum distance, to take the average distance, or to use some kind of measure that minimizes the distances between observations within the cluster. Each of these methods will reveal certain types of structure within the data. \item Using the \textit{minimum} tends to find clusters that are drawn out and "snake"-like, while using the \textit{maximum} tends to find compact clusters. 
+\item Using the mean is a compromise between those methods.
+\item One method that tends to produce clusters of more equal size is known as \textbf{\textit{Ward's method}}. It attempts to form clusters keeping the distances within the clusters as small as possible, and is often useful when the other methods find clusters with only a few observations. 
+
+\end{itemize}
+\section{More on Agglomeration Methods (SPSS)}
+\textbf{The following was written for SPSS users} \\
+Having selected how we will measure distance, we must now choose the clustering algorithm, i.e. the rules that govern between which points distances are measured to determine cluster membership. There are many methods available, the criteria used differ and hence
+different classifications may be obtained for the same data. This is important since it tells us that, although cluster analysis may provide an objective method for the clustering of cases, there can be subjectivity in the choice of method. 
+
+The linkage distances are calculated by SPSS. The goal of the clustering algorithm is to join objects together into successively larger clusters, using some measure of similarity or distance. SPSS provides seven clustering algorithms, the most commonly used one being  \textbf{\textit{Ward's method}}.
+
+
+\subsection{Nearest neighbour method} \textit{
+(Also known as the single linkage method).\\}
+In this method the distance between two clusters is defined to be the distance between
+the two closest members, or neighbours. This method is relatively simple but is often
+criticised because it doesnt take account of cluster structure and can result in a problem
+called chaining whereby clusters end up being long and straggly. However, it is better
+than the other methods when the natural clusters are not spherical or elliptical in shape.
+
+\subsection{Furthest neighbour method}\textit{
+(Also known as the complete linkage method).\\}
+In this case the distance between two clusters is defined to be the maximum distance
+between members  i.e. the distance between the two subjects that are furthest apart.
+This method tends to produce compact clusters of similar size but, as for the nearest
+neighbour method, does not take account of cluster structure. It is also quite sensitive
+to outliers.
+
+\subsection{Average (between groups) linkage method }
+\textit{(sometimes referred to as UPGMA).}\\
+The distance between two clusters is calculated as the average distance between all pairs
+of subjects in the two clusters. This is considered to be a fairly robust method.
+
+\subsection{Centroid method}
+Here the centroid (mean value for each variable) of each cluster is calculated and the
+distance between centroids is used. Clusters whose centroids are closest together are
+merged. This method is also fairly robust.
+
+\subsection{Wards method}
+In this method all possible pairs of clusters are combined and the sum of the squared
+distances within each cluster is calculated. This is then summed over all clusters. The
+combination that gives the lowest sum of squares is chosen. This method tends to
+produce clusters of approximately equal size, which is not always desirable. It is also
+quite sensitive to outliers. Despite this, it is one of the most popular methods, along
+with the average linkage method.
+
+\section{Hierarchical Clustering: Implementation with \texttt{R}}
+\begin{itemize}
+\item Agglomerative Hierarchical cluster analysis is provided in \texttt{R} through the \texttt{hclust} function.
+\item Notice that, by its very nature, solutions with many clusters are nested within the solutions that have fewer clusters, so observations don't "jump ship" as they do in k-means or the pam methods. 
+\item Furthermore, we don't need to tell these procedures how many clusters we want - we get a complete set of solutions starting from the trivial case of each observation in a separate cluster all the way to the other trivial case where we say all the observations are in a single cluster.
+\item Traditionally, hierarchical cluster analysis has taken computational shortcuts when updating the distance matrix to reflect new clusters. In particular, when a new cluster is formed and the distance matrix is updated, all the information about the individual members of the cluster is discarded in order to make the computations faster. 
+\end{itemize}
+\subsection{The \texttt{agnes} function (cluster package)}
+\begin{itemize}
+\item The \textbf{cluster} library provides the \texttt{agnes} function which uses essentially the same technique as \texttt{hclust}, but which uses fewer shortcuts when updating the distance matrix.\\ For example, when the mean method of calculating the distance between observations and clusters is used, \texttt{hclust} only uses the two observations and/or clusters which were recently merged when updating the distance matrix, while agnes calculates those distances as the average of all the distances between all the observations in the two clusters. 
+
+\item While the two functions will usually agree quite closely when minimum or maximum updating methods are used, there may be noticeable differences when updating using the average distance or Ward's method.
+\end{itemize}
+\newpage
+
+%----------------------------------------------%
+\newpage
+\section{Partitioning around Medoids}
+\begin{itemize}
+\item The R \textbf{\textit{cluster}} library provides a modern alternative to k-means clustering, known as pam, which is an acronym for "Partitioning around Medoids". 
+
+\item The term\textbf{ \textit{medoid}} refers to an observation within a cluster for which the sum of the distances between it and all the other members of the cluster is a minimum. \textbf{pam} requires that you know the number of clusters that you want (like k-means clustering), but it does more computation than k-means in order to insure that the medoids it finds are truly representative of the observations within a given cluster. 
+
+\item  Recall that in the k-means method the centers of the clusters (which might or might not actually correspond to a particular observation) are only recaculated after all of the observations have had a chance to move from one cluster to another. With \textbf{pam}, the sums of the distances between objects within a cluster are constantly recalculated as observations move around, which will hopefully provide a more reliable solution. 
+\item Furthermore, as a by-product of the clustering operation it identifies the observations that represent the medoids, and these observations (one per cluster) can be considered a representative example of the members of that cluster which may be useful in some situations. \textbf{pam} does require that the entire distance matrix is calculated to facilitate the recalculation of the medoids, and it does involve considerably more computation than k-means, but with modern computers this may not be a important consideration. 
+\item As with k-means, there's no guarantee that the structure that's revealed with a small number of clusters will be retained when you increase the number of clusters.
+\end{itemize}
+
+\end{document}

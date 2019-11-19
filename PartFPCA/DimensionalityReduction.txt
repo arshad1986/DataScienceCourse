@@ -1,0 +1,10 @@
+\section{Factor Analysis}
+
+Factor analysis summarizes information contained in a large number of variables and condenses it into a smaller number of factors containing variables that are interrelated. For example: In a study about a group of women, their characteristics of height, weight, hobbies, activities, and interests might be summarized, using factor analysis, as size (height and weight) and lifestyles (the combination of hobbies, activities, and interests). In so doing, five variables have been condensed into two separate factors.
+
+
+\section{Scree plot}
+
+A plot, in descending order of magnitude, of the eigenvalues of a correlation matrix. In the context of factor analysis or principal components analysis a scree plot helps the analyst visualize the relative importance of the factors — a sharp drop in the plot signals that subsequent factors are ignorable.
+
+

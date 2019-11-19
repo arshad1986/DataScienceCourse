@@ -1,0 +1,239 @@
+\documentclass[a4paper,12pt]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+%\usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Advanced Data Modelling}
+%\input{tcilatex}
+
+
+% http://www.norusis.com/pdf/SPC_v13.pdf
+\begin{document}
+	
+	
+	%SESSION 1: Hierarchical Clustering
+	% Hierarchical clustering - dendrograms
+	% Divisive vs. agglomerative methods
+	% Different linkage methods
+	
+	%SESSION 2: K-means Clustering
+	
+	\tableofcontents
+	\newpage
+	
+	\chapter{Introduction to Two-Step Clustering}
+
+\section{Two-Step Cluster}
+
+The Two-Step Cluster Analysis procedure was designed for such applications. The name two-step clustering is already an indication that the algorithm is based on a two-stage approach: In the first stage, the algorithm undertakes a procedure that is very similar to the k-means algorithm. 
+
+Based on these results, the two-step
+procedure conducts a modified hierarchical agglomerative clustering procedure that
+combines the objects sequentially to form homogenous clusters. This is done by
+building a so-called \textbf{\textit{cluster feature tree}} whose \textbf{\textit{leaves}} represent distinct objects in the dataset. 
+
+The procedure can handle categorical and continuous variables simultaneously
+and offers the user the flexibility to specify the cluster numbers as well as
+the maximum number of clusters, or to allow the technique to automatically choose
+the number of clusters on the basis of statistical evaluation criteria.
+
+\subsection{Cluster Features Tree}
+
+Two-Step Cluster Analysis is done by building a so-called \textbf{\textit{cluster feature tree}} whose \textbf{\textit{leaves}} represent distinct objects in the dataset. The procedure can handle categorical and continuous variables simultaneously and offers the user the flexibility to specify the cluster numbers as well as the maximum number of clusters, or to allow the technique to automatically choose the number of clusters on the basis of statistical evaluation criteria.
+
+Additionally, the procedure indicates each variables importance for the construction of a specific cluster. These desirable features make the somewhat less popular two-step clustering a viable alternative to the traditional
+methods.
+
+
+\subsection{Types of Data} The Two-Step procedure works with both continuous and categorical variables. Cases represent objects to be clustered, and the variables represent attributes upon which the clustering is based.
+
+\subsection{Case Order}
+Note that the cluster features tree and the final solution may depend on the order of objects (or cases). To minimize order effects, randomly order the cases. It is recommended to obtain several different solutions with cases sorted in different random orders to verify the stability of a given solution. In situations where this is difficult due to extremely large file sizes, multiple runs with a sample of cases sorted in different random orders might be substituted.
+%------------------------------------------------------------------------------%
+
+
+\subsection{Graphical Outputs}
+The lower part of the output indicates the quality of the cluster
+solution. The silhouette measure of cohesion and separation is a measure of the
+clustering solutions overall goodness-of-fit. It is essentially based on the average
+distances between the objects and can vary between -1 and +1. Specifically, a
+silhouette measure of less than 0.20 indicates a poor solution quality, a measure
+between 0.20 and 0.50 a fair solution, whereas values of more than 0.50 indicate a
+good solution . In our case, the measure indicates a satisfactory (``fair") cluster quality. Consequently, you can
+proceed with the analysis by double-clicking on the output. This will open up the
+model viewer , an evaluation tool that graphically presents the structure
+of the revealed clusters.
+
+
+The model viewer provides us with two windows: the main view, which initially
+shows a model summary (left-hand side), and an auxiliary view, which initially
+features the cluster sizes (right-hand side). At the bottom of each window, you can
+request different information, such as an overview of the cluster structure and the
+overall variable importance.
+%------------------------------------------------------------------------------%
+
+
+
+
+
+\section{Two-Step Cluster Analysis}
+
+When you have a really large data set or you need a clustering procedure that can rapidly form clusters on the basis of either categorical or continuous data, neither of the previous two procedures are entirely appropriate. Hierarchical clustering requires a matrix of distances between all pairs of cases, and k-means requires shuffling cases in and out of clusters and knowing the number of clusters in advance.
+
+The Two-Step Cluster Analysis procedure was designed for such applications. The name two-step clustering is already an indication that the algorithm is based on a two-stage approach
+\begin{itemize}
+	\item In the first stage, the algorithm undertakes a procedure that is very similar to the k-means algorithm. \item Based on these results, the two-step
+	procedure conducts a modified hierarchical agglomerative clustering procedure that
+	combines the objects sequentially to form homogenous clusters.
+\end{itemize}
+
+The Two-Step Cluster Analysis is an exploratory tool designed to reveal natural groupings (or clusters) within a data set that would otherwise not be apparent. The algorithm employed by this procedure has several desirable features that differentiate it from traditional clustering techniques:
+
+\begin{itemize}
+	\item Handling of categorical and continuous variables. By assuming variables to be independent, a joint \textbf{\textit{multinomial-normal distribution}} can be placed on categorical and continuous variables. (Interesting, but not examinable).
+	
+	\item Automatic selection of number of clusters. By comparing the values of a \textbf{\textit{model-choice criterion}} across different clustering solutions, the procedure can automatically determine the optimal number of clusters.
+	
+	\item Scalability. By constructing a \textbf{\textit{cluster features}} (CF) tree that summarizes the records, the Two-Step algorithm allows you to analyze large data files. The Two-Step Cluster Analysis requires only one pass of data (which is important for very large data files).
+	
+\end{itemize}
+The Two-Step Cluster Analysis requires only one pass of data
+(which is important for very large data files).
+
+Additionally, the procedure indicates each variables
+importance for the construction of a specific cluster. These desirable features make
+the somewhat less popular two-step clustering a viable alternative to the traditional
+methods.
+
+
+\subsection{Pre-clustering }
+
+In two-step clustering, to make large problems tractable, in the first step, cases are
+assigned to \textbf{\textit{preclusters}}. In the second step, the preclusters are clustered using the
+hierarchical clustering algorithm. You can specify the number of clusters you want or
+let the algorithm decide based on preselected criteria.
+
+In general, the larger the number of sub-clusters produced by the pre-cluster step, the more accurate the final result is. However, too many sub-clusters will slow down the clustering during the second step.
+
+The maximum number of sub-clusters should be carefully chosen so that it is large enough to produce accurate results and small enough not to slow down the second step clustering.
+
+
+
+
+
+
+%----------------------------------------------------------------------%
+\subsection{Measures of Fit}
+Two-Step Cluster Analysis guides the decision of how many clusters to retain from the data by
+calculating measures-of-fit such as \textbf{\textit{Akaikes Information Criterion (AIC)}} or \textbf{\textit{Bayes Information Criterion (BIC)}}.
+
+These are relative measures of goodness-of-fit and are used to compare different
+solutions with different numbers of segments.(``Relative" means that these criteria
+are not scaled on a range of, for example, 0 to 1 but can generally take any value.)
+Compared to an alternative solution with a different number of segments, smaller
+values in AIC or BIC indicate an increased fit.
+
+SPSS computes solutions for different
+segment numbers (up to the maximum number of segments specified before) and
+chooses the appropriate solution by looking for the smallest value in the chosen
+criterion. However, which criterion should we choose? AIC is well-known for
+overestimating the correct number of segments, while BIC has a slight tendency
+to underestimate this number.
+
+Thus, it is worthwhile comparing the clustering
+outcomes of both criteria and selecting a smaller number of segments than
+actually indicated by AIC. Nevertheless, when running two separate analyses,
+one based on AIC and the other based on BIC, SPSS usually renders the same
+results.
+\newpage
+
+
+The clustering algorithm is based on a distance measure that gives the best results if all variables are independent, continuous variables have a normal distribution (or categorical variables have a multinomial distribution). This is seldom the case in practice, but the algorithm is thought to behave reasonably well when the assumptions are not met.
+
+Because cluster analysis does not involve hypothesis testing and calculation of observed significance levels, other than for descriptive follow-up, it's perfectly acceptable to cluster data that may not meet the assumptions for best performance.
+
+The final outcome may depend on the order of the cases in the file. To minimize the effect, arrange the cases in random order. Sort them by the last digit of their ID numbers or something similar.
+
+\subsection{Step 1 : Pre-clustering: Making Little Clusters}
+The first step of the two-step procedure is formation of pre-clusters. The goal of pre-clustering is to reduce the size of the Distance matrix (the matrix that contains distances between all
+possible pairs of cases). Pre-clusters are just clusters of the original cases that are used in place of the raw data in the hierarchical clustering. As a case is read, the algorithm
+decides, based on a distance measure, if the current case should be merged with a previously formed pre-cluster or start a new precluster.
+
+When preclustering is complete, all cases in the same precluster are treated as a single entity. The size of the distance matrix is no longer dependent on the number of cases but on the number of preclusters.
+
+
+
+\subsection{Step 2 : Hierarchical Clustering of Preclusters}
+In the second step, SPSS uses the standard hierarchical clustering algorithm on the
+preclusters. Forming clusters hierarchically lets you explore a range of solutions with
+different numbers of clusters.
+Tip: The Options dialog box lets you control the number of preclusters. Large numbers
+of preclusters give better results because the cases are more similar in a precluster;
+however, forming many preclusters slows the algorithm.
+
+
+Some of the options you can specify when using two-step clustering are:
+\textbf{Standardization:} The algorithm will automatically standardize all of the variables
+unless you override this option.
+
+\textbf{Distance measures:} If your data are a mixture of continuous and categorical variables,
+you can use only the log-likelihood criterion. The distance between two clusters
+depends on the decrease in the log-likelihood when they are combined into a single
+cluster. If the data are only continuous variables, you can use the Euclidean
+distance between two cluster centers. Depending on the distance measure selected,
+cases are assigned to the cluster that leads to the largest log-likelihood or to the cluster
+that has the smallest Euclidean distance.
+
+
+\textbf{Number of clusters:} You can specify the number of clusters to be formed, or you can let
+the algorithm select the optimal number based on either the Schwarz Bayesian
+Criterion or the Akaike information criterion.
+
+
+\textbf{Outlier handling:} You have the option to create a separate cluster for cases that don't fit
+well into any other cluster.
+
+
+\textbf{Range of solutions:} You can specify the range of cluster solutions that you want to see.
+
+\subsection{SPSS Implementation}
+
+\begin{itemize}
+	\item To implement a Two-Step Cluster Analysis in SPSS, you use the following options:\\
+	\textbf{\textit{Analyze $>$ Classify $>$ TwoStep Cluster}}.
+	
+	\item \textbf{Distance Measure} Log likelihood distance measures are the default; Euclidean distance can be used if all variables are continuous. (Log likelihood distance measures are not part of course).
+	
+	\item \textbf{Count of Continuous Variables} Continuous variables are standardized by default. The variables
+	are standardized so that they all contribute equally to the distance or similarity between cases.
+	
+	\item \textbf{Number of clusters} You can specify the number of clusters, or you can let the algorithm select
+	the optimal number based on either the Schwarz Bayesian criterion (BIC) or the Akaike
+	information criterion (AIC).
+	
+	\item \textbf{Clustering Criterion} BIC and AIC are offered with the default being BIC.
+\end{itemize}
+
+
+
+
+\end{document}

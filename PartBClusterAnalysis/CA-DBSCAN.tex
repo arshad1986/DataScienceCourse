@@ -1,0 +1,17 @@
+Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996.[1] It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes. DBSCAN is one of the most common clustering algorithms and also most cited in scientific literature.
+
+%======================================================================================================%
+
+The DBSCAN algorithm views clusters as areas of high density separated by areas of low density. 
+
+Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. 
+The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. 
+
+A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, min_samples and eps, which define formally what we mean when we say dense. A higher min_samples or lower eps indicate higher density necessary to form a cluster.
+More formally, we define a core sample as being a sample in the dataset such that there exist min_samples other samples within a distance of eps, which are defined as neighbors of the core sample. This tells us that the core sample is in a dense area of the vector space. A cluster is a set of core samples, that can be built by recursively by taking a core sample, finding all of its neighbors that are core samples, finding all of their neighbors that are core samples, and so on. A cluster also has a set of non-core samples, which are samples that are neighbors of a core sample in the cluster but are not themselves core samples. Intuitively, these samples are on the fringes of a cluster.
+Any core sample is part of a cluster, by definition. 
+
+Further, any cluster has at least min_samples points in it, following the definition of a core sample. 
+For any sample that is not a core sample, and does have a distance higher than eps to any core sample, it is considered an outlier by the algorithm.
+
+% http://scikit-learn.org/stable/modules/clustering.html

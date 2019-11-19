@@ -1,0 +1,57 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+%\usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+
+\setcounter{MaxMatrixCols}{10}
+% http://nyx-www.informatik.uni-bremen.de/664/1/smith_tr_02.pdf
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{Dublin \texttt{R}} \rhead{24 April 2013}
+\chead{Principal Components Analysis with \texttt{R}}
+
+\begin{document}
+
+\section{Principal Components}
+
+The \texttt{princomp()} function produces an \textit{unrotated} principal component analysis.
+
+\begin{framed}
+\begin{verbatim}
+# Pricipal Components Analysis
+# entering raw data and extracting PCs from the correlation matrix 
+fit <- princomp(mydata, cor=TRUE)
+summary(fit) # print variance accounted for 
+loadings(fit) # pc loadings 
+plot(fit,type="lines") # scree plot 
+fit$scores # the principal components
+biplot(fit)
+\end{verbatim}
+\end{framed}
+
+\subsection{The \texttt{principal()} function(psych package) }
+The \texttt{principal()} function in the \textbf{psych }package can be used to extract and rotate principal components.
+\begin{framed}
+\begin{verbatim}
+# Varimax Rotated Principal Components
+# retaining 5 components 
+library(psych)
+fit <- principal(mydata, nfactors=5, rotate="varimax")
+fit # print results
+\end{verbatim}
+\end{framed}
+%-------------------------------------------------------------- %
+\subsection{Scree Plots}
+\texttt{screeplot.default} plots the variances against the number of the principal component. This is also the plot method for classes "\texttt{princomp}" and "\texttt{prcomp}".
+
+
+\end{document}

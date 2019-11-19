@@ -1,0 +1,44 @@
+%------------------------------------------------------------------%
+\subsection{Initial Cluster Centres}
+The first step in k-means clustering is finding the k centres. This is done iteratively. 
+You start with an initial set of centres and then modify them until the change between two iterations is small enough.
+
+If you have good guesses for the centres, you can use those
+as initial starting points; otherwise, you can let SPSS find k cases that are well separated and use these values 
+as initial cluster centers. (i.e. The clustering process starts by randomly assigning objects to a number of
+clusters).
+
+%------------------------------------------------------------------%
+\subsection{Initial Cluster Centres}
+The first step in k-means clustering is finding the k centres. This is done iteratively. 
+You start with an initial set of centres and then modify them until the change between two iterations is small enough.
+
+If you have good guesses for the centres, you can use those
+as initial starting points; otherwise, you can let SPSS find k cases that are well separated and use these values 
+as initial cluster centers. (i.e. The clustering process starts by randomly assigning objects to a number of
+clusters).
+
+
+%------------------------------------------------------------------%
+
+K-means clustering is very sensitive to outliers, since they will usually be selected as initial cluster centers. 
+This will result in outliers forming clusters with small numbers of cases. Before you start a cluster analysis, 
+screen the data for outliers and remove them from the initial analysis. The solution may also depend on the order 
+of the cases in the data.
+
+After the initial cluster centers have been selected, each case is assigned to the closest
+cluster, based on its distance from the cluster centers. After all of the cases have been
+assigned to clusters, the cluster centers are recomputed, based on all of the cases in the
+cluster.
+
+The cases are then successively reassigned to other clusters to minimize the within-cluster variation, 
+which is basically the (squared) distance from each observation to the center of the associated cluster. 
+If the reallocation of an case to another cluster decreases the within-cluster variation, this case is reassigned
+to that cluster.
+
+Case assignment is done again, using these updated cluster centers. You keep
+assigning cases and recomputing the cluster centers until no cluster center changes
+appreciably or the maximum number of iterations (10 by default) is reached.
+\newpage
+%------------------------------------------------------------------%
+

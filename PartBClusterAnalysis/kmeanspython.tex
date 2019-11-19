@@ -1,0 +1,160 @@
+%- https://datasciencelab.wordpress.com/2013/12/12/clustering-with-k-means-in-python/
+
+
+Clustering With K-Means in Python
+A very common task in data analysis is that of grouping a set of objects into subsets such that all elements within a group are more similar among them than they are to the others. The practical applications of such a procedure are many: given a medical image of a group of cells, a clustering algorithm could aid in identifying the centers of the cells; looking at the GPS data of a user’s mobile device, their more frequently visited locations within a certain radius can be revealed; for any set of unlabeled observations, clustering helps establish the existence of some sort of structure that might indicate that the data is separable.
+
+Mathematical background
+
+The k-means algorithm takes a dataset X of N points as input, together with a parameter K specifying how many clusters to create. The output is a set of K cluster centroids and a labeling of X that assigns each of the points in X to a unique cluster. All points within a cluster are closer in distance to their centroid than they are to any other centroid.
+
+The mathematical condition for the K clusters C_k and the K centroids \mu_k can be expressed as:
+
+Minimize \displaystyle \sum_{k=1}^K \sum_{\mathrm{x}_n \in C_k} ||\mathrm{x}_n - \mu_k ||^2 with respect to \displaystyle C_k, \mu_k.
+
+%=================================================================%
+\subsection*{Lloyd’s algorithm}
+
+Finding the solution is unfortunately NP hard. Nevertheless, an iterative method known as Lloyd’s algorithm exists that converges (albeit to a local minimum) in few steps. The procedure alternates between two operations. (1) Once a set of centroids \mu_k is available, the clusters are updated to contain the points closest in distance to each centroid. (2) Given a set of clusters, the centroids are recalculated as the means of all points belonging to a cluster.
+
+\displaystyle C_k = \{\mathrm{x}_n : ||\mathrm{x}_n - \mu_k|| \leq \mathrm{\,\,all\,\,} ||\mathrm{x}_n - \mu_l||\}\qquad(1)
+
+\displaystyle \mu_k = \frac{1}{C_k}\sum_{\mathrm{x}_n \in C_k}\mathrm{x}_n\qquad(2)
+
+The two-step procedure continues until the assignments of clusters and centroids no longer change. As already mentioned, the convergence is guaranteed but the solution might be a local minimum. In practice, the algorithm is run multiple times and averaged. For the starting set of centroids, several methods can be employed, for instance random assignation.
+
+Below is a simple implementation of Lloyd’s algorithm for performing k-means clustering in python:
+\begin{framed}
+\begin{verbatim}
+import numpy as np
+ 
+def cluster_points(X, mu):
+    clusters  = {}
+    for x in X:
+        bestmukey = min([(i[0], np.linalg.norm(x-mu[i[0]])) \
+                    for i in enumerate(mu)], key=lambda t:t[1])[0]
+        try:
+            clusters[bestmukey].append(x)
+        except KeyError:
+            clusters[bestmukey] = [x]
+    return clusters
+ 
+def reevaluate_centers(mu, clusters):
+    newmu = []
+    keys = sorted(clusters.keys())
+    for k in keys:
+        newmu.append(np.mean(clusters[k], axis = 0))
+    return newmu
+ 
+def has_converged(mu, oldmu):
+    return (set([tuple(a) for a in mu]) == set([tuple(a) for a in oldmu])
+ 
+def find_centers(X, K):
+    # Initialize to K random centers
+    oldmu = random.sample(X, K)
+    mu = random.sample(X, K)
+    while not has_converged(mu, oldmu):
+        oldmu = mu
+        # Assign all points in X to clusters
+        clusters = cluster_points(X, mu)
+        # Reevaluate centers
+        mu = reevaluate_centers(oldmu, clusters)
+    return(mu, clusters)
+
+\end{verbatim}
+\end{framed}
+%===============================================================%
+\subsection*{Clustering in action}
+
+Let’s see the algorithm in action! For an ensemble of 100 random points on the plane, we set the k-means function to find 7 clusters. The code converges in 7 iterations after initializing with random centers. In the following plots, dots correspond to the target data points X and stars represent the centroids \mu_k of the clusters. Each cluster is distinguished by a different color.
+
+p_N100_K7
+
+The initial configuration of points for the algorithm is created as follows:
+
+\begin{framed}
+\begin{verbatim}
+
+import random
+ 
+def init_board(N):
+    X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
+    return 
+
+\end{verbatim}
+\end{framed}
+%===============================================================%
+
+For a configuration with twice as many points and a target of 3 clusters, often the algorithm needs more iterations to converge.
+
+p_N200_K3
+
+Obviously, an ensemble of randomly generated points does not possess a natural cluster-like structure. To make things slightly more tricky, we want to modify the function that generates our initial data points to output a more interesting structure. The following routine constructs a specified number of Gaussian distributed clusters with random variances:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+def init_board_gauss(N, k):
+    n = float(N)/k
+    X = []
+    for i in range(k):
+        c = (random.uniform(-1, 1), random.uniform(-1, 1))
+        s = random.uniform(0.05,0.5)
+        x = []
+        while len(x) < n:
+            a, b = np.array([np.random.normal(c[0], s), np.random.normal(c[1], s)])
+            # Continue drawing points from the distribution in the range [-1,1]
+            if abs(a) < 1 and abs(b) < 1:
+                x.append([a,b])
+        X.extend(x)
+    X = np.array(X)[:N]
+    return X
+Let us look at a data set constructed as X = init_board_gauss(200,3): 7 iterations are needed to find the 3 centroids.
+
+p_N200_K3_G
+
+If the target distribution is disjointedly clustered and only one instantiation of Lloyd’s algorithm is used, the danger exists that the local minimum reached is not the optimal solution. This is shown in the example below, where initial data using very peaked Gaussians is constructed:
+
+p_N100_K9_G
+
+The yellow and black stars serve two different clusters each, while the orange, red and blue centroids are cramped within one unique blob due to an unfortunate random initialization. For this type of cases, a cleverer election of initial clusters should help.
+
+To finalize our table-top experiment on k-means clustering, we might want to take a look at what happens when the original data space is densely populated:
+
+p_N2000_K15_
+
+The k-means algorithm induces a partition of the observations corresponding to a Voronoi tessellation generated by the K centroids. And it is certainly very pretty!
+
+Table-top data experiment take-away message
+
+Lloyd’s two-step implementation of the k-means algorithm allows to cluster data points into groups represented by a centroid. This technique is employed in many facets of machine learning, from unsupervised learning algorithms to dimensionality reduction problems. The general clustering problem is NP hard, but the iterative procedure converges always, albeit to a local minimum. Proper initialization of the centroids is important. Additionally, this algorithm does not supply information as to which K for the k-means is optimal; that has to be found out by alternative methods.
+
+Update: We explore the gap statistic as a method to determine the optimal K for clustering in this post: Finding the K in K-Means Clustering and the f(K) method: Selection of K in K-means Clustering, Reloaded.
+
+Update: For a proper initialization of the centroids at the start of the k-means algorithm, we implement the improved k-means++ seeding procedure.
+
+
+%===============================================================================================================
+
+I have data from a customer which includes retail store characteristics. They would like to use many store attributes to help them find new store “groupings” that they an use for business planning activities. There are about 50 attributes per store and data is numerical, ordinal, and categorical in nature. (size, nearest competitor, demographic info, sales, market segment, etc.). I would like to first:
+1. get an idea of which attributes account for the most variance in the data. PCA is ok but I get a bit lost mapping from one basis to the other. (ex. which PCA component contains which features from my dataset). Goal here is some dimensionality reduction since I know some of my features are collinear.
+2. after certain “redundant” information is removed, I think I should look at the data distribution of each feature to get an idea of the “nature” of the data. not quite sure here any hard and fast rules. Ex. Normalization, Regularization?
+3. then I would go for clustering algorithm. At the moment I like Kmeans and agglomerative hierarchical.
+
+what do you think about that thought process?
+
+note: Kmeans will force every point to a cluster. Outliers are not ALWAYS bad in this use case (some stores like “super stores” are important to keep and might be an own cluster) so I don’t want to always just remove them prior to running the algorithm.
+
+%==========================================================================================================
